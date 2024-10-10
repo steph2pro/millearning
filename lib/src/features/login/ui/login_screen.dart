@@ -13,6 +13,7 @@ import 'package:flutter_kit/src/shared/components/gap.dart';
 import 'package:flutter_kit/src/shared/extensions/context_extensions.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:flutter_kit/src/features/user/ui/user_screen.dart'; // Import de la page cible
 
 @RoutePage()
 class LoginScreen extends StatefulWidget implements AutoRouteWrapper {
@@ -143,6 +144,12 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ],
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // context.router.push(const UserScreen());// Navigation vers UserScreen
+          },
+          child: const Icon(Icons.arrow_forward), // Icône pour le bouton flottant
         ),
       ),
     );
