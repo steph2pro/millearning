@@ -22,6 +22,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "alreadyHave":
+            MessageLookupByLibrary.simpleMessage("Already have an account?"),
+        "appTo": MessageLookupByLibrary.simpleMessage(
+            "App to search and discover the most suitable place for you to stay."),
+        "findingThe": MessageLookupByLibrary.simpleMessage("Finding the "),
+        "forYou": MessageLookupByLibrary.simpleMessage("for You"),
+        "letStarted":
+            MessageLookupByLibrary.simpleMessage("Let\'s Get Started"),
         "loadingDialog_content":
             MessageLookupByLibrary.simpleMessage("Please wait..."),
         "login_appleBtnLabel":
@@ -40,6 +48,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "login_subtitle": MessageLookupByLibrary.simpleMessage(
             "Let\'s continue where we left off."),
         "login_title": MessageLookupByLibrary.simpleMessage("Login"),
-        "or": MessageLookupByLibrary.simpleMessage("OR")
+        "or": MessageLookupByLibrary.simpleMessage("OR"),
+        "perfect":
+            MessageLookupByLibrary.simpleMessage("Perfect Online Course "),
+        "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
+        "skip": MessageLookupByLibrary.simpleMessage("Skip")
       };
 }

@@ -169,6 +169,86 @@ class I18n {
       args: [],
     );
   }
+
+  /// `Finding the `
+  String get findingThe {
+    return Intl.message(
+      'Finding the ',
+      name: 'findingThe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Perfect Online Course `
+  String get perfect {
+    return Intl.message(
+      'Perfect Online Course ',
+      name: 'perfect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `for You`
+  String get forYou {
+    return Intl.message(
+      'for You',
+      name: 'forYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `App to search and discover the most suitable place for you to stay.`
+  String get appTo {
+    return Intl.message(
+      'App to search and discover the most suitable place for you to stay.',
+      name: 'appTo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let's Get Started`
+  String get letStarted {
+    return Intl.message(
+      'Let\'s Get Started',
+      name: 'letStarted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already have an account?`
+  String get alreadyHave {
+    return Intl.message(
+      'Already have an account?',
+      name: 'alreadyHave',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign In`
+  String get signIn {
+    return Intl.message(
+      'Sign In',
+      name: 'signIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skip`
+  String get skip {
+    return Intl.message(
+      'Skip',
+      name: 'skip',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<I18n> {

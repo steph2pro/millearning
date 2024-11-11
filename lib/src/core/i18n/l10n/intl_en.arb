@@ -14,5 +14,13 @@
 
   "loadingDialog_content": "Please wait...",
 
-  "or": "OR"
+  "or": "OR",
+  "findingThe":"Finding the ",
+  "perfect":"Perfect Online Course ",
+  "forYou":"for You",
+  "appTo":"App to search and discover the most suitable place for you to stay.",
+  "letStarted":"Let's Get Started",
+  "alreadyHave":"Already have an account?",
+  "signIn":"Sign In",
+  "skip":"Skip"
 }

@@ -12,14 +12,20 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/app-logo.svg
+  String get appLogo => 'assets/images/app-logo.svg';
+
   /// File path: assets/images/apple-logo.svg
   String get appleLogo => 'assets/images/apple-logo.svg';
 
   /// File path: assets/images/google-logo.svg
   String get googleLogo => 'assets/images/google-logo.svg';
 
+  /// File path: assets/images/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
   /// List of all assets
-  List<String> get values => [appleLogo, googleLogo];
+  List<dynamic> get values => [appLogo, appleLogo, googleLogo, logo];
 }
 
 class Assets {
@@ -29,9 +35,16 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(this._assetName);
+  const AssetGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  });
 
   final String _assetName;
+
+  final Size? size;
+  final Set<String> flavors;
 
   Image image({
     Key? key,
@@ -51,7 +64,7 @@ class AssetGenImage {
     ImageRepeat repeat = ImageRepeat.noRepeat,
     Rect? centerSlice,
     bool matchTextDirection = false,
-    bool gaplessPlayback = false,
+    bool gaplessPlayback = true,
     bool isAntiAlias = false,
     String? package,
     FilterQuality filterQuality = FilterQuality.low,
