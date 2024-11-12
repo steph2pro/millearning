@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_kit/src/core/theme/dimens.dart';
+import 'package:millearnia/src/core/theme/dimens.dart';
 
 class BasicCard extends StatelessWidget {
   const BasicCard({

@@ -1,11 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_kit/src/core/i18n/l10n.dart';
-import 'package:flutter_kit/src/shared/components/atoms/dividers/labeled_divider.dart';
-import 'package:flutter_kit/src/shared/components/onboarding/onboarding_item.dart';
-import 'package:flutter_kit/src/shared/components/onboarding/page_indicators.dart';
-import 'package:flutter_kit/src/shared/extensions/context_extensions.dart';
+import 'package:millearnia/src/core/i18n/l10n.dart';
+import 'package:millearnia/src/core/routing/app_router.dart';
+import 'package:millearnia/src/shared/components/atoms/dividers/labeled_divider.dart';
+import 'package:millearnia/src/shared/components/onboarding/onboarding_item.dart';
+import 'package:millearnia/src/shared/components/onboarding/page_indicators.dart';
+import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 
 @RoutePage()
 class OnboardingScreen extends StatefulWidget {
@@ -29,23 +30,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.colorScheme.onPrimary,
-      
-      body: Column(
-        children: [
-          Padding(padding: EdgeInsets.symmetric(vertical: 20),
-          child: Align(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: context.colorScheme.onPrimary,
+        title:  Align(
           alignment: Alignment.topRight,
           child: TextButton(
-                    onPressed: (){}, 
+                    onPressed: (){
+                      context.router.push(const WelcomeRoute());
+                    }, 
                     child: Text(
                       I18n.of(context).skip,
                       style: context.textTheme.bodySmall!.copyWith(fontSize: 12,color: context.colorScheme.primaryContainer)
                     ),
                   )
         ),
-          ),
-          
+      ),
+      backgroundColor: context.colorScheme.onPrimary,
+      
+      body: Column(
+        children: [
           Expanded(
             flex: 4,
             child: PageView(
@@ -127,8 +131,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 duration: const Duration(milliseconds: 500),
                                 curve: Curves.fastOutSlowIn);
                           } else {
-                            // TODO:
-                            // context.pushRoute(const AddDriverInformationRoute());
+                            context.router.push(const LoginRoute());
+                            print("object");
                           }
                         },
                       ),

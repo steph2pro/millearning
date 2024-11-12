@@ -1,4 +1,4 @@
-name: flutter_kit
+name: millearnia
 description: A boilerplate for Flutter Projects using BLoC Architecture
 
 publish_to: 'none'
@@ -28,6 +28,7 @@ dependencies:
   json_annotation: ^4.9.0
   google_fonts: ^6.2.1
   flutter_animate: ^4.5.0
+  flutter_otp_text_field: ^1.2.0
 
 dev_dependencies:
   flutter_test:

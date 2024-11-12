@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_kit/src/core/theme/dimens.dart';
-import 'package:flutter_kit/src/shared/components/gap.dart';
-import 'package:flutter_kit/src/shared/extensions/context_extensions.dart';
+import 'package:millearnia/src/core/theme/dimens.dart';
+import 'package:millearnia/src/shared/components/gap.dart';
+import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 
 class Input extends StatelessWidget {
   final FocusNode? focusNode;
@@ -61,7 +61,7 @@ class Input extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color borderColor = context.colorScheme.outline;
+    final Color borderColor = context.colorScheme.onPrimary;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,7 +101,7 @@ class Input extends StatelessWidget {
               enabled: enabled,
               errorBorder: _getInputBorder(color: context.colorScheme.error),
               enabledBorder: _getInputBorder(color: borderColor),
-              border: _getInputBorder(color: borderColor),
+              border: InputBorder.none,
               focusedErrorBorder: _getInputBorder(color: context.colorScheme.error),
               focusedBorder: _getInputBorder(color: context.colorScheme.primary),
             ),

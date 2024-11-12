@@ -50,20 +50,20 @@ class I18n {
     return Localizations.of<I18n>(context, I18n);
   }
 
-  /// `Login`
+  /// `Sign In`
   String get login_title {
     return Intl.message(
-      'Login',
+      'Sign In',
       name: 'login_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `Let's continue where we left off.`
+  /// `Hi! Welcome back, you've been missed`
   String get login_subtitle {
     return Intl.message(
-      'Let\'s continue where we left off.',
+      'Hi! Welcome back, you\'ve been missed',
       name: 'login_subtitle',
       desc: '',
       args: [],
@@ -75,6 +75,26 @@ class I18n {
     return Intl.message(
       'Email',
       name: 'login_emailLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get nameLabel {
+    return Intl.message(
+      'Name',
+      name: 'nameLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Jhone Doe`
+  String get namelHint {
+    return Intl.message(
+      'Jhone Doe',
+      name: 'namelHint',
       desc: '',
       args: [],
     );
@@ -160,30 +180,30 @@ class I18n {
     );
   }
 
-  /// `OR`
-  String get or {
+  /// `Or sign in with`
+  String get orSign {
     return Intl.message(
-      'OR',
-      name: 'or',
+      'Or sign in with',
+      name: 'orSign',
       desc: '',
       args: [],
     );
   }
 
-  /// `Finding the `
+  /// `Finding the`
   String get findingThe {
     return Intl.message(
-      'Finding the ',
+      'Finding the',
       name: 'findingThe',
       desc: '',
       args: [],
     );
   }
 
-  /// `Perfect Online Course `
+  /// `Perfect Online Course`
   String get perfect {
     return Intl.message(
-      'Perfect Online Course ',
+      'Perfect Online Course',
       name: 'perfect',
       desc: '',
       args: [],
@@ -240,11 +260,221 @@ class I18n {
     );
   }
 
+  /// `Sign Up`
+  String get signUp {
+    return Intl.message(
+      'Sign Up',
+      name: 'signUp',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Skip`
   String get skip {
     return Intl.message(
       'Skip',
       name: 'skip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have an account??`
+  String get dontHaveAccount {
+    return Intl.message(
+      'Don\'t have an account??',
+      name: 'dontHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Account`
+  String get createAccount {
+    return Intl.message(
+      'Create Account',
+      name: 'createAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fill your information below or register with your social account.`
+  String get fillYourInformation {
+    return Intl.message(
+      'Fill your information below or register with your social account.',
+      name: 'fillYourInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Agree with`
+  String get agreeWith {
+    return Intl.message(
+      'Agree with',
+      name: 'agreeWith',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terms & Condition`
+  String get termsCondition {
+    return Intl.message(
+      'Terms & Condition',
+      name: 'termsCondition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify Code`
+  String get verifyCode {
+    return Intl.message(
+      'Verify Code',
+      name: 'verifyCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the code we just sent to email`
+  String get enterCode {
+    return Intl.message(
+      'Please enter the code we just sent to email',
+      name: 'enterCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `example@email.com`
+  String get mailExple {
+    return Intl.message(
+      'example@email.com',
+      name: 'mailExple',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Didn't receive OTP?`
+  String get didReceive {
+    return Intl.message(
+      'Didn\'t receive OTP?',
+      name: 'didReceive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resend code`
+  String get resendCode {
+    return Intl.message(
+      'Resend code',
+      name: 'resendCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify`
+  String get verify {
+    return Intl.message(
+      'Verify',
+      name: 'verify',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get newPassword {
+    return Intl.message(
+      'New Password',
+      name: 'newPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your new password must be different from previously used passwords.`
+  String get youNewPassword {
+    return Intl.message(
+      'Your new password must be different from previously used passwords.',
+      name: 'youNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password`
+  String get ConfirmPassword {
+    return Intl.message(
+      'Confirm Password',
+      name: 'ConfirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create New Password`
+  String get createNewPassword {
+    return Intl.message(
+      'Create New Password',
+      name: 'createNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complete Your Profile`
+  String get completeYouProfile {
+    return Intl.message(
+      'Complete Your Profile',
+      name: 'completeYouProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't worry, only you can see your personal data, No one else will be able to see it.`
+  String get dontWorry {
+    return Intl.message(
+      'Don\'t worry, only you can see your personal data, No one else will be able to see it.',
+      name: 'dontWorry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone Number`
+  String get phoneNumber {
+    return Intl.message(
+      'Phone Number',
+      name: 'phoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gender`
+  String get gender {
+    return Intl.message(
+      'Gender',
+      name: 'gender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complete Profile`
+  String get completeProfile {
+    return Intl.message(
+      'Complete Profile',
+      name: 'completeProfile',
       desc: '',
       args: [],
     );

@@ -1,8 +1,8 @@
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_kit/src/core/theme/app_size.dart';
-import 'package:flutter_kit/src/core/theme/dimens.dart';
-import 'package:flutter_kit/src/shared/extensions/context_extensions.dart';
+import 'package:millearnia/src/core/theme/app_size.dart';
+import 'package:millearnia/src/core/theme/dimens.dart';
+import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 
 
 class OnboardingItem extends StatelessWidget {

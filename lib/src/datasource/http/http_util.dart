@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_kit/src/datasource/models/api_response/api_response.dart';
+import 'package:millearnia/src/datasource/models/api_response/api_response.dart';
 
 ApiError createApiErrorFromDioError(DioException error) {
   return ApiError(

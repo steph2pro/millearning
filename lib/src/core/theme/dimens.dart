@@ -1,13 +1,13 @@
 class Dimens {
    static const double loaderSize = 25.0;
-  static const double minSpacing = 4.0;
-  static const double halfSpacing = 8.0;
-  static const double spacing = 16.0;
+  static const double minSpacing = 14.0;
+  static const double halfSpacing = 12.0;
+  static const double spacing = 20.0;
   static const double doubleSpacing = 12.0;
   static const double tripleSpacing = 48.0;
 
   static const double radius = 10.0;
-  static const double doubleRadius = 24.0;
+  static const double doubleRadius = 22.0;
   static const double fullRadius = 999.0;
   static const double borderRadius = 10.0;
 
@@ -17,7 +17,7 @@ class Dimens {
 
   static const double inputWidth = 351.0;
   static const double inputHeight = 46.0;
-  static const double inputRadius = 10.0;
+  static const double inputRadius = 6.0;
   static const double inputBorderWidth = 1.0;
   static const double inputPaddingHorizontal = 18.0;
   static const double inputPaddingVertical = 14.0;

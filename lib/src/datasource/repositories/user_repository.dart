@@ -1,8 +1,8 @@
-import 'package:flutter_kit/src/datasource/http/dio_config.dart';
-import 'package:flutter_kit/src/datasource/http/random_user_api.dart';
-import 'package:flutter_kit/src/datasource/models/api_response/api_response.dart';
-import 'package:flutter_kit/src/datasource/repositories/base_repository.dart';
-import 'package:flutter_kit/src/shared/locator.dart';
+import 'package:millearnia/src/datasource/http/dio_config.dart';
+import 'package:millearnia/src/datasource/http/random_user_api.dart';
+import 'package:millearnia/src/datasource/models/api_response/api_response.dart';
+import 'package:millearnia/src/datasource/repositories/base_repository.dart';
+import 'package:millearnia/src/shared/locator.dart';
 import '../models/user_model.dart';
 
 class UserRepository extends BaseRepository {

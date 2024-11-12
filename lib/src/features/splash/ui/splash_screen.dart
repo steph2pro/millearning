@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_kit/src/core/routing/app_router.dart';
-import 'package:flutter_kit/src/core/theme/app_size.dart';
+import 'package:millearnia/src/core/routing/app_router.dart';
+import 'package:millearnia/src/core/theme/app_size.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_kit/gen/assets.gen.dart';
-import 'package:flutter_kit/src/core/theme/dimens.dart';
-import 'package:flutter_kit/src/shared/extensions/context_extensions.dart';
+import 'package:millearnia/gen/assets.gen.dart';
+import 'package:millearnia/src/core/theme/dimens.dart';
+import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 
 
 
@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
           gapH16,
           Center(
             child: Text(
-              "ParcoursVision",
+              "Millearnia",
               style: context.textTheme.bodyLarge
             ),
           )

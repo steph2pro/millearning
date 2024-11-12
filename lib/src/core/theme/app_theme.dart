@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_kit/src/core/theme/color_schemes.dart';
+import 'package:millearnia/src/core/theme/color_schemes.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'dimens.dart';
@@ -107,7 +107,7 @@ class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4), // Forme personnalisée (ici un carré avec des bords arrondis)
         ),
-        side: BorderSide(color: colors.onPrimaryFixed), // Bordure de la case
+        side: BorderSide(color: colors.primary), // Bordure de la case
         materialTapTargetSize: MaterialTapTargetSize.padded, // Taille plus grande pour faciliter les interactions
       ),
       scaffoldBackgroundColor: colors.surface,
@@ -116,7 +116,7 @@ class AppTheme {
         titleSpacing: 0,
         elevation: 0,
         backgroundColor: colors.surface,
-        centerTitle: true,
+        // centerTitle: true,
         titleTextStyle: font.copyWith(fontSize: 18, fontWeight: FontWeight.w500),
       ),
       bottomAppBarTheme: BottomAppBarTheme(
@@ -137,13 +137,13 @@ class AppTheme {
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
-        fillColor: colors.surface,
+        fillColor: colors.onSurfaceVariant,
         filled: true,
-       
+        border: InputBorder.none,
         contentPadding: const EdgeInsets.symmetric(vertical: Dimens.inputPaddingVertical, horizontal: Dimens.inputPaddingHorizontal),
         hintStyle: font.copyWith(color: colors.tertiaryContainer, fontSize: 16, fontWeight: FontWeight.w400),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(Dimens.inputRadius)),
-        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: colors.tertiaryContainer), borderRadius: BorderRadius.circular(Dimens.inputRadius)),
+        // border: OutlineInputBorder(borderRadius: BorderRadius.circular(Dimens.inputRadius)),
+        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: colors.onPrimary), borderRadius: BorderRadius.circular(Dimens.inputRadius)),
         focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: colors.secondary), borderRadius: BorderRadius.circular(Dimens.inputRadius)),
         errorBorder: OutlineInputBorder(borderSide: BorderSide(color: colors.error), borderRadius: BorderRadius.circular(Dimens.inputRadius)),
         disabledBorder: OutlineInputBorder(borderSide: BorderSide(color: colors.surface), borderRadius: BorderRadius.circular(Dimens.inputRadius)),

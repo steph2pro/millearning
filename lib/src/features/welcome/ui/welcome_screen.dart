@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_kit/src/core/routing/app_router.dart';
-import 'package:flutter_kit/src/core/theme/app_size.dart';
-import 'package:flutter_kit/src/core/theme/dimens.dart';
-import 'package:flutter_kit/src/core/i18n/l10n.dart';
-import 'package:flutter_kit/src/shared/extensions/context_extensions.dart';
+import 'package:millearnia/src/core/routing/app_router.dart';
+import 'package:millearnia/src/core/theme/app_size.dart';
+import 'package:millearnia/src/core/theme/dimens.dart';
+import 'package:millearnia/src/core/i18n/l10n.dart';
+import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 
 
 
@@ -30,20 +30,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+      ),
       backgroundColor: context.colorScheme.onPrimary,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
+          Container(
+            // margin: EdgeInsets.only(top: 100),
             child:  Image.asset(
+            
             "assets/images/welcome.png",
              width: double.infinity,
            fit: BoxFit.cover,
             
             ),
            width: double.infinity,
-           height: 500,
+           height: 400,
           ),
           gapH16,
          Expanded(
@@ -100,7 +105,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   style: context.textTheme.bodySmall!.copyWith(fontSize: 15,color: context.colorScheme.onTertiaryContainer)
                   ),
                   TextButton(
-                    onPressed: (){}, 
+                    onPressed: (){
+                      context.router.push(const LoginRoute());
+                    }, 
                     child: Text(
                       I18n.of(context).signIn,
                       style: context.textTheme.bodySmall!.copyWith(fontSize: 16,color: context.colorScheme.primaryContainer)

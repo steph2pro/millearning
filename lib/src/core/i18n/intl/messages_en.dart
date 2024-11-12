@@ -22,12 +22,33 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "ConfirmPassword":
+            MessageLookupByLibrary.simpleMessage("Confirm Password"),
+        "agreeWith": MessageLookupByLibrary.simpleMessage("Agree with"),
         "alreadyHave":
             MessageLookupByLibrary.simpleMessage("Already have an account?"),
         "appTo": MessageLookupByLibrary.simpleMessage(
             "App to search and discover the most suitable place for you to stay."),
-        "findingThe": MessageLookupByLibrary.simpleMessage("Finding the "),
+        "completeProfile":
+            MessageLookupByLibrary.simpleMessage("Complete Profile"),
+        "completeYouProfile":
+            MessageLookupByLibrary.simpleMessage("Complete Your Profile"),
+        "createAccount": MessageLookupByLibrary.simpleMessage("Create Account"),
+        "createNewPassword":
+            MessageLookupByLibrary.simpleMessage("Create New Password"),
+        "didReceive":
+            MessageLookupByLibrary.simpleMessage("Didn\'t receive OTP?"),
+        "dontHaveAccount":
+            MessageLookupByLibrary.simpleMessage("Don\'t have an account??"),
+        "dontWorry": MessageLookupByLibrary.simpleMessage(
+            "Don\'t worry, only you can see your personal data, No one else will be able to see it."),
+        "enterCode": MessageLookupByLibrary.simpleMessage(
+            "Please enter the code we just sent to email"),
+        "fillYourInformation": MessageLookupByLibrary.simpleMessage(
+            "Fill your information below or register with your social account."),
+        "findingThe": MessageLookupByLibrary.simpleMessage("Finding the"),
         "forYou": MessageLookupByLibrary.simpleMessage("for You"),
+        "gender": MessageLookupByLibrary.simpleMessage("Gender"),
         "letStarted":
             MessageLookupByLibrary.simpleMessage("Let\'s Get Started"),
         "loadingDialog_content":
@@ -46,12 +67,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "login_passwordLabel": MessageLookupByLibrary.simpleMessage("Password"),
         "login_submitBtnLabel": MessageLookupByLibrary.simpleMessage("Login"),
         "login_subtitle": MessageLookupByLibrary.simpleMessage(
-            "Let\'s continue where we left off."),
-        "login_title": MessageLookupByLibrary.simpleMessage("Login"),
-        "or": MessageLookupByLibrary.simpleMessage("OR"),
+            "Hi! Welcome back, you\'ve been missed"),
+        "login_title": MessageLookupByLibrary.simpleMessage("Sign In"),
+        "mailExple": MessageLookupByLibrary.simpleMessage("example@email.com"),
+        "nameLabel": MessageLookupByLibrary.simpleMessage("Name"),
+        "namelHint": MessageLookupByLibrary.simpleMessage("Jhone Doe"),
+        "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
+        "orSign": MessageLookupByLibrary.simpleMessage("Or sign in with"),
         "perfect":
-            MessageLookupByLibrary.simpleMessage("Perfect Online Course "),
+            MessageLookupByLibrary.simpleMessage("Perfect Online Course"),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "resendCode": MessageLookupByLibrary.simpleMessage("Resend code"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
-        "skip": MessageLookupByLibrary.simpleMessage("Skip")
+        "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
+        "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+        "termsCondition":
+            MessageLookupByLibrary.simpleMessage("Terms & Condition"),
+        "verify": MessageLookupByLibrary.simpleMessage("Verify"),
+        "verifyCode": MessageLookupByLibrary.simpleMessage("Verify Code"),
+        "youNewPassword": MessageLookupByLibrary.simpleMessage(
+            "Your new password must be different from previously used passwords.")
       };
 }

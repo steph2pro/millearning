@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_kit/src/datasource/models/api_response/api_response.dart';
-import 'package:flutter_kit/src/datasource/repositories/example_repository.dart';
-import 'package:flutter_kit/src/shared/locator.dart';
+import 'package:millearnia/src/datasource/models/api_response/api_response.dart';
+import 'package:millearnia/src/datasource/repositories/example_repository.dart';
+import 'package:millearnia/src/shared/locator.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'login_cubit.freezed.dart';

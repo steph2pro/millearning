@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_kit/src/core/theme/dimens.dart';
-import 'package:flutter_kit/src/shared/extensions/context_extensions.dart';
+import 'package:millearnia/src/core/theme/dimens.dart';
+import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 
 enum ButtonType {
   primary,
@@ -71,11 +71,12 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     final label = Text(
       title,
-      style: context.textTheme.bodyMedium?.copyWith(
+      style: context.textTheme.bodySmall?.copyWith(
         color: (type == ButtonType.primary || type == ButtonType.neutral)
             ? context.colorScheme.surface
             : context.colorScheme.onSurface,
         fontWeight: type == ButtonType.primary ? FontWeight.w600 : FontWeight.w500,
+        fontSize: 16,
       ),
     );
     return SizedBox(
@@ -85,7 +86,8 @@ class Button extends StatelessWidget {
         ButtonType.primary || ButtonType.neutral => ElevatedButton.icon(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimens.radius)),
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimens.doubleRadius)),
               backgroundColor:
                   type == ButtonType.primary ? context.colorScheme.primary : context.colorScheme.onSurface,
             ),
@@ -95,7 +97,8 @@ class Button extends StatelessWidget {
         ButtonType.outline => OutlinedButton.icon(
             onPressed: onPressed,
             style: OutlinedButton.styleFrom(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimens.radius)),
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimens.doubleRadius)),
               side: BorderSide(color: context.colorScheme.onSurface.withOpacity(.3), width: 1.2),
             ),
             icon: icon ?? const SizedBox(),

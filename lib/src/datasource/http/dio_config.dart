@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_kit/src/core/environment.dart';
+import 'package:millearnia/src/core/environment.dart';
 
 final _logInterceptor = LogInterceptor(
   logPrint: (object) => log(object.toString()),

@@ -1,7 +1,7 @@
 // Drawing a divider with some text in the center
 import 'package:flutter/material.dart';
-import 'package:flutter_kit/src/core/theme/dimens.dart';
-import 'package:flutter_kit/src/shared/extensions/context_extensions.dart';
+import 'package:millearnia/src/core/theme/dimens.dart';
+import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 
 class LabeledDivider extends StatelessWidget {
   final String label;
@@ -22,13 +22,17 @@ class LabeledDivider extends StatelessWidget {
     return Stack(
       alignment: labelAlignment,
       children: [
-        const Divider(),
+         Divider(
+          color:  context.colorScheme.onInverseSurface,
+          thickness: 1,
+          
+        ),
         Container(
           padding: labelPadding,
           color: labelBackgroundColor ?? context.colorScheme.surface,
           child: Text(
             label,
-            style: context.textTheme.bodySmall?.copyWith(color: context.colorScheme.onSurface.withOpacity(.8)),
+            style: context.textTheme.bodySmall?.copyWith(color: context.colorScheme.onInverseSurface,fontSize: 12),
           ),
         )
       ],
