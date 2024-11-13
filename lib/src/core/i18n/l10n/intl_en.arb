@@ -45,5 +45,13 @@
   "dontWorry":"Don't worry, only you can see your personal data, No one else will be able to see it.",
   "phoneNumber":"Phone Number",
   "gender":"Gender",
-  "completeProfile":"Complete Profile"
+  "EnterPhoneNumber":"Enter Phone Number",
+  "completeProfile":"Complete Profile",
+  "hi":"Hi, ",
+  "letStart":"Let's start learning!",
+  "categories":"Categories",
+  "seeAll":"See all",
+  "pupularCourse":"Pupular Course",
+  "topMentor":"Top Mentor",
+  "continueLearning":"Continue Learning"
 }

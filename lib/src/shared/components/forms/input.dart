@@ -95,7 +95,7 @@ class Input extends StatelessWidget {
               hintText: hintText,
               hintStyle: hintStyle,
               filled: filled,
-              fillColor: fillColor ?? context.colorScheme.surface,
+              fillColor: fillColor ?? context.colorScheme.onSurfaceVariant,
               prefixIcon: prefixIcon,
               suffixIcon: suffixIcon,
               enabled: enabled,

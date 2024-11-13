@@ -53,7 +53,7 @@ class AppTheme {
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          textStyle: font.copyWith(fontWeight: FontWeight.w500, fontSize: 16),
+          textStyle: font.copyWith(fontWeight: FontWeight.w600, fontSize: 14,color: colors.surfaceTint),
           padding: const EdgeInsets.symmetric(vertical: Dimens.doubleSpacing, horizontal: 28.0),
           foregroundColor: colors.primaryContainer,
         ).copyWith(
@@ -141,7 +141,7 @@ class AppTheme {
         filled: true,
         border: InputBorder.none,
         contentPadding: const EdgeInsets.symmetric(vertical: Dimens.inputPaddingVertical, horizontal: Dimens.inputPaddingHorizontal),
-        hintStyle: font.copyWith(color: colors.tertiaryContainer, fontSize: 16, fontWeight: FontWeight.w400),
+        hintStyle: font.copyWith(color: colors.tertiaryContainer, fontSize: 12, fontWeight: FontWeight.w400),
         // border: OutlineInputBorder(borderRadius: BorderRadius.circular(Dimens.inputRadius)),
         enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: colors.onPrimary), borderRadius: BorderRadius.circular(Dimens.inputRadius)),
         focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: colors.secondary), borderRadius: BorderRadius.circular(Dimens.inputRadius)),
@@ -167,7 +167,7 @@ class AppTheme {
       bodySmall: font.copyWith(color: colors.tertiaryContainer, fontWeight: FontWeight.w600, fontSize: 14),
       bodyLarge: font.copyWith(color: colors.tertiary, fontWeight: FontWeight.w700, fontSize: 26, height: 41.48 / 35),
       bodyMedium: font.copyWith(color: colors.onSurface, fontSize: 20, fontWeight: FontWeight.w400),
-      titleLarge: font.copyWith(color: colors.secondary, fontWeight: FontWeight.w700, fontSize: 24),
+      titleLarge: font.copyWith(color: colors.secondaryContainer, fontWeight: FontWeight.w600, fontSize: 17),
       titleMedium: font.copyWith(color: colors.onSurface, fontWeight: FontWeight.w400, fontSize: 14),
       labelLarge: font.copyWith(color: colors.tertiary, fontWeight: FontWeight.w400, fontSize: 14),
       labelMedium: font.copyWith(color: colors.onSurface, fontSize: 12, fontWeight: FontWeight.w500),

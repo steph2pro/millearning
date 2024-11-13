@@ -470,11 +470,91 @@ class I18n {
     );
   }
 
+  /// `Enter Phone Number`
+  String get EnterPhoneNumber {
+    return Intl.message(
+      'Enter Phone Number',
+      name: 'EnterPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Complete Profile`
   String get completeProfile {
     return Intl.message(
       'Complete Profile',
       name: 'completeProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hi, `
+  String get hi {
+    return Intl.message(
+      'Hi, ',
+      name: 'hi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let's start learning!`
+  String get letStart {
+    return Intl.message(
+      'Let\'s start learning!',
+      name: 'letStart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Categories`
+  String get categories {
+    return Intl.message(
+      'Categories',
+      name: 'categories',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See all`
+  String get seeAll {
+    return Intl.message(
+      'See all',
+      name: 'seeAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pupular Course`
+  String get pupularCourse {
+    return Intl.message(
+      'Pupular Course',
+      name: 'pupularCourse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Top Mentor`
+  String get topMentor {
+    return Intl.message(
+      'Top Mentor',
+      name: 'topMentor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue Learning`
+  String get continueLearning {
+    return Intl.message(
+      'Continue Learning',
+      name: 'continueLearning',
       desc: '',
       args: [],
     );

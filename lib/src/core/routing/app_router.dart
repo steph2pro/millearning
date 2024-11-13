@@ -4,6 +4,7 @@ import 'package:millearnia/src/features/auth/profile/ui/profile_screen.dart';
 import 'package:millearnia/src/features/auth/register/ui/code_verify_screen.dart';
 import 'package:millearnia/src/features/auth/register/ui/new_password.dart';
 import 'package:millearnia/src/features/auth/register/ui/register_screen.dart';
+import 'package:millearnia/src/features/home/ui/home_screen.dart';
 import 'package:millearnia/src/features/onboarding/ui/onboarding_screen.dart';
 import 'package:millearnia/src/features/splash/ui/splash_screen.dart';
 import 'package:millearnia/src/features/welcome/ui/welcome_screen.dart';
@@ -19,10 +20,11 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: WelcomeRoute.page),
     AutoRoute(page: OnboardingRoute.page),
     AutoRoute(page: OnboardingRoute.page),
-    AutoRoute(page: LoginRoute.page, initial: true),
+    AutoRoute(page: LoginRoute.page),
     AutoRoute(page: RegisterRoute.page),
     AutoRoute(page: CodeVerifyRoute.page),
     AutoRoute(page: NewPasswordRoute.page),
-    AutoRoute(page: ProfileRoute.page),
+    AutoRoute(page: ProfileRoute.page, initial: true),
+    AutoRoute(page: HomeRoute.page),
   ];
 }

@@ -24,15 +24,20 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "ConfirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
+        "EnterPhoneNumber":
+            MessageLookupByLibrary.simpleMessage("Enter Phone Number"),
         "agreeWith": MessageLookupByLibrary.simpleMessage("Agree with"),
         "alreadyHave":
             MessageLookupByLibrary.simpleMessage("Already have an account?"),
         "appTo": MessageLookupByLibrary.simpleMessage(
             "App to search and discover the most suitable place for you to stay."),
+        "categories": MessageLookupByLibrary.simpleMessage("Categories"),
         "completeProfile":
             MessageLookupByLibrary.simpleMessage("Complete Profile"),
         "completeYouProfile":
             MessageLookupByLibrary.simpleMessage("Complete Your Profile"),
+        "continueLearning":
+            MessageLookupByLibrary.simpleMessage("Continue Learning"),
         "createAccount": MessageLookupByLibrary.simpleMessage("Create Account"),
         "createNewPassword":
             MessageLookupByLibrary.simpleMessage("Create New Password"),
@@ -49,6 +54,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "findingThe": MessageLookupByLibrary.simpleMessage("Finding the"),
         "forYou": MessageLookupByLibrary.simpleMessage("for You"),
         "gender": MessageLookupByLibrary.simpleMessage("Gender"),
+        "hi": MessageLookupByLibrary.simpleMessage("Hi, "),
+        "letStart":
+            MessageLookupByLibrary.simpleMessage("Let\'s start learning!"),
         "letStarted":
             MessageLookupByLibrary.simpleMessage("Let\'s Get Started"),
         "loadingDialog_content":
@@ -77,12 +85,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "perfect":
             MessageLookupByLibrary.simpleMessage("Perfect Online Course"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "pupularCourse": MessageLookupByLibrary.simpleMessage("Pupular Course"),
         "resendCode": MessageLookupByLibrary.simpleMessage("Resend code"),
+        "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "termsCondition":
             MessageLookupByLibrary.simpleMessage("Terms & Condition"),
+        "topMentor": MessageLookupByLibrary.simpleMessage("Top Mentor"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "verifyCode": MessageLookupByLibrary.simpleMessage("Verify Code"),
         "youNewPassword": MessageLookupByLibrary.simpleMessage(
