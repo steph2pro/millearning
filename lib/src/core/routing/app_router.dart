@@ -16,7 +16,7 @@ part 'app_router.gr.dart'; // Assurez-vous que cela est correct
 class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> routes = [
-    AutoRoute(page: SplashRoute.page),
+    AutoRoute(page: SplashRoute.page, initial: true),
     AutoRoute(page: WelcomeRoute.page),
     AutoRoute(page: OnboardingRoute.page),
     AutoRoute(page: OnboardingRoute.page),
@@ -24,7 +24,7 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: RegisterRoute.page),
     AutoRoute(page: CodeVerifyRoute.page),
     AutoRoute(page: NewPasswordRoute.page),
-    AutoRoute(page: ProfileRoute.page, initial: true),
+    AutoRoute(page: ProfileRoute.page),
     AutoRoute(page: HomeRoute.page),
   ];
 }

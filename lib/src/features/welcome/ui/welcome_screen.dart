@@ -38,18 +38,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         // mainAxisAlignment: MainAxisAlignment.center,
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            // margin: EdgeInsets.only(top: 100),
-            child:  Image.asset(
-            
-            "assets/images/welcome.png",
-             width: double.infinity,
-           fit: BoxFit.cover,
-            
-            ),
-           width: double.infinity,
-           height: 400,
-          ),
+         Container(
+      width: double.infinity,
+      height: 400,
+      child: ClipPath(
+        clipper: CurvedClipper(),
+        child: Image.asset(
+          "assets/images/welcome.png",
+          width: double.infinity,
+          fit: BoxFit.cover,
+        ),
+      ),
+    ),
           gapH16,
          Expanded(
           child: Padding(
@@ -124,4 +124,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       ),
     );
   }
+}
+
+class CurvedClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+    path.lineTo(0, size.height - 20);
+    path.quadraticBezierTo(size.width / 4, size.height, size.width / 4, size.height);
+   path.quadraticBezierTo(3 * size.width / 2, size.height, size.width, size.height - 120);
+    path.lineTo(size.width, 0);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
