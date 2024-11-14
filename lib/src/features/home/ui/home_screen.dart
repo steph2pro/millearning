@@ -8,6 +8,7 @@ import 'package:millearnia/src/shared/components/atoms/dividers/labeled_divider.
 import 'package:millearnia/src/shared/components/forms/input.dart';
 import 'package:millearnia/src/shared/components/home_components/categorie.dart';
 import 'package:millearnia/src/shared/components/home_components/course_component.dart';
+import 'package:millearnia/src/shared/components/home_components/course_continue.dart';
 import 'package:millearnia/src/shared/components/onboarding/onboarding_item.dart';
 import 'package:millearnia/src/shared/components/onboarding/page_indicators.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
@@ -278,8 +279,39 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
               
               ),
-             
-
+               gapH12,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                  I18n.of(context).continueLearning,
+                  style: context.textTheme.titleLarge
+                  ),
+                  gapW4,
+                  InkWell(
+                    onTap: (){
+                    }, 
+                    child: Text(
+                      I18n.of(context).seeAll,
+                      style: context.textTheme.bodySmall!.copyWith(fontSize: 14,color: context.colorScheme.surfaceTint)
+                    ),
+                  )
+                ],
+              ),
+               gapH12,
+              //  SizedBox(
+              //   width: 300,
+              //   height: 100,
+              //   child: 
+//               //  ),
+CourseContinue(
+                title: 'Introduction of Figma',
+                 contentImage: 'assets/images/courseContinue.png',
+                  name:'Jacob Jones', 
+                   btnText:'Design',
+                   progress: 20,
+                   ),
         ],
       ),
     )

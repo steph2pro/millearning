@@ -165,7 +165,7 @@ class CourseComponent extends StatelessWidget {
               width: 100,
               height: 30,
               child:  ElevatedButton(
-                onPressed: (){}, 
+                onPressed: btnTap, 
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.all(0),
                   backgroundColor: context.colorScheme.onPrimaryContainer,
