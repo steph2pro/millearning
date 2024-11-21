@@ -1,10 +1,13 @@
 import 'package:millearnia/src/core/routing/app_router.dart';
+import 'package:millearnia/src/datasource/http/auth_user.dart';
 import 'package:millearnia/src/datasource/http/dio_config.dart';
 import 'package:millearnia/src/datasource/http/example_api.dart';
 import 'package:millearnia/src/datasource/http/random_user_api.dart';
+import 'package:millearnia/src/datasource/models/user_model.dart';
 import 'package:millearnia/src/datasource/repositories/example_repository.dart';
 import 'package:millearnia/src/datasource/repositories/user_repository.dart';
 import 'package:get_it/get_it.dart';
+import 'package:millearnia/src/features/auth/register/logic/register_cubit.dart';
 
 final GetIt locator = GetIt.instance
   ..registerLazySingleton(() {
@@ -28,6 +31,16 @@ final GetIt locator = GetIt.instance
     return RandomUserApi(dio: locator<DioConfig>().dio);
   })
   ..registerLazySingleton(() {
+    print('Registering RandomUserApi');
+    return AuthUser(dio: locator<DioConfig>().dio);
+  })
+  ..registerLazySingleton(() {
     print('Registering UserRepository');
-    return UserRepository(randomUserApi: locator<RandomUserApi>());
-  });
+    return UserRepository(authUser: locator<AuthUser>());
+  })
+  ..registerLazySingleton(() {
+    print('Registering RegisterCubit');
+    return RegisterCubit( userRepository: locator<UserRepository>(),
+    ); // Remplacez par vos dépendances si nécessaire
+  })
+  ;

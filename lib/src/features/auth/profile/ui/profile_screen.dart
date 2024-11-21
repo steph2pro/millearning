@@ -290,7 +290,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Button.primary(
                 
                 title: I18n.of(context).completeProfile,
-                onPressed: (){},
+                onPressed: (){
+                  context.router.push(HomeRoute());
+                },
               ),
               
             ],

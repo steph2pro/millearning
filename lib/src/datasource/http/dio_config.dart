@@ -23,6 +23,8 @@ class DioConfig {
                   'Accept': 'application/json',
                 },
                 contentType: 'application/json',
+                // connectTimeout: Duration(milliseconds: 10000), // 10 secondes
+                // receiveTimeout: 10000,
               ),
             ) {
     this.dio.interceptors.add(_logInterceptor);

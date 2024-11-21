@@ -5,6 +5,6 @@ class Environment {
   // URL de base pour les API selon l'environnement
   static const String baseUrl = String.fromEnvironment(
     'base_url',
-    defaultValue: 'https://randomuser.me/', // URL de l'API Random User Generator
+    defaultValue: 'http://192.168.1.199:3333/api', // URL de l'API Random User Generator
   );
 }

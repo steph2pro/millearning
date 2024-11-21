@@ -32,7 +32,7 @@ class CourseContinue extends StatelessWidget {
       color: Colors.white, // Couleur de fond (modifiable ou transparent)
       border: Border.all(
           color: Theme.of(context).colorScheme.outline, // Couleur de la bordure
-        width: 2, // Épaisseur de la bordure
+        width: 1, // Épaisseur de la bordure
       ),
       borderRadius: BorderRadius.all(
         Radius.circular(10), // Rayon des coins arrondis
@@ -51,7 +51,8 @@ class CourseContinue extends StatelessWidget {
               ),
               ),
           gapW12,
-          Column(
+         Expanded(
+          child:  Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -87,7 +88,7 @@ class CourseContinue extends StatelessWidget {
               children: [
                 profilImage != null
                   ? CircleAvatar(
-                      radius: 5,
+                      radius: 10,
                       backgroundColor: Theme.of(context).colorScheme.surface,
                       backgroundImage: AssetImage(profilImage!),
                     )
@@ -96,7 +97,7 @@ class CourseContinue extends StatelessWidget {
                           backgroundColor: Theme.of(context).colorScheme.surface,
                           child: Icon(
                             Icons.person,
-                            size: 10,
+                            size: 15,
                             color: Theme.of(context).colorScheme.tertiary,
                           ),
                     )
@@ -112,43 +113,47 @@ class CourseContinue extends StatelessWidget {
                 
               ],
             ),
-    //         Row(
-    //         children: [
-    //           Container(
-    //   width: double.infinity,
-    //   height: 7,
-    //   decoration: BoxDecoration(
-    //     color: context.colorScheme.outline, // Couleur de fond de la barre
-    //     borderRadius: BorderRadius.circular(15),
-    //   ),
-    //   child: Stack(
-    //     children: [
-    //       Container(
-    //         width: progressPercentage * MediaQuery.of(context).size.width,
-    //         height: 7,
-    //         decoration: BoxDecoration(
-    //           color: context.colorScheme.primary, // Couleur de la partie remplie
-    //           borderRadius: BorderRadius.circular(15),
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // ),
+            gapH12,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+      width: 100,
+      height: 7,
+      decoration: BoxDecoration(
+        color: context.colorScheme.outline, // Couleur de fond de la barre
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Stack(
+        children: [
+          Container(
+            width: progress*4,
+            height: 7,
+            decoration: BoxDecoration(
+              color: context.colorScheme.primary, // Couleur de la partie remplie
+              borderRadius: BorderRadius.circular(15),
+            ),
+          ),
+        ],
+      ),
+    ),
 
 
-    //           Text(
-    //             '${progress.toString()} /25',
-    //             style: context.textTheme.bodySmall!.copyWith(
-    //               fontSize: 14,
-    //               color: context.colorScheme.primaryContainer,
-    //             ),
-    //           ),
-    //           gapW10,
+              Text(
+                '${progress.toString()} /25',
+                style: context.textTheme.bodySmall!.copyWith(
+                  fontSize: 14,
+                  color: context.colorScheme.primaryContainer,
+                ),
+              ),
+              gapW10,
              
-    //         ],
-    //       )
+            ],
+          )
             ],
           ),
+         )
           
          
         ],

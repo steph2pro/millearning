@@ -16,23 +16,22 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ApiResponse<R, E> {
-  Object? get response => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(R response) success,
-    required TResult Function(E response) error,
+    required TResult Function(E error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(R response)? success,
-    TResult? Function(E response)? error,
+    TResult? Function(E error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(R response)? success,
-    TResult Function(E response)? error,
+    TResult Function(E error)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -116,7 +115,7 @@ class __$$ApiResponseSuccessImplCopyWithImpl<R, E, $Res>
 /// @nodoc
 
 class _$ApiResponseSuccessImpl<R, E> implements _ApiResponseSuccess<R, E> {
-  _$ApiResponseSuccessImpl(this.response);
+  const _$ApiResponseSuccessImpl(this.response);
 
   @override
   final R response;
@@ -151,7 +150,7 @@ class _$ApiResponseSuccessImpl<R, E> implements _ApiResponseSuccess<R, E> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(R response) success,
-    required TResult Function(E response) error,
+    required TResult Function(E error) error,
   }) {
     return success(response);
   }
@@ -160,7 +159,7 @@ class _$ApiResponseSuccessImpl<R, E> implements _ApiResponseSuccess<R, E> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(R response)? success,
-    TResult? Function(E response)? error,
+    TResult? Function(E error)? error,
   }) {
     return success?.call(response);
   }
@@ -169,7 +168,7 @@ class _$ApiResponseSuccessImpl<R, E> implements _ApiResponseSuccess<R, E> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(R response)? success,
-    TResult Function(E response)? error,
+    TResult Function(E error)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -211,10 +210,9 @@ class _$ApiResponseSuccessImpl<R, E> implements _ApiResponseSuccess<R, E> {
 }
 
 abstract class _ApiResponseSuccess<R, E> implements ApiResponse<R, E> {
-  factory _ApiResponseSuccess(final R response) =
+  const factory _ApiResponseSuccess(final R response) =
       _$ApiResponseSuccessImpl<R, E>;
 
-  @override
   R get response;
 
   /// Create a copy of ApiResponse
@@ -230,7 +228,7 @@ abstract class _$$ApiResponseErrorImplCopyWith<R, E, $Res> {
           $Res Function(_$ApiResponseErrorImpl<R, E>) then) =
       __$$ApiResponseErrorImplCopyWithImpl<R, E, $Res>;
   @useResult
-  $Res call({E response});
+  $Res call({E error});
 }
 
 /// @nodoc
@@ -246,12 +244,12 @@ class __$$ApiResponseErrorImplCopyWithImpl<R, E, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? response = freezed,
+    Object? error = freezed,
   }) {
     return _then(_$ApiResponseErrorImpl<R, E>(
-      freezed == response
-          ? _value.response
-          : response // ignore: cast_nullable_to_non_nullable
+      freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
               as E,
     ));
   }
@@ -260,14 +258,14 @@ class __$$ApiResponseErrorImplCopyWithImpl<R, E, $Res>
 /// @nodoc
 
 class _$ApiResponseErrorImpl<R, E> implements _ApiResponseError<R, E> {
-  _$ApiResponseErrorImpl(this.response);
+  const _$ApiResponseErrorImpl(this.error);
 
   @override
-  final E response;
+  final E error;
 
   @override
   String toString() {
-    return 'ApiResponse<$R, $E>.error(response: $response)';
+    return 'ApiResponse<$R, $E>.error(error: $error)';
   }
 
   @override
@@ -275,12 +273,12 @@ class _$ApiResponseErrorImpl<R, E> implements _ApiResponseError<R, E> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ApiResponseErrorImpl<R, E> &&
-            const DeepCollectionEquality().equals(other.response, response));
+            const DeepCollectionEquality().equals(other.error, error));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(response));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
 
   /// Create a copy of ApiResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -295,29 +293,29 @@ class _$ApiResponseErrorImpl<R, E> implements _ApiResponseError<R, E> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(R response) success,
-    required TResult Function(E response) error,
+    required TResult Function(E error) error,
   }) {
-    return error(response);
+    return error(this.error);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(R response)? success,
-    TResult? Function(E response)? error,
+    TResult? Function(E error)? error,
   }) {
-    return error?.call(response);
+    return error?.call(this.error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(R response)? success,
-    TResult Function(E response)? error,
+    TResult Function(E error)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(response);
+      return error(this.error);
     }
     return orElse();
   }
@@ -355,10 +353,9 @@ class _$ApiResponseErrorImpl<R, E> implements _ApiResponseError<R, E> {
 }
 
 abstract class _ApiResponseError<R, E> implements ApiResponse<R, E> {
-  factory _ApiResponseError(final E response) = _$ApiResponseErrorImpl<R, E>;
+  const factory _ApiResponseError(final E error) = _$ApiResponseErrorImpl<R, E>;
 
-  @override
-  E get response;
+  E get error;
 
   /// Create a copy of ApiResponse
   /// with the given fields replaced by the non-null parameter values.

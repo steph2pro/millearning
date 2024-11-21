@@ -9,12 +9,12 @@ import 'package:millearnia/src/features/auth/login/logic/login_cubit.dart';
 import 'package:millearnia/src/shared/components/atoms/dividers/labeled_divider.dart';
 import 'package:millearnia/src/shared/components/buttons/button.dart';
 import 'package:millearnia/src/shared/components/dialogs/dialog_builder.dart';
+import 'package:millearnia/src/shared/components/dialogs/notifyer.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
 import 'package:millearnia/src/shared/components/gap.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
-import 'package:millearnia/src/features/user/ui/user_screen.dart';
 
 import 'package:millearnia/src/core/routing/app_router.dart'; // Importez le fichier principal // Import de la page cible
 
@@ -54,8 +54,29 @@ class _LoginScreenState extends State<LoginScreen> {
       listener: (context, state) {
         state.whenOrNull(
             loading: (email, password) => LoadingDialog.show(context: context),
-            success: (email, password, response) => LoadingDialog.hide(context: context),
-            error: (email, password, error) => LoadingDialog.hide(context: context));
+            success: (email, password, response) {
+              LoadingDialog.hide(context: context);
+              Notifyer.show(context, 
+              message: 'connection reusi',
+              // response.toString(),
+              duration: Duration(seconds: 3),
+              backgroundColor: context.colorScheme.primaryContainer,
+              textColor: context.colorScheme.onPrimary,
+              );
+              context.router.push(HomeRoute());
+            },
+            error: (email, password, error) {
+               LoadingDialog.hide(context: context);
+
+              // Afficher un message d'erreur (exemple avec Notifyer)
+              Notifyer.show(
+                context,
+                message: 'informations erroner', //error.toString() Message d'erreur renvoyé par l'API
+                duration: Duration(seconds: 10), // Durée du message
+                backgroundColor: context.colorScheme.error,
+                textColor: context.colorScheme.onPrimary,
+              );
+            });
       },
       child: Scaffold(
         backgroundColor: context.colorScheme.onPrimary,

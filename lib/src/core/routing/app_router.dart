@@ -8,7 +8,6 @@ import 'package:millearnia/src/features/home/ui/home_screen.dart';
 import 'package:millearnia/src/features/onboarding/ui/onboarding_screen.dart';
 import 'package:millearnia/src/features/splash/ui/splash_screen.dart';
 import 'package:millearnia/src/features/welcome/ui/welcome_screen.dart';
-import 'package:millearnia/src/features/user/ui/user_screen.dart';
 
 part 'app_router.gr.dart'; // Assurez-vous que cela est correct
 
@@ -16,11 +15,11 @@ part 'app_router.gr.dart'; // Assurez-vous que cela est correct
 class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> routes = [
-    AutoRoute(page: SplashRoute.page, initial: true),
+    AutoRoute(page: SplashRoute.page),
     AutoRoute(page: WelcomeRoute.page),
     AutoRoute(page: OnboardingRoute.page),
     AutoRoute(page: OnboardingRoute.page),
-    AutoRoute(page: LoginRoute.page),
+    AutoRoute(page: LoginRoute.page, initial: true),
     AutoRoute(page: RegisterRoute.page),
     AutoRoute(page: CodeVerifyRoute.page),
     AutoRoute(page: NewPasswordRoute.page),
