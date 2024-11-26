@@ -21,6 +21,7 @@ class DioConfig {
                 baseUrl: Environment.baseUrl,
                 headers: {
                   'Accept': 'application/json',
+                  'local':'fr',
                 },
                 contentType: 'application/json',
                 // connectTimeout: Duration(milliseconds: 10000), // 10 secondes

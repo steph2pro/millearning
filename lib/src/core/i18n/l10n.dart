@@ -559,6 +559,56 @@ class I18n {
       args: [],
     );
   }
+
+  /// `This field must not be empty`
+  String get inputValidationCanBeEmpty {
+    return Intl.message(
+      'This field must not be empty',
+      name: 'inputValidationCanBeEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password should be the same`
+  String get inputValidationShouldBeSame {
+    return Intl.message(
+      'Password should be the same',
+      name: 'inputValidationShouldBeSame',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid password`
+  String get inputValidationInvalidPassword {
+    return Intl.message(
+      'Invalid password',
+      name: 'inputValidationInvalidPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid Email`
+  String get inputValidationInvalidEmail {
+    return Intl.message(
+      'Invalid Email',
+      name: 'inputValidationInvalidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field must be {number} characters`
+  String inputValidationMustBeAtLeast(Object number) {
+    return Intl.message(
+      'This field must be $number characters',
+      name: 'inputValidationMustBeAtLeast',
+      desc: '',
+      args: [number],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<I18n> {

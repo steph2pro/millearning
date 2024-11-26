@@ -5,8 +5,8 @@ part 'api_response.freezed.dart';
 
 @freezed
 class ApiResponse<R, E> with _$ApiResponse<R, E> {
-  const factory ApiResponse.success(R response) = _ApiResponseSuccess;
-  const factory ApiResponse.error(E error) = _ApiResponseError;
+  factory ApiResponse.success(R response) = _ApiResponseSuccess;
+  factory ApiResponse.error(E response) = _ApiResponseError;
 }
 
 enum ApiErrorType {
@@ -25,59 +25,25 @@ enum ApiErrorType {
 
 class ApiError<T> extends Equatable {
   final ApiErrorType type;
-  final int? statusCode;
-  final T? error;
-  final String? message;
+  final int statusCode;
+  final T error;
 
   const ApiError({
     required this.type,
-    this.statusCode,
-    this.error,
-    this.message,
+    required this.error,
+    required this.statusCode,
   });
 
-  /// Helper to create a server-side error
-  factory ApiError.server({T? error, int? statusCode, String? message}) {
-    return ApiError(
-      type: ApiErrorType.server,
-      error: error,
-      statusCode: statusCode,
-      message: message ?? 'Server error occurred',
-    );
-  }
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-  /// Helper to create a network error
-  factory ApiError.network({T? error, String? message}) {
-    return ApiError(
-      type: ApiErrorType.network,
-      error: error,
-      message: message ?? 'Network error occurred',
-    );
-  }
-
-  /// Helper to create a user-side error
-  factory ApiError.user({T? error, String? message}) {
-    return ApiError(
-      type: ApiErrorType.user,
-      error: error,
-      message: message ?? 'User error occurred',
-    );
-  }
-
-  /// Helper to create an unknown error
-  factory ApiError.unknown({T? error, String? message}) {
-    return ApiError(
-      type: ApiErrorType.unknown,
-      error: error,
-      message: message ?? 'An unknown error occurred',
-    );
+    return other is ApiError<T> && other.type == type && other.error == error;
   }
 
   @override
-  List<Object?> get props => [type, statusCode, error, message];
+  int get hashCode => type.hashCode ^ error.hashCode;
 
   @override
-  String toString() {
-    return 'ApiError(type: $type, statusCode: $statusCode, error: $error, message: $message)';
-  }
+  List<Object?> get props => [type, error];
 }

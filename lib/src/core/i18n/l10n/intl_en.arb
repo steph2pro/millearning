@@ -53,5 +53,15 @@
   "seeAll":"See all",
   "pupularCourse":"Pupular Course",
   "topMentor":"Top Mentor",
-  "continueLearning":"Continue Learning"
+  "continueLearning":"Continue Learning",
+  "inputValidationCanBeEmpty": "This field must not be empty",
+  "inputValidationShouldBeSame": "Password should be the same",
+  "inputValidationInvalidPassword":"Invalid password",
+  "inputValidationInvalidEmail": "Invalid Email",
+  "inputValidationMustBeAtLeast": "This field must be {number} characters",
+  "@inputValidationMustBeAtLeast": {
+    "placeholder": {
+      "number": {}
+    }
+  }
 }

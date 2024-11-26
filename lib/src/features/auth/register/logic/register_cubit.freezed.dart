@@ -16,32 +16,28 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$RegisterState {
-  UserModel get user => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserModel user) initial,
-    required TResult Function(UserModel user) loading,
-    required TResult Function(UserModel user, ApiError<dynamic> error) error,
-    required TResult Function(UserModel user, Object response) success,
-    required TResult Function(UserModel user) updated,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(ApiError<dynamic> error) error,
+    required TResult Function(RegisterResponse response) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(UserModel user)? initial,
-    TResult? Function(UserModel user)? loading,
-    TResult? Function(UserModel user, ApiError<dynamic> error)? error,
-    TResult? Function(UserModel user, Object response)? success,
-    TResult? Function(UserModel user)? updated,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(ApiError<dynamic> error)? error,
+    TResult? Function(RegisterResponse response)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserModel user)? initial,
-    TResult Function(UserModel user)? loading,
-    TResult Function(UserModel user, ApiError<dynamic> error)? error,
-    TResult Function(UserModel user, Object response)? success,
-    TResult Function(UserModel user)? updated,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(ApiError<dynamic> error)? error,
+    TResult Function(RegisterResponse response)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,7 +47,6 @@ mixin _$RegisterState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Success value) success,
-    required TResult Function(_Updated value) updated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,7 +55,6 @@ mixin _$RegisterState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_Success value)? success,
-    TResult? Function(_Updated value)? updated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,15 +63,8 @@ mixin _$RegisterState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
-    TResult Function(_Updated value)? updated,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  /// Create a copy of RegisterState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $RegisterStateCopyWith<RegisterState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -86,10 +73,6 @@ abstract class $RegisterStateCopyWith<$Res> {
   factory $RegisterStateCopyWith(
           RegisterState value, $Res Function(RegisterState) then) =
       _$RegisterStateCopyWithImpl<$Res, RegisterState>;
-  @useResult
-  $Res call({UserModel user});
-
-  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -104,42 +87,13 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = null,
-  }) {
-    return _then(_value.copyWith(
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
-    ) as $Val);
-  }
-
-  /// Create a copy of RegisterState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $UserModelCopyWith<$Res> get user {
-    return $UserModelCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
-abstract class _$$InitialImplCopyWith<$Res>
-    implements $RegisterStateCopyWith<$Res> {
+abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({UserModel user});
-
-  @override
-  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -152,88 +106,60 @@ class __$$InitialImplCopyWithImpl<$Res>
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = null,
-  }) {
-    return _then(_$InitialImpl(
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$InitialImpl implements _Initial {
-  _$InitialImpl({required this.user});
-
-  @override
-  final UserModel user;
+  _$InitialImpl();
 
   @override
   String toString() {
-    return 'RegisterState.initial(user: $user)';
+    return 'RegisterState.initial()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$InitialImpl &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
-
-  /// Create a copy of RegisterState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
-      __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserModel user) initial,
-    required TResult Function(UserModel user) loading,
-    required TResult Function(UserModel user, ApiError<dynamic> error) error,
-    required TResult Function(UserModel user, Object response) success,
-    required TResult Function(UserModel user) updated,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(ApiError<dynamic> error) error,
+    required TResult Function(RegisterResponse response) success,
   }) {
-    return initial(user);
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(UserModel user)? initial,
-    TResult? Function(UserModel user)? loading,
-    TResult? Function(UserModel user, ApiError<dynamic> error)? error,
-    TResult? Function(UserModel user, Object response)? success,
-    TResult? Function(UserModel user)? updated,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(ApiError<dynamic> error)? error,
+    TResult? Function(RegisterResponse response)? success,
   }) {
-    return initial?.call(user);
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserModel user)? initial,
-    TResult Function(UserModel user)? loading,
-    TResult Function(UserModel user, ApiError<dynamic> error)? error,
-    TResult Function(UserModel user, Object response)? success,
-    TResult Function(UserModel user)? updated,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(ApiError<dynamic> error)? error,
+    TResult Function(RegisterResponse response)? success,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(user);
+      return initial();
     }
     return orElse();
   }
@@ -245,7 +171,6 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Success value) success,
-    required TResult Function(_Updated value) updated,
   }) {
     return initial(this);
   }
@@ -257,7 +182,6 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_Success value)? success,
-    TResult? Function(_Updated value)? updated,
   }) {
     return initial?.call(this);
   }
@@ -269,7 +193,6 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
-    TResult Function(_Updated value)? updated,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -280,31 +203,14 @@ class _$InitialImpl implements _Initial {
 }
 
 abstract class _Initial implements RegisterState {
-  factory _Initial({required final UserModel user}) = _$InitialImpl;
-
-  @override
-  UserModel get user;
-
-  /// Create a copy of RegisterState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$LoadingImplCopyWith<$Res>
-    implements $RegisterStateCopyWith<$Res> {
+abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
           _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
       __$$LoadingImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({UserModel user});
-
-  @override
-  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -317,88 +223,60 @@ class __$$LoadingImplCopyWithImpl<$Res>
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = null,
-  }) {
-    return _then(_$LoadingImpl(
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$LoadingImpl implements _Loading {
-  _$LoadingImpl({required this.user});
-
-  @override
-  final UserModel user;
+  _$LoadingImpl();
 
   @override
   String toString() {
-    return 'RegisterState.loading(user: $user)';
+    return 'RegisterState.loading()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadingImpl &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$LoadingImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
-
-  /// Create a copy of RegisterState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
-      __$$LoadingImplCopyWithImpl<_$LoadingImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserModel user) initial,
-    required TResult Function(UserModel user) loading,
-    required TResult Function(UserModel user, ApiError<dynamic> error) error,
-    required TResult Function(UserModel user, Object response) success,
-    required TResult Function(UserModel user) updated,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(ApiError<dynamic> error) error,
+    required TResult Function(RegisterResponse response) success,
   }) {
-    return loading(user);
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(UserModel user)? initial,
-    TResult? Function(UserModel user)? loading,
-    TResult? Function(UserModel user, ApiError<dynamic> error)? error,
-    TResult? Function(UserModel user, Object response)? success,
-    TResult? Function(UserModel user)? updated,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(ApiError<dynamic> error)? error,
+    TResult? Function(RegisterResponse response)? success,
   }) {
-    return loading?.call(user);
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserModel user)? initial,
-    TResult Function(UserModel user)? loading,
-    TResult Function(UserModel user, ApiError<dynamic> error)? error,
-    TResult Function(UserModel user, Object response)? success,
-    TResult Function(UserModel user)? updated,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(ApiError<dynamic> error)? error,
+    TResult Function(RegisterResponse response)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(user);
+      return loading();
     }
     return orElse();
   }
@@ -410,7 +288,6 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Success value) success,
-    required TResult Function(_Updated value) updated,
   }) {
     return loading(this);
   }
@@ -422,7 +299,6 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_Success value)? success,
-    TResult? Function(_Updated value)? updated,
   }) {
     return loading?.call(this);
   }
@@ -434,7 +310,6 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
-    TResult Function(_Updated value)? updated,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -445,31 +320,16 @@ class _$LoadingImpl implements _Loading {
 }
 
 abstract class _Loading implements RegisterState {
-  factory _Loading({required final UserModel user}) = _$LoadingImpl;
-
-  @override
-  UserModel get user;
-
-  /// Create a copy of RegisterState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  factory _Loading() = _$LoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$ErrorImplCopyWith<$Res>
-    implements $RegisterStateCopyWith<$Res> {
+abstract class _$$ErrorImplCopyWith<$Res> {
   factory _$$ErrorImplCopyWith(
           _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
       __$$ErrorImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({UserModel user, ApiError<dynamic> error});
-
-  @override
-  $UserModelCopyWith<$Res> get user;
+  $Res call({ApiError<dynamic> error});
 }
 
 /// @nodoc
@@ -485,14 +345,9 @@ class __$$ErrorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = null,
     Object? error = null,
   }) {
     return _then(_$ErrorImpl(
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -504,16 +359,14 @@ class __$$ErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ErrorImpl implements _Error {
-  _$ErrorImpl({required this.user, required this.error});
+  _$ErrorImpl({required this.error});
 
-  @override
-  final UserModel user;
   @override
   final ApiError<dynamic> error;
 
   @override
   String toString() {
-    return 'RegisterState.error(user: $user, error: $error)';
+    return 'RegisterState.error(error: $error)';
   }
 
   @override
@@ -521,12 +374,11 @@ class _$ErrorImpl implements _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorImpl &&
-            (identical(other.user, user) || other.user == user) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, error);
+  int get hashCode => Object.hash(runtimeType, error);
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
@@ -539,39 +391,36 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserModel user) initial,
-    required TResult Function(UserModel user) loading,
-    required TResult Function(UserModel user, ApiError<dynamic> error) error,
-    required TResult Function(UserModel user, Object response) success,
-    required TResult Function(UserModel user) updated,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(ApiError<dynamic> error) error,
+    required TResult Function(RegisterResponse response) success,
   }) {
-    return error(user, this.error);
+    return error(this.error);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(UserModel user)? initial,
-    TResult? Function(UserModel user)? loading,
-    TResult? Function(UserModel user, ApiError<dynamic> error)? error,
-    TResult? Function(UserModel user, Object response)? success,
-    TResult? Function(UserModel user)? updated,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(ApiError<dynamic> error)? error,
+    TResult? Function(RegisterResponse response)? success,
   }) {
-    return error?.call(user, this.error);
+    return error?.call(this.error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserModel user)? initial,
-    TResult Function(UserModel user)? loading,
-    TResult Function(UserModel user, ApiError<dynamic> error)? error,
-    TResult Function(UserModel user, Object response)? success,
-    TResult Function(UserModel user)? updated,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(ApiError<dynamic> error)? error,
+    TResult Function(RegisterResponse response)? success,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(user, this.error);
+      return error(this.error);
     }
     return orElse();
   }
@@ -583,7 +432,6 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Success value) success,
-    required TResult Function(_Updated value) updated,
   }) {
     return error(this);
   }
@@ -595,7 +443,6 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_Success value)? success,
-    TResult? Function(_Updated value)? updated,
   }) {
     return error?.call(this);
   }
@@ -607,7 +454,6 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
-    TResult Function(_Updated value)? updated,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -618,34 +464,26 @@ class _$ErrorImpl implements _Error {
 }
 
 abstract class _Error implements RegisterState {
-  factory _Error(
-      {required final UserModel user,
-      required final ApiError<dynamic> error}) = _$ErrorImpl;
+  factory _Error({required final ApiError<dynamic> error}) = _$ErrorImpl;
 
-  @override
-  UserModel get user;
   ApiError<dynamic> get error;
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SuccessImplCopyWith<$Res>
-    implements $RegisterStateCopyWith<$Res> {
+abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({UserModel user, Object response});
+  $Res call({RegisterResponse response});
 
-  @override
-  $UserModelCopyWith<$Res> get user;
+  $RegisterResponseCopyWith<$Res> get response;
 }
 
 /// @nodoc
@@ -661,32 +499,38 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = null,
     Object? response = null,
   }) {
     return _then(_$SuccessImpl(
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
-      response: null == response ? _value.response : response,
+      response: null == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as RegisterResponse,
     ));
+  }
+
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $RegisterResponseCopyWith<$Res> get response {
+    return $RegisterResponseCopyWith<$Res>(_value.response, (value) {
+      return _then(_value.copyWith(response: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  _$SuccessImpl({required this.user, required this.response});
+  _$SuccessImpl({required this.response});
 
   @override
-  final UserModel user;
-  @override
-  final Object response;
+  final RegisterResponse response;
 
   @override
   String toString() {
-    return 'RegisterState.success(user: $user, response: $response)';
+    return 'RegisterState.success(response: $response)';
   }
 
   @override
@@ -694,13 +538,12 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.user, user) || other.user == user) &&
-            const DeepCollectionEquality().equals(other.response, response));
+            (identical(other.response, response) ||
+                other.response == response));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, user, const DeepCollectionEquality().hash(response));
+  int get hashCode => Object.hash(runtimeType, response);
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
@@ -713,39 +556,36 @@ class _$SuccessImpl implements _Success {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(UserModel user) initial,
-    required TResult Function(UserModel user) loading,
-    required TResult Function(UserModel user, ApiError<dynamic> error) error,
-    required TResult Function(UserModel user, Object response) success,
-    required TResult Function(UserModel user) updated,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(ApiError<dynamic> error) error,
+    required TResult Function(RegisterResponse response) success,
   }) {
-    return success(user, response);
+    return success(response);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(UserModel user)? initial,
-    TResult? Function(UserModel user)? loading,
-    TResult? Function(UserModel user, ApiError<dynamic> error)? error,
-    TResult? Function(UserModel user, Object response)? success,
-    TResult? Function(UserModel user)? updated,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(ApiError<dynamic> error)? error,
+    TResult? Function(RegisterResponse response)? success,
   }) {
-    return success?.call(user, response);
+    return success?.call(response);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserModel user)? initial,
-    TResult Function(UserModel user)? loading,
-    TResult Function(UserModel user, ApiError<dynamic> error)? error,
-    TResult Function(UserModel user, Object response)? success,
-    TResult Function(UserModel user)? updated,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(ApiError<dynamic> error)? error,
+    TResult Function(RegisterResponse response)? success,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(user, response);
+      return success(response);
     }
     return orElse();
   }
@@ -757,7 +597,6 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Success value) success,
-    required TResult Function(_Updated value) updated,
   }) {
     return success(this);
   }
@@ -769,7 +608,6 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_Success value)? success,
-    TResult? Function(_Updated value)? updated,
   }) {
     return success?.call(this);
   }
@@ -781,7 +619,6 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
-    TResult Function(_Updated value)? updated,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -792,183 +629,13 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements RegisterState {
-  factory _Success(
-      {required final UserModel user,
-      required final Object response}) = _$SuccessImpl;
+  factory _Success({required final RegisterResponse response}) = _$SuccessImpl;
 
-  @override
-  UserModel get user;
-  Object get response;
+  RegisterResponse get response;
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$UpdatedImplCopyWith<$Res>
-    implements $RegisterStateCopyWith<$Res> {
-  factory _$$UpdatedImplCopyWith(
-          _$UpdatedImpl value, $Res Function(_$UpdatedImpl) then) =
-      __$$UpdatedImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({UserModel user});
-
-  @override
-  $UserModelCopyWith<$Res> get user;
-}
-
-/// @nodoc
-class __$$UpdatedImplCopyWithImpl<$Res>
-    extends _$RegisterStateCopyWithImpl<$Res, _$UpdatedImpl>
-    implements _$$UpdatedImplCopyWith<$Res> {
-  __$$UpdatedImplCopyWithImpl(
-      _$UpdatedImpl _value, $Res Function(_$UpdatedImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of RegisterState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = null,
-  }) {
-    return _then(_$UpdatedImpl(
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$UpdatedImpl implements _Updated {
-  const _$UpdatedImpl({required this.user});
-
-  @override
-  final UserModel user;
-
-  @override
-  String toString() {
-    return 'RegisterState.updated(user: $user)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdatedImpl &&
-            (identical(other.user, user) || other.user == user));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, user);
-
-  /// Create a copy of RegisterState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdatedImplCopyWith<_$UpdatedImpl> get copyWith =>
-      __$$UpdatedImplCopyWithImpl<_$UpdatedImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(UserModel user) initial,
-    required TResult Function(UserModel user) loading,
-    required TResult Function(UserModel user, ApiError<dynamic> error) error,
-    required TResult Function(UserModel user, Object response) success,
-    required TResult Function(UserModel user) updated,
-  }) {
-    return updated(user);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(UserModel user)? initial,
-    TResult? Function(UserModel user)? loading,
-    TResult? Function(UserModel user, ApiError<dynamic> error)? error,
-    TResult? Function(UserModel user, Object response)? success,
-    TResult? Function(UserModel user)? updated,
-  }) {
-    return updated?.call(user);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(UserModel user)? initial,
-    TResult Function(UserModel user)? loading,
-    TResult Function(UserModel user, ApiError<dynamic> error)? error,
-    TResult Function(UserModel user, Object response)? success,
-    TResult Function(UserModel user)? updated,
-    required TResult orElse(),
-  }) {
-    if (updated != null) {
-      return updated(user);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Updated value) updated,
-  }) {
-    return updated(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Updated value)? updated,
-  }) {
-    return updated?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Error value)? error,
-    TResult Function(_Success value)? success,
-    TResult Function(_Updated value)? updated,
-    required TResult orElse(),
-  }) {
-    if (updated != null) {
-      return updated(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Updated implements RegisterState {
-  const factory _Updated({required final UserModel user}) = _$UpdatedImpl;
-
-  @override
-  UserModel get user;
-
-  /// Create a copy of RegisterState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdatedImplCopyWith<_$UpdatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

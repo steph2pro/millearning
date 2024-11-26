@@ -5,6 +5,7 @@ import 'package:millearnia/src/core/routing/app_router.dart';
 import 'package:millearnia/src/core/theme/app_theme.dart';
 import 'package:millearnia/src/shared/locator.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:oktoast/oktoast.dart';
 
 class Application extends StatelessWidget {
   final AppRouter _appRouter;
@@ -33,6 +34,9 @@ class Application extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: I18n.delegate.supportedLocales,
+      builder: (context, child) {
+        return OKToast(child: child ?? Container());
+      }
     );
   }
 }

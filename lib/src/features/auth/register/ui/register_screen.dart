@@ -5,10 +5,13 @@ import 'package:millearnia/gen/assets.gen.dart';
 import 'package:millearnia/src/core/i18n/l10n.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
 import 'package:millearnia/src/core/theme/dimens.dart';
+import 'package:millearnia/src/features/auth/register/model/register_request.dart';
 import 'package:millearnia/src/shared/components/dialogs/dialog_builder.dart';
 import 'package:millearnia/src/shared/components/dialogs/notifyer.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
 import 'package:millearnia/src/shared/components/gap.dart';
+import 'package:millearnia/src/shared/components/modals/modal.dart';
+import 'package:millearnia/src/shared/components/validator/input_validator.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:millearnia/src/core/routing/app_router.dart';
@@ -23,7 +26,7 @@ class RegisterScreen extends StatefulWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (_) => locator<RegisterCubit>(),
+      create: (_) => RegisterCubit(),
       child: this,
     );
   }
@@ -51,32 +54,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
     super.dispose();
   }
 
-  // Handle the registration process
-  // void _onRegister(BuildContext context) {
-  //   if (_formKey.currentState!.validate()) {
-  //     final user = UserModel(
-  //       email: _emailController.text,
-  //       password: _passwordController.text,
-  //       name: _nameController.text,
-  //     );
-  //     context.read<RegisterCubit>().register();
-  //   }
-  // }
   void _onRegister(BuildContext context) {
+    FocusScope.of(context).unfocus();
   if (_formKey.currentState!.validate()) {
-    final user = UserModel(
+    final user = RegisterRequest(
       email: _emailController.text,
       password: _passwordController.text,
       name: _nameController.text,
     );
-    context.read<RegisterCubit>().updateUser(
-      email: _emailController.text,
-      password: _passwordController.text,
-      name: _nameController.text,
-    );
-    print (user);
-    print('usser was saved');
-    context.read<RegisterCubit>().register();
+   
+    context.read<RegisterCubit>().register(user);
   }
 }
 
@@ -86,40 +73,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return BlocListener<RegisterCubit, RegisterState>(
       listener: (context, state) {
         state.whenOrNull(
-          loading: (user) => LoadingDialog.show(context: context),
-          success: (user, response) {
-            // _hideLoadingDialog(context);
-            LoadingDialog.hide(context: context);
-            // print('Inscription réussie');
-            Notifyer.show(
-              context,
-              message: response.toString(),
-              backgroundColor: context.colorScheme.primaryContainer,
-              textColor: context.colorScheme.onPrimary,
-              duration: Duration(seconds: 20),
-            );
-            context.router.push(LoginRoute());
+          loading: () => LoadingDialog.show(context: context),
+          success: (response) {
+            _hideLoadingDialog(context);
+            showSuccesModal(response.message);
+            if(response.data!=null){
+              context.router.push(const LoginRoute());
+            }
+            // 
 
             print (response);
           },
-          error: (user, error) {
+          error: (error) {
             _hideLoadingDialog(context);
-             Notifyer.show(
-                context,
-                message:  error.message!, //error.toString() Message d'erreur renvoyé par l'API
-                duration: Duration(seconds: 10), // Durée du message
-                backgroundColor: context.colorScheme.error,
-                textColor: context.colorScheme.onPrimary,
-              );
+            print("je suis error en grand");
+            print(error.error);
+            print(error);
+             showErrorModal(
+              error.toString()
+             );
             // _showErrorDialog(context, error.message!);
-             print(error);
+             
           },
         );
       },
       child: Scaffold(
         backgroundColor: context.colorScheme.onPrimary,
         appBar: AppBar(toolbarHeight: 0),
-        body: SafeArea(
+        body: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child:SafeArea(
           child: ListView(
             padding: const EdgeInsets.all(Dimens.spacing),
             children: [
@@ -133,6 +118,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ],
           ),
         ),
+        )
       ),
     );
   }
@@ -169,8 +155,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               label: I18n.of(context).nameLabel,
               hint: I18n.of(context).namelHint,
               controller: _nameController,
-              validator: (value) =>
-                  value == null || value.isEmpty ? 'Nom requis' : null,
+              validator: (value)=>InputValidator.simpleValidator(context, value)
             ),
             const Gap.vertical(height: Dimens.spacing),
             _buildInputField(
@@ -178,15 +163,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               label: I18n.of(context).login_emailLabel,
               hint: I18n.of(context).mailExple,
               controller: _emailController,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Email requis';
-                }
-                if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                  return 'Email invalide';
-                }
-                return null;
-              },
+              validator: (value) => InputValidator.emailValidator(context, value),
             ),
             const Gap.vertical(height: Dimens.spacing),
             _buildPasswordField(context),
@@ -233,8 +210,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           isPassword: !_isPasswordVisible,
           hintText: I18n.of(context).login_passwordHint,
           textInputAction: TextInputAction.done,
-          validator: (value) =>
-              value == null || value.length < 6 ? 'Mot de passe trop court' : null,
+          validator: (value)=>InputValidator.passwordValidator(context, value),
           suffixIcon: IconButton(
             onPressed: () => setState(() => _isPasswordVisible = !_isPasswordVisible),
             icon: Icon(

@@ -76,6 +76,7 @@ class Input extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(Dimens.radius),
           child: TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             expands: expands,
             autofillHints: autofillHints,
             controller: controller,
@@ -83,7 +84,7 @@ class Input extends StatelessWidget {
             cursorColor: cursorColor,
             readOnly: readOnly,
             focusNode: focusNode,
-            style: style ?? Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+            style: style ?? Theme.of(context).textTheme.bodyLarge,
             minLines: isPassword ? 1 : minLines,
             maxLines: isPassword ? 1 : maxLines,
             keyboardType: keyboardType,

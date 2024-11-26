@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:millearnia/src/datasource/http/auth_user.dart';
+import 'package:millearnia/src/datasource/http/user_api.dart';
 import 'package:millearnia/src/datasource/models/api_response/api_response.dart';
 import 'package:millearnia/src/datasource/repositories/example_repository.dart';
 import 'package:millearnia/src/datasource/repositories/user_repository.dart';
+import 'package:millearnia/src/features/auth/login/models/login_request.dart';
+import 'package:millearnia/src/features/auth/login/models/login_response.dart';
 import 'package:millearnia/src/shared/locator.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -16,23 +18,16 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit({
     UserRepository? userRepository,
   })  : _userRepository = userRepository ?? locator<UserRepository>(),
-        super(LoginState.initial(email: '', password: ''));
+        super(LoginState.initial());
 
-  void onEmailChanged(String email) {
-    emit(LoginState.initial(email: email, password: state.password));
-  }
+  
+  void login(LoginRequest user) async {
+    emit(LoginState.loading());
 
-  void onPasswordChanged(String password) {
-    emit(LoginState.initial(password: password, email: state.email));
-  }
-
-  void login() async {
-    emit(LoginState.loading(email: state.email, password: state.password));
-
-    final response = await _userRepository.login(email: state.email,password: state.password);
+    final response = await _userRepository.login(user);
     response.when(
-      success: (data) => emit(LoginState.success(email: state.email, password: state.password, response: data)),
-      error: (error) => emit(LoginState.error(email: state.email, password: state.password, error: error)),
+      success: (data) => emit(LoginState.success(response: data)),
+      error: (error) => emit(LoginState.error(error: error)),
     );
   }
 }

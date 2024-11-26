@@ -1,76 +1,43 @@
 import 'package:dio/dio.dart';
 import 'package:millearnia/src/datasource/http/dio_config.dart';
-import 'package:millearnia/src/datasource/http/auth_user.dart';
+import 'package:millearnia/src/datasource/http/user_api.dart';
 import 'package:millearnia/src/datasource/models/api_response/api_response.dart';
 import 'package:millearnia/src/datasource/repositories/base_repository.dart';
+import 'package:millearnia/src/features/auth/login/models/login_request.dart';
+import 'package:millearnia/src/features/auth/login/models/login_response.dart';
+import 'package:millearnia/src/features/auth/register/model/register_request.dart';
+import 'package:millearnia/src/features/auth/register/model/register_response.dart';
 import 'package:millearnia/src/shared/locator.dart';
 import '../models/user_model.dart';
 
 class UserRepository extends BaseRepository {
-  final AuthUser authUser;
+  final UserApi userApi;
 
   UserRepository({
-    AuthUser? authUser,
-  }) : authUser = authUser ?? AuthUser(dio: locator<DioConfig>().dio);
+    UserApi? userApi,
+  }) : userApi = userApi ?? UserApi(dio: locator<DioConfig>().dio);
 
-  Future<ApiResponse<String, ApiError>> registerUser(UserModel user) async {
+  Future<ApiResponse<RegisterResponse, ApiError>> registerUser(RegisterRequest user) async {
     return runApiCall(
       call: () async {
-        try {
-          // Appeler le service AuthUser pour enregistrer l'utilisateur
-          final response = await authUser.registerUser(user);
+        
+          final response = await userApi.registerUser(user);
 
-          // Gestion du succès
-          // return ApiResponse.success(response['data']);
-          if (response.containsKey('message')) {
-            return ApiResponse.success(response['message']);
-          } else {
-            throw ApiError(
-              type: ApiErrorType.server,
-              statusCode: response['statusCode'] ?? 500,
-              error: 'La réponse ne contient pas de données valides.',
-            );
-          }
-        } on ApiError catch (apiError) {
-          // Gérer une erreur déjà formatée sous forme d'ApiError
-          return ApiResponse.error(apiError);
-        } catch (e) {
-          // Gestion générique des erreurs inconnues
-          return ApiResponse.error(
-            ApiError.unknown(
-              error: e,
-              message: 'Une erreur inattendue est survenue',
-            ),
-          );
-        }
-      },
+          return ApiResponse.success(RegisterResponse.fromJson(response));
+      }
     );
   }
 
-  Future<ApiResponse<UserModel, ApiError>> login({
-    required String email,
-    required String password,
-  }) async {
+  Future<ApiResponse<LoginResponse, ApiError>> login(LoginRequest user) async {
     return runApiCall(
       call: () async {
-        try {
-          // Appeler le service AuthUser pour effectuer la connexion
-          final response = await authUser.loginUser(email: email, password: password);
-          final user = response;
-          return ApiResponse.success(user);
+       
+          final response = await userApi.loginUser(user);
           
-        } on ApiError catch (apiError) {
-          // Gérer une erreur déjà formatée sous forme d'ApiError
-          return ApiResponse.error(apiError);
-        } catch (e) {
-          // Gestion générique des erreurs inconnues
-          return ApiResponse.error(
-            ApiError.unknown(
-              error: e,
-              message: 'Une erreur inattendue est survenue',
-            ),
-          );
-        }
+          return ApiResponse.success(LoginResponse.fromJson(response));
+          
+       
+        
       },
     );
   }

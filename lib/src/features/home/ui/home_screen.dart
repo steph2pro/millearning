@@ -32,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
    final List<Map<String, String>> Courses = [
     {'img': 'assets/images/course1.png', 'title': 'Design Thinking Fundamental','star':' 4.8','name':'Robert Green','prise':'180.00','btnText':'Best seller'},
+    {'img': 'assets/images/course1.png', 'title': 'Design Thinking Fundamental','star':' 4.8','name':'Robert Green','prise':'180.00','btnText':'Best seller'},
     {'img': 'assets/images/course2.png', 'title': '3D Illustration Des','star':'4.9','name':'John Doe','prise':'250.00','btnText':'Recommer'},
   ];
    final List<Map<String, String>> profiles = [
@@ -139,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 gapW6,
               Container(
-                // margin: EdgeInsets.only(bottom: 10),
+                margin: EdgeInsets.only(bottom: 10),
                 width: 49,
                 height: 59,
                 decoration: BoxDecoration(

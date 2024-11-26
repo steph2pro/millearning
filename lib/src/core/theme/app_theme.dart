@@ -26,6 +26,7 @@ class AppTheme {
     //   colorScheme: colors,
     // );
     return baseTheme.copyWith(
+      
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ElevatedButton.styleFrom(
           textStyle: font.copyWith(fontWeight: FontWeight.w500, fontSize: 16),
@@ -164,11 +165,12 @@ class AppTheme {
 
   static TextTheme _buildTextTheme({required ColorScheme colors}) {
      return TextTheme(
-      bodySmall: font.copyWith(color: colors.tertiaryContainer, fontWeight: FontWeight.w600, fontSize: 14),
-      bodyLarge: font.copyWith(color: colors.tertiary, fontWeight: FontWeight.w700, fontSize: 26, height: 41.48 / 35),
-      bodyMedium: font.copyWith(color: colors.onSurface, fontSize: 20, fontWeight: FontWeight.w400),
-      titleLarge: font.copyWith(color: colors.secondaryContainer, fontWeight: FontWeight.w600, fontSize: 17),
-      titleMedium: font.copyWith(color: colors.onSurface, fontWeight: FontWeight.w400, fontSize: 14),
+      bodySmall: font.copyWith(color: colors.tertiaryContainer, fontWeight: FontWeight.w600, fontSize: 12),
+      bodyLarge: font.copyWith(color: colors.tertiaryContainer, fontSize: 14,),
+      bodyMedium: font.copyWith(color: colors.onSurface, fontSize: 14, fontWeight: FontWeight.w400),
+      titleLarge: font.copyWith(color: colors.secondaryContainer, fontWeight: FontWeight.w600, fontSize: 22),
+      titleMedium: font.copyWith(color: colors.onSurface, fontWeight: FontWeight.w400, fontSize: 18),
+      titleSmall: font.copyWith(color: colors.onSurface, fontWeight: FontWeight.w400, fontSize: 16),
       labelLarge: font.copyWith(color: colors.tertiary, fontWeight: FontWeight.w400, fontSize: 14),
       labelMedium: font.copyWith(color: colors.onSurface, fontSize: 12, fontWeight: FontWeight.w500),
       labelSmall: font.copyWith(color: colors.tertiaryContainer, fontWeight: FontWeight.w400, fontSize: 10),

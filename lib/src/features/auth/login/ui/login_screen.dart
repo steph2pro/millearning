@@ -6,12 +6,15 @@ import 'package:millearnia/src/core/i18n/l10n.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
 import 'package:millearnia/src/core/theme/dimens.dart';
 import 'package:millearnia/src/features/auth/login/logic/login_cubit.dart';
+import 'package:millearnia/src/features/auth/login/models/login_request.dart';
 import 'package:millearnia/src/shared/components/atoms/dividers/labeled_divider.dart';
 import 'package:millearnia/src/shared/components/buttons/button.dart';
 import 'package:millearnia/src/shared/components/dialogs/dialog_builder.dart';
 import 'package:millearnia/src/shared/components/dialogs/notifyer.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
 import 'package:millearnia/src/shared/components/gap.dart';
+import 'package:millearnia/src/shared/components/modals/modal.dart';
+import 'package:millearnia/src/shared/components/validator/input_validator.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
@@ -47,41 +50,51 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordController.dispose();
     super.dispose();
   }
+  
+//   void _onLogin() {
+//     // FocusScope.of(context).unfocus();
+//   if (_formKey.currentState!.validate()) {
+//     final user = LoginRequest(
+//       email: _emailController.text,
+//       password: _passwordController.text,
+//     );
+   
+//     context.read<LoginCubit>().login(user);
+//   }
+// }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
         state.whenOrNull(
-            loading: (email, password) => LoadingDialog.show(context: context),
-            success: (email, password, response) {
-              LoadingDialog.hide(context: context);
-              Notifyer.show(context, 
-              message: 'connection reusi',
-              // response.toString(),
-              duration: Duration(seconds: 3),
-              backgroundColor: context.colorScheme.primaryContainer,
-              textColor: context.colorScheme.onPrimary,
-              );
+            loading: () => LoadingDialog.show(context: context),
+            success: ( response) {
+             LoadingDialog.hide(context: context);
+            showSuccesModal(response.message);
+            if(response.data != null){
               context.router.push(HomeRoute());
-            },
-            error: (email, password, error) {
-               LoadingDialog.hide(context: context);
+            }
 
-              // Afficher un message d'erreur (exemple avec Notifyer)
-              Notifyer.show(
-                context,
-                message: 'informations erroner', //error.toString() Message d'erreur renvoyé par l'API
-                duration: Duration(seconds: 10), // Durée du message
-                backgroundColor: context.colorScheme.error,
-                textColor: context.colorScheme.onPrimary,
-              );
+            print (response);
+             
+            },
+            error: ( error) {
+               LoadingDialog.hide(context: context);
+              showErrorModal(
+              'informations incorrect veillez reesayer!'
+             );
+              
             });
       },
       child: Scaffold(
         backgroundColor: context.colorScheme.onPrimary,
         appBar: AppBar(toolbarHeight: 0),
-        body: SafeArea(
+        body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+      child: SafeArea(
           
           child: ListView(
             padding: const EdgeInsets.all(Dimens.spacing),
@@ -113,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         autofillHints: const [AutofillHints.email],
                         controller: _emailController,
                         hintText: I18n.of(context).login_emailHint,
-                        onChanged: context.read<LoginCubit>().onEmailChanged,
+                        validator: (value) => InputValidator.emailValidator(context, value),
                         textInputAction: TextInputAction.next,
                       ),
                       const Gap.vertical(height: Dimens.spacing),
@@ -126,8 +139,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         autofillHints: const [AutofillHints.password],
                         controller: _passwordController,
                         isPassword: !_isPasswordVisible,
+                        validator: (value)=>InputValidator.passwordValidator(context, value),
                         hintText: I18n.of(context).login_passwordHint,
-                        onChanged: context.read<LoginCubit>().onPasswordChanged,
                         textInputAction: TextInputAction.done,
                         suffixIcon: IconButton(
                           onPressed: () => setState(() => _isPasswordVisible = !_isPasswordVisible),
@@ -136,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: context.colorScheme.onSurface,
                           ),
                         ),
-                        onSubmitted: (_) => _onLogin(),
+                        // onSubmitted: (_) => _onLogin(context),
                       ),
                     ],
                   ),
@@ -154,7 +167,17 @@ class _LoginScreenState extends State<LoginScreen> {
               Button.primary(
                 
                 title: I18n.of(context).signIn,
-                onPressed: _onLogin,
+                onPressed: (){
+                 FocusScope.of(context).unfocus();
+                 if (_formKey.currentState!.validate()) {
+                    final user = LoginRequest(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                    );
+                  
+                    context.read<LoginCubit>().login(user);
+                  }
+              },
               ),
               const Gap.vertical(height: Dimens.tripleSpacing),
               Padding(padding: EdgeInsets.symmetric(horizontal: 40),
@@ -246,8 +269,10 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
        
       ),
+    )
     );
   }
 
-  void _onLogin() => context.read<LoginCubit>().login();
+  
+
 }

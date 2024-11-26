@@ -16,35 +16,28 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LoginState {
-  String get email => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) initial,
-    required TResult Function(String email, String password) loading,
-    required TResult Function(
-            String email, String password, ApiError<dynamic> error)
-        error,
-    required TResult Function(String email, String password, Object response)
-        success,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(ApiError<dynamic> error) error,
+    required TResult Function(LoginResponse response) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? initial,
-    TResult? Function(String email, String password)? loading,
-    TResult? Function(String email, String password, ApiError<dynamic> error)?
-        error,
-    TResult? Function(String email, String password, Object response)? success,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(ApiError<dynamic> error)? error,
+    TResult? Function(LoginResponse response)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? initial,
-    TResult Function(String email, String password)? loading,
-    TResult Function(String email, String password, ApiError<dynamic> error)?
-        error,
-    TResult Function(String email, String password, Object response)? success,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(ApiError<dynamic> error)? error,
+    TResult Function(LoginResponse response)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -73,12 +66,6 @@ mixin _$LoginState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  /// Create a copy of LoginState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $LoginStateCopyWith<LoginState> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -86,8 +73,6 @@ abstract class $LoginStateCopyWith<$Res> {
   factory $LoginStateCopyWith(
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res, LoginState>;
-  @useResult
-  $Res call({String email, String password});
 }
 
 /// @nodoc
@@ -102,34 +87,13 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? email = null,
-    Object? password = null,
-  }) {
-    return _then(_value.copyWith(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$InitialImplCopyWith<$Res>
-    implements $LoginStateCopyWith<$Res> {
+abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String email, String password});
 }
 
 /// @nodoc
@@ -142,99 +106,60 @@ class __$$InitialImplCopyWithImpl<$Res>
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? email = null,
-    Object? password = null,
-  }) {
-    return _then(_$InitialImpl(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$InitialImpl implements _Initial {
-  _$InitialImpl({required this.email, required this.password});
-
-  @override
-  final String email;
-  @override
-  final String password;
+  _$InitialImpl();
 
   @override
   String toString() {
-    return 'LoginState.initial(email: $email, password: $password)';
+    return 'LoginState.initial()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$InitialImpl &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.password, password) ||
-                other.password == password));
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password);
-
-  /// Create a copy of LoginState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
-      __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) initial,
-    required TResult Function(String email, String password) loading,
-    required TResult Function(
-            String email, String password, ApiError<dynamic> error)
-        error,
-    required TResult Function(String email, String password, Object response)
-        success,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(ApiError<dynamic> error) error,
+    required TResult Function(LoginResponse response) success,
   }) {
-    return initial(email, password);
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? initial,
-    TResult? Function(String email, String password)? loading,
-    TResult? Function(String email, String password, ApiError<dynamic> error)?
-        error,
-    TResult? Function(String email, String password, Object response)? success,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(ApiError<dynamic> error)? error,
+    TResult? Function(LoginResponse response)? success,
   }) {
-    return initial?.call(email, password);
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? initial,
-    TResult Function(String email, String password)? loading,
-    TResult Function(String email, String password, ApiError<dynamic> error)?
-        error,
-    TResult Function(String email, String password, Object response)? success,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(ApiError<dynamic> error)? error,
+    TResult Function(LoginResponse response)? success,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(email, password);
+      return initial();
     }
     return orElse();
   }
@@ -278,32 +203,14 @@ class _$InitialImpl implements _Initial {
 }
 
 abstract class _Initial implements LoginState {
-  factory _Initial(
-      {required final String email,
-      required final String password}) = _$InitialImpl;
-
-  @override
-  String get email;
-  @override
-  String get password;
-
-  /// Create a copy of LoginState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$LoadingImplCopyWith<$Res>
-    implements $LoginStateCopyWith<$Res> {
+abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
           _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
       __$$LoadingImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String email, String password});
 }
 
 /// @nodoc
@@ -316,99 +223,60 @@ class __$$LoadingImplCopyWithImpl<$Res>
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? email = null,
-    Object? password = null,
-  }) {
-    return _then(_$LoadingImpl(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$LoadingImpl implements _Loading {
-  _$LoadingImpl({required this.email, required this.password});
-
-  @override
-  final String email;
-  @override
-  final String password;
+  _$LoadingImpl();
 
   @override
   String toString() {
-    return 'LoginState.loading(email: $email, password: $password)';
+    return 'LoginState.loading()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadingImpl &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.password, password) ||
-                other.password == password));
+        (other.runtimeType == runtimeType && other is _$LoadingImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password);
-
-  /// Create a copy of LoginState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
-      __$$LoadingImplCopyWithImpl<_$LoadingImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) initial,
-    required TResult Function(String email, String password) loading,
-    required TResult Function(
-            String email, String password, ApiError<dynamic> error)
-        error,
-    required TResult Function(String email, String password, Object response)
-        success,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(ApiError<dynamic> error) error,
+    required TResult Function(LoginResponse response) success,
   }) {
-    return loading(email, password);
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? initial,
-    TResult? Function(String email, String password)? loading,
-    TResult? Function(String email, String password, ApiError<dynamic> error)?
-        error,
-    TResult? Function(String email, String password, Object response)? success,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(ApiError<dynamic> error)? error,
+    TResult? Function(LoginResponse response)? success,
   }) {
-    return loading?.call(email, password);
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? initial,
-    TResult Function(String email, String password)? loading,
-    TResult Function(String email, String password, ApiError<dynamic> error)?
-        error,
-    TResult Function(String email, String password, Object response)? success,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(ApiError<dynamic> error)? error,
+    TResult Function(LoginResponse response)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(email, password);
+      return loading();
     }
     return orElse();
   }
@@ -452,31 +320,16 @@ class _$LoadingImpl implements _Loading {
 }
 
 abstract class _Loading implements LoginState {
-  factory _Loading(
-      {required final String email,
-      required final String password}) = _$LoadingImpl;
-
-  @override
-  String get email;
-  @override
-  String get password;
-
-  /// Create a copy of LoginState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  factory _Loading() = _$LoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$ErrorImplCopyWith<$Res> implements $LoginStateCopyWith<$Res> {
+abstract class _$$ErrorImplCopyWith<$Res> {
   factory _$$ErrorImplCopyWith(
           _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
       __$$ErrorImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String email, String password, ApiError<dynamic> error});
+  $Res call({ApiError<dynamic> error});
 }
 
 /// @nodoc
@@ -492,19 +345,9 @@ class __$$ErrorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = null,
-    Object? password = null,
     Object? error = null,
   }) {
     return _then(_$ErrorImpl(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -516,19 +359,14 @@ class __$$ErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ErrorImpl implements _Error {
-  _$ErrorImpl(
-      {required this.email, required this.password, required this.error});
+  _$ErrorImpl({required this.error});
 
-  @override
-  final String email;
-  @override
-  final String password;
   @override
   final ApiError<dynamic> error;
 
   @override
   String toString() {
-    return 'LoginState.error(email: $email, password: $password, error: $error)';
+    return 'LoginState.error(error: $error)';
   }
 
   @override
@@ -536,14 +374,11 @@ class _$ErrorImpl implements _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorImpl &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.password, password) ||
-                other.password == password) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password, error);
+  int get hashCode => Object.hash(runtimeType, error);
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -556,41 +391,36 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) initial,
-    required TResult Function(String email, String password) loading,
-    required TResult Function(
-            String email, String password, ApiError<dynamic> error)
-        error,
-    required TResult Function(String email, String password, Object response)
-        success,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(ApiError<dynamic> error) error,
+    required TResult Function(LoginResponse response) success,
   }) {
-    return error(email, password, this.error);
+    return error(this.error);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? initial,
-    TResult? Function(String email, String password)? loading,
-    TResult? Function(String email, String password, ApiError<dynamic> error)?
-        error,
-    TResult? Function(String email, String password, Object response)? success,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(ApiError<dynamic> error)? error,
+    TResult? Function(LoginResponse response)? success,
   }) {
-    return error?.call(email, password, this.error);
+    return error?.call(this.error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? initial,
-    TResult Function(String email, String password)? loading,
-    TResult Function(String email, String password, ApiError<dynamic> error)?
-        error,
-    TResult Function(String email, String password, Object response)? success,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(ApiError<dynamic> error)? error,
+    TResult Function(LoginResponse response)? success,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(email, password, this.error);
+      return error(this.error);
     }
     return orElse();
   }
@@ -634,34 +464,26 @@ class _$ErrorImpl implements _Error {
 }
 
 abstract class _Error implements LoginState {
-  factory _Error(
-      {required final String email,
-      required final String password,
-      required final ApiError<dynamic> error}) = _$ErrorImpl;
+  factory _Error({required final ApiError<dynamic> error}) = _$ErrorImpl;
 
-  @override
-  String get email;
-  @override
-  String get password;
   ApiError<dynamic> get error;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SuccessImplCopyWith<$Res>
-    implements $LoginStateCopyWith<$Res> {
+abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String email, String password, Object response});
+  $Res call({LoginResponse response});
+
+  $LoginResponseCopyWith<$Res> get response;
 }
 
 /// @nodoc
@@ -677,40 +499,38 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = null,
-    Object? password = null,
     Object? response = null,
   }) {
     return _then(_$SuccessImpl(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      response: null == response ? _value.response : response,
+      response: null == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as LoginResponse,
     ));
+  }
+
+  /// Create a copy of LoginState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LoginResponseCopyWith<$Res> get response {
+    return $LoginResponseCopyWith<$Res>(_value.response, (value) {
+      return _then(_value.copyWith(response: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  _$SuccessImpl(
-      {required this.email, required this.password, required this.response});
+  _$SuccessImpl({required this.response});
 
   @override
-  final String email;
-  @override
-  final String password;
-  @override
-  final Object response;
+  final LoginResponse response;
 
   @override
   String toString() {
-    return 'LoginState.success(email: $email, password: $password, response: $response)';
+    return 'LoginState.success(response: $response)';
   }
 
   @override
@@ -718,15 +538,12 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.password, password) ||
-                other.password == password) &&
-            const DeepCollectionEquality().equals(other.response, response));
+            (identical(other.response, response) ||
+                other.response == response));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password,
-      const DeepCollectionEquality().hash(response));
+  int get hashCode => Object.hash(runtimeType, response);
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -739,41 +556,36 @@ class _$SuccessImpl implements _Success {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) initial,
-    required TResult Function(String email, String password) loading,
-    required TResult Function(
-            String email, String password, ApiError<dynamic> error)
-        error,
-    required TResult Function(String email, String password, Object response)
-        success,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(ApiError<dynamic> error) error,
+    required TResult Function(LoginResponse response) success,
   }) {
-    return success(email, password, response);
+    return success(response);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? initial,
-    TResult? Function(String email, String password)? loading,
-    TResult? Function(String email, String password, ApiError<dynamic> error)?
-        error,
-    TResult? Function(String email, String password, Object response)? success,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(ApiError<dynamic> error)? error,
+    TResult? Function(LoginResponse response)? success,
   }) {
-    return success?.call(email, password, response);
+    return success?.call(response);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? initial,
-    TResult Function(String email, String password)? loading,
-    TResult Function(String email, String password, ApiError<dynamic> error)?
-        error,
-    TResult Function(String email, String password, Object response)? success,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(ApiError<dynamic> error)? error,
+    TResult Function(LoginResponse response)? success,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(email, password, response);
+      return success(response);
     }
     return orElse();
   }
@@ -817,20 +629,12 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements LoginState {
-  factory _Success(
-      {required final String email,
-      required final String password,
-      required final Object response}) = _$SuccessImpl;
+  factory _Success({required final LoginResponse response}) = _$SuccessImpl;
 
-  @override
-  String get email;
-  @override
-  String get password;
-  Object get response;
+  LoginResponse get response;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;

@@ -20,6 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(number) => "This field must be ${number} characters";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "ConfirmPassword":
@@ -55,6 +57,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "forYou": MessageLookupByLibrary.simpleMessage("for You"),
         "gender": MessageLookupByLibrary.simpleMessage("Gender"),
         "hi": MessageLookupByLibrary.simpleMessage("Hi, "),
+        "inputValidationCanBeEmpty": MessageLookupByLibrary.simpleMessage(
+            "This field must not be empty"),
+        "inputValidationInvalidEmail":
+            MessageLookupByLibrary.simpleMessage("Invalid Email"),
+        "inputValidationInvalidPassword":
+            MessageLookupByLibrary.simpleMessage("Invalid password"),
+        "inputValidationMustBeAtLeast": m0,
+        "inputValidationShouldBeSame":
+            MessageLookupByLibrary.simpleMessage("Password should be the same"),
         "letStart":
             MessageLookupByLibrary.simpleMessage("Let\'s start learning!"),
         "letStarted":
