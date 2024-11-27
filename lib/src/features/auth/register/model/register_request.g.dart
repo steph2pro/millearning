@@ -11,6 +11,7 @@ _$RegisterRequestImpl _$$RegisterRequestImplFromJson(
     _$RegisterRequestImpl(
       name: json['name'] as String,
       email: json['email'] as String,
+      phone: json['phone'] as String,
       password: json['password'] as String,
     );
 
@@ -19,5 +20,6 @@ Map<String, dynamic> _$$RegisterRequestImplToJson(
     <String, dynamic>{
       'name': instance.name,
       'email': instance.email,
+      'phone': instance.phone,
       'password': instance.password,
     };

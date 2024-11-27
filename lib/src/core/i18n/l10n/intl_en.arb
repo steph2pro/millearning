@@ -13,9 +13,10 @@
   "login_googleBtnLabel": "Sign in with Google",
   "login_appleBtnLabel": "Sign in with Apple",
   "login_submitBtnLabel": "Login",
-
+  "country":"Country",
+  "search":"Search",
   "loadingDialog_content": "Please wait...",
-
+  "signInWith":"SignIn with :",
   "orSign": "Or sign in with",
   "findingThe":"Finding the",
   "perfect":"Perfect Online Course",
@@ -59,6 +60,7 @@
   "inputValidationInvalidPassword":"Invalid password",
   "inputValidationInvalidEmail": "Invalid Email",
   "inputValidationMustBeAtLeast": "This field must be {number} characters",
+  "phone_number":"Phone number",
   "@inputValidationMustBeAtLeast": {
     "placeholder": {
       "number": {}

@@ -33,6 +33,7 @@ dependencies:
   country_picker: ^2.0.20
   country_pickers: ^3.0.1
   oktoast: ^3.4.0
+  flutter_libphonenumber: ^2.5.0
 
 dev_dependencies:
   flutter_test:

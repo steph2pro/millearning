@@ -29,7 +29,7 @@ class Input extends StatelessWidget {
   final String? labelText;
   final TextCapitalization? textCapitalization;
   final bool expands;
-
+  final inputFormatters;
   const Input({
     super.key,
     this.focusNode,
@@ -56,7 +56,7 @@ class Input extends StatelessWidget {
     this.onSubmitted,
     this.labelText,
     this.textCapitalization,
-    this.expands = false,
+    this.expands = false,  this.inputFormatters,
   });
 
   @override

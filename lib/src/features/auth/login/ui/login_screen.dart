@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:country_pickers/country.dart';
+import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:millearnia/gen/assets.gen.dart';
@@ -19,7 +21,8 @@ import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
-import 'package:millearnia/src/core/routing/app_router.dart'; // Importez le fichier principal // Import de la page cible
+import 'package:millearnia/src/core/routing/app_router.dart';
+import 'package:millearnia/src/shared/utils/regexp_plus.dart'; // Importez le fichier principal // Import de la page cible
 
 @RoutePage()
 class LoginScreen extends StatefulWidget implements AutoRouteWrapper {
@@ -44,24 +47,96 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+ final TextEditingController _phoneController = TextEditingController();
+  Country _country = CountryPickerUtils.getCountryByIsoCode('cm');
+
+  bool isPhoneNumber = true;
+  String get fullPhoneNumber => '+${_country.phoneCode}${_phoneController.text}';
+
+  void onCountryTap() {
+    showCountryPicker(context,
+        onValuePicked: (country) => setState(() {
+              _country = country;
+            }));
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
+
+
+  Widget get numberWidget => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            I18n.of(context).phone_number,
+            style: Theme.of(context).textTheme.labelMedium,
+          ),
+          const Gap.vertical(height: Dimens.halfSpacing),
+          Row(
+            children: [
+              GestureDetector(
+                onTap: onCountryTap,
+                child: SizedBox(
+                  width: 106.0,
+                  child: AbsorbPointer(
+                    child: Input(
+                      controller: TextEditingController(),
+                      readOnly: true,
+                      hintText: '+${_country.phoneCode}',
+                      hintStyle: context.textTheme.bodyMedium,
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.only(right: 0, left: 0, top: 16, bottom: 16),
+                        child: SizedBox(
+                          height: 24,
+                          width: 24,
+                          child: CircleAvatar(
+                            backgroundColor: Theme.of(context).primaryColor,
+                            backgroundImage: AssetImage(CountryPickerUtils.getFlagImageAssetPath(_country.isoCode), package: 'country_pickers'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8.0),
+              Expanded(
+                child: Input(
+                  controller: _phoneController,
+                  keyboardType: TextInputType.phone,
+                  hintText: 'Ex : 07 80 00 00 00',
+                  inputFormatters: mobileFormatters(_phoneController.text.trim(), _country.phoneCode),
+                  textInputAction: TextInputAction.next,
+                ),
+              )
+            ],
+          ),
+        ],
+      );
+
+  Widget get emailWidget => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            I18n.of(context).login_emailLabel,
+            style: Theme.of(context).textTheme.labelMedium,
+          ),
+          const Gap.vertical(height: Dimens.halfSpacing),
+          Input(
+            autofillHints: const [AutofillHints.email],
+            controller: _emailController,
+            hintText: I18n.of(context).login_emailHint,
+            validator: (value) => InputValidator.emailValidator(context, value),
+            textInputAction: TextInputAction.next,
+          ),
+        ],
+      );
   
-//   void _onLogin() {
-//     // FocusScope.of(context).unfocus();
-//   if (_formKey.currentState!.validate()) {
-//     final user = LoginRequest(
-//       email: _emailController.text,
-//       password: _passwordController.text,
-//     );
-   
-//     context.read<LoginCubit>().login(user);
-//   }
-// }
+
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Text(
                 I18n.of(context).signIn,
                 textAlign: TextAlign.center,
-                style: context.textTheme.bodyLarge,
+                style: context.textTheme.titleLarge,
               ),
               const Gap.vertical(height: Dimens.minSpacing),
               Text(
@@ -118,18 +193,36 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        I18n.of(context).login_emailLabel,
-                        style: context.textTheme.bodySmall?.copyWith(fontSize: 12)
-                      ),
-                      Input(
-                        autofillHints: const [AutofillHints.email],
-                        controller: _emailController,
-                        hintText: I18n.of(context).login_emailHint,
-                        validator: (value) => InputValidator.emailValidator(context, value),
-                        textInputAction: TextInputAction.next,
-                      ),
-                      const Gap.vertical(height: Dimens.spacing),
+
+                       isPhoneNumber ? numberWidget : emailWidget,
+            // const Gap.vertical(height: Dimens.spacing),
+              Align(
+                alignment: Alignment.topRight,
+                child: TextButton(
+                  onPressed: () {
+                    setState(() {
+                      isPhoneNumber = !isPhoneNumber;
+                      _phoneController.clear();
+                    }); 
+                  },
+                  child: Text(
+                    '${I18n.of(context).signInWith} ${!isPhoneNumber ? I18n.of(context).phone_number.toLowerCase() : I18n.of(context).login_emailLabel.toLowerCase()}'
+                  ),
+                ),
+              ),
+           
+                      // Text(
+                      //   I18n.of(context).login_emailLabel,
+                      //   style: context.textTheme.bodySmall?.copyWith(fontSize: 12)
+                      // ),
+                      // Input(
+                      //   autofillHints: const [AutofillHints.email],
+                      //   controller: _emailController,
+                      //   hintText: I18n.of(context).login_emailHint,
+                      //   validator: (value) => InputValidator.emailValidator(context, value),
+                      //   textInputAction: TextInputAction.next,
+                      // ),
+                      // const Gap.vertical(height: Dimens.spacing),
                       
                       Text(
                         I18n.of(context).login_passwordLabel,
@@ -172,6 +265,7 @@ class _LoginScreenState extends State<LoginScreen> {
                  if (_formKey.currentState!.validate()) {
                     final user = LoginRequest(
                       email: _emailController.text,
+                      phone: _phoneController.text,
                       password: _passwordController.text,
                     );
                   

@@ -170,11 +170,41 @@ class I18n {
     );
   }
 
+  /// `Country`
+  String get country {
+    return Intl.message(
+      'Country',
+      name: 'country',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Please wait...`
   String get loadingDialog_content {
     return Intl.message(
       'Please wait...',
       name: 'loadingDialog_content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SignIn with :`
+  String get signInWith {
+    return Intl.message(
+      'SignIn with :',
+      name: 'signInWith',
       desc: '',
       args: [],
     );
@@ -607,6 +637,16 @@ class I18n {
       name: 'inputValidationMustBeAtLeast',
       desc: '',
       args: [number],
+    );
+  }
+
+  /// `Phone number`
+  String get phone_number {
+    return Intl.message(
+      'Phone number',
+      name: 'phone_number',
+      desc: '',
+      args: [],
     );
   }
 }

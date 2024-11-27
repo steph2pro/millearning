@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Complete Your Profile"),
         "continueLearning":
             MessageLookupByLibrary.simpleMessage("Continue Learning"),
+        "country": MessageLookupByLibrary.simpleMessage("Country"),
         "createAccount": MessageLookupByLibrary.simpleMessage("Create Account"),
         "createNewPassword":
             MessageLookupByLibrary.simpleMessage("Create New Password"),
@@ -96,10 +97,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "perfect":
             MessageLookupByLibrary.simpleMessage("Perfect Online Course"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "phone_number": MessageLookupByLibrary.simpleMessage("Phone number"),
         "pupularCourse": MessageLookupByLibrary.simpleMessage("Pupular Course"),
         "resendCode": MessageLookupByLibrary.simpleMessage("Resend code"),
+        "search": MessageLookupByLibrary.simpleMessage("Search"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
+        "signInWith": MessageLookupByLibrary.simpleMessage("SignIn with :"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "termsCondition":

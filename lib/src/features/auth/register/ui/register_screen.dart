@@ -1,13 +1,14 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:country_pickers/country.dart';
+// import 'package:country_picker/country_picker.dart' hide Country;
+import 'package:country_pickers/country_pickers.dart' as cps;
+import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:millearnia/gen/assets.gen.dart';
 import 'package:millearnia/src/core/i18n/l10n.dart';
-import 'package:millearnia/src/core/theme/app_size.dart';
 import 'package:millearnia/src/core/theme/dimens.dart';
 import 'package:millearnia/src/features/auth/register/model/register_request.dart';
 import 'package:millearnia/src/shared/components/dialogs/dialog_builder.dart';
-import 'package:millearnia/src/shared/components/dialogs/notifyer.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
 import 'package:millearnia/src/shared/components/gap.dart';
 import 'package:millearnia/src/shared/components/modals/modal.dart';
@@ -15,9 +16,8 @@ import 'package:millearnia/src/shared/components/validator/input_validator.dart'
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:millearnia/src/core/routing/app_router.dart';
-import 'package:millearnia/src/datasource/models/user_model.dart';
-import 'package:millearnia/src/shared/locator.dart';
 import 'package:millearnia/src/features/auth/register/logic/register_cubit.dart';
+import 'package:millearnia/src/shared/utils/regexp_plus.dart';
 
 @RoutePage()
 class RegisterScreen extends StatefulWidget implements AutoRouteWrapper {
@@ -45,6 +45,79 @@ class _RegisterScreenState extends State<RegisterScreen> {
   // States
   bool _isChecked = false;
   bool _isPasswordVisible = false;
+ 
+  final TextEditingController _phoneController = TextEditingController();
+  Country _country = CountryPickerUtils.getCountryByIsoCode('cm');
+  
+  // bool isPhoneNumber = true;
+  // String get fullPhoneNumber => '+${_country.phoneCode}${_phoneController.text}';
+
+  void onCountryTap() {
+    showCountryPicker(
+      
+       context,
+         onValuePicked: (country) => setState(() {
+              _country = country;
+            })
+
+    );
+ 
+  
+
+  }
+
+  Widget get numberWidget => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            I18n.of(context).phone_number,
+            style: Theme.of(context).textTheme.labelMedium,
+          ),
+          const Gap.vertical(height: Dimens.halfSpacing),
+          Row(
+            children: [
+              GestureDetector(
+                onTap: onCountryTap,
+                child: SizedBox(
+                  width: 106.0,
+                  child: AbsorbPointer(
+                    child: Input(
+                      controller: TextEditingController(),
+                      readOnly: true,
+                      hintText: '+${_country.phoneCode}',
+                      hintStyle: context.textTheme.bodyMedium,
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.only(right: 0, left: 0, top: 16, bottom: 16),
+                        child: SizedBox(
+                          height: 24,
+                          width: 24,
+                          child: CircleAvatar(
+                            backgroundColor: Theme.of(context).primaryColor,
+                            backgroundImage: AssetImage(CountryPickerUtils.getFlagImageAssetPath(_country.isoCode), package: 'country_pickers'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8.0),
+              Expanded(
+                child: Input(
+                  controller: _phoneController,
+                  keyboardType: TextInputType.phone,
+                  hintText: 'Ex : 07 80 00 00 00',
+                  inputFormatters: mobileFormatters(_phoneController.text.trim(), _country.phoneCode),
+                  textInputAction: TextInputAction.next,
+                ),
+              )
+            ],
+          ),
+        ],
+      );
+
+
+
 
   @override
   void dispose() {
@@ -61,6 +134,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       email: _emailController.text,
       password: _passwordController.text,
       name: _nameController.text,
+      phone:_phoneController.text,
     );
    
     context.read<RegisterCubit>().register(user);
@@ -130,7 +204,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Text(
           I18n.of(context).createAccount,
           textAlign: TextAlign.center,
-          style: context.textTheme.bodyLarge,
+          style: context.textTheme.titleLarge,
         ),
         const Gap.vertical(height: Dimens.minSpacing),
         Text(
@@ -157,6 +231,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               controller: _nameController,
               validator: (value)=>InputValidator.simpleValidator(context, value)
             ),
+            const Gap.vertical(height: Dimens.spacing),
+            numberWidget,
             const Gap.vertical(height: Dimens.spacing),
             _buildInputField(
               context,

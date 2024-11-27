@@ -22,6 +22,7 @@ RegisterRequest _$RegisterRequestFromJson(Map<String, dynamic> json) {
 mixin _$RegisterRequest {
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  String get phone => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
 
   /// Serializes this RegisterRequest to a JSON map.
@@ -40,7 +41,7 @@ abstract class $RegisterRequestCopyWith<$Res> {
           RegisterRequest value, $Res Function(RegisterRequest) then) =
       _$RegisterRequestCopyWithImpl<$Res, RegisterRequest>;
   @useResult
-  $Res call({String name, String email, String password});
+  $Res call({String name, String email, String phone, String password});
 }
 
 /// @nodoc
@@ -60,6 +61,7 @@ class _$RegisterRequestCopyWithImpl<$Res, $Val extends RegisterRequest>
   $Res call({
     Object? name = null,
     Object? email = null,
+    Object? phone = null,
     Object? password = null,
   }) {
     return _then(_value.copyWith(
@@ -70,6 +72,10 @@ class _$RegisterRequestCopyWithImpl<$Res, $Val extends RegisterRequest>
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      phone: null == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
               as String,
       password: null == password
           ? _value.password
@@ -87,7 +93,7 @@ abstract class _$$RegisterRequestImplCopyWith<$Res>
       __$$RegisterRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String email, String password});
+  $Res call({String name, String email, String phone, String password});
 }
 
 /// @nodoc
@@ -105,6 +111,7 @@ class __$$RegisterRequestImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? email = null,
+    Object? phone = null,
     Object? password = null,
   }) {
     return _then(_$RegisterRequestImpl(
@@ -115,6 +122,10 @@ class __$$RegisterRequestImplCopyWithImpl<$Res>
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      phone: null == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
               as String,
       password: null == password
           ? _value.password
@@ -128,7 +139,10 @@ class __$$RegisterRequestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$RegisterRequestImpl implements _RegisterRequest {
   _$RegisterRequestImpl(
-      {required this.name, required this.email, required this.password});
+      {required this.name,
+      required this.email,
+      required this.phone,
+      required this.password});
 
   factory _$RegisterRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$RegisterRequestImplFromJson(json);
@@ -138,11 +152,13 @@ class _$RegisterRequestImpl implements _RegisterRequest {
   @override
   final String email;
   @override
+  final String phone;
+  @override
   final String password;
 
   @override
   String toString() {
-    return 'RegisterRequest(name: $name, email: $email, password: $password)';
+    return 'RegisterRequest(name: $name, email: $email, phone: $phone, password: $password)';
   }
 
   @override
@@ -152,13 +168,14 @@ class _$RegisterRequestImpl implements _RegisterRequest {
             other is _$RegisterRequestImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.password, password) ||
                 other.password == password));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, email, password);
+  int get hashCode => Object.hash(runtimeType, name, email, phone, password);
 
   /// Create a copy of RegisterRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -181,6 +198,7 @@ abstract class _RegisterRequest implements RegisterRequest {
   factory _RegisterRequest(
       {required final String name,
       required final String email,
+      required final String phone,
       required final String password}) = _$RegisterRequestImpl;
 
   factory _RegisterRequest.fromJson(Map<String, dynamic> json) =
@@ -190,6 +208,8 @@ abstract class _RegisterRequest implements RegisterRequest {
   String get name;
   @override
   String get email;
+  @override
+  String get phone;
   @override
   String get password;
 
