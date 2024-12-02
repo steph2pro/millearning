@@ -21,6 +21,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CodeVerifyScreen(),
       );
     },
+    CourseDetailRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CourseDetailScreen(),
+      );
+    },
     HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -82,6 +88,20 @@ class CodeVerifyRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CodeVerifyRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CourseDetailScreen]
+class CourseDetailRoute extends PageRouteInfo<void> {
+  const CourseDetailRoute({List<PageRouteInfo>? children})
+      : super(
+          CourseDetailRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CourseDetailRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
