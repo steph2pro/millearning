@@ -36,7 +36,8 @@ class Application extends StatelessWidget {
       supportedLocales: I18n.delegate.supportedLocales,
       builder: (context, child) {
         return OKToast(child: child ?? Container());
-      }
+      },
+      
     );
   }
 }

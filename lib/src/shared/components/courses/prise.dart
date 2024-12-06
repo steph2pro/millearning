@@ -21,11 +21,11 @@ class PriceAndEnrollButton extends StatelessWidget {
       children: [
         Text(
           "Total Price",
-          style: context.textTheme.titleSmall
+          style: context.textTheme.labelLarge
         ),
         Text(
           "\$$totalPrice",
-          style: context.textTheme.titleLarge?.copyWith(color: context.colorScheme.primary)
+          style: context.textTheme.titleSmall?.copyWith(color: context.colorScheme.primary)
         ),
       ]),
      

@@ -44,7 +44,7 @@ class CourseTitle extends StatelessWidget {
                 child:   Text(
                 "Best Seller",
                 style: context.textTheme.bodySmall!.copyWith(
-                  fontSize: 14,
+                  fontSize: 12,
                   color: context.colorScheme.secondary,
                 ),
                 )
@@ -65,7 +65,7 @@ class CourseTitle extends StatelessWidget {
         gapH12,
         Text(
                  title,
-                style: context.textTheme.titleLarge,
+                style: context.textTheme.titleSmall,
               )
         ,
         gapH12,
@@ -95,7 +95,7 @@ class CourseTitle extends StatelessWidget {
                 Text(
               name,
               style: context.textTheme.bodySmall!.copyWith(
-                fontSize: 12,
+                fontSize: 10,
                 color: context.colorScheme.outlineVariant,
               ),
             ),
@@ -109,7 +109,7 @@ class CourseTitle extends StatelessWidget {
                 Text(
                 '${lessons.toString()} lessons',
                 style: context.textTheme.bodySmall!.copyWith(
-                  fontSize: 12,
+                  fontSize: 10,
                   color: context.colorScheme.outlineVariant,
                 ),
                 )
@@ -124,7 +124,7 @@ class CourseTitle extends StatelessWidget {
                     ?'${lessons.toString()} certifications'
                     :'certification',
                 style: context.textTheme.bodySmall!.copyWith(
-                  fontSize: 12,
+                  fontSize: 10,
                   color: context.colorScheme.outlineVariant,
                 ),
                 )

@@ -11,4 +11,6 @@ class Utils {
   static String getFlagImageAssetPath(String isoCode) {
     return "assets/${isoCode.toLowerCase()}.png";
   }
+
+  
 }

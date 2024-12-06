@@ -45,5 +45,10 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>L'application a besoin d'accéder à votre bibliothèque pour enregistrer des fichiers.</string>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>L'application a besoin d'accéder à vos documents pour enregistrer des fichiers.</string>
+
 </dict>
 </plist>

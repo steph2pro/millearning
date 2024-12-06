@@ -8,6 +8,7 @@ import 'package:millearnia/src/datasource/repositories/example_repository.dart';
 import 'package:millearnia/src/datasource/repositories/user_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:millearnia/src/features/auth/register/logic/register_cubit.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 final GetIt locator = GetIt.instance
   ..registerLazySingleton(() {
@@ -37,5 +38,9 @@ final GetIt locator = GetIt.instance
   ..registerLazySingleton(() {
     print('Registering UserRepository');
     return UserRepository(userApi: locator<UserApi>());
+  })
+  ..registerLazySingleton(() {
+    print('Registering SupabaseClient');
+    return Supabase.instance.client;
   })
   ;
