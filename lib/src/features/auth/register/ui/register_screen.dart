@@ -19,6 +19,8 @@ import 'package:millearnia/src/core/routing/app_router.dart';
 import 'package:millearnia/src/features/auth/register/logic/register_cubit.dart';
 import 'package:millearnia/src/shared/utils/regexp_plus.dart';
 
+import '../../../../datasource/models/api_response/api_response.dart';
+
 @RoutePage()
 class RegisterScreen extends StatefulWidget implements AutoRouteWrapper {
   const RegisterScreen({super.key});
@@ -45,25 +47,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
   // States
   bool _isChecked = false;
   bool _isPasswordVisible = false;
- 
+
   final TextEditingController _phoneController = TextEditingController();
   Country _country = CountryPickerUtils.getCountryByIsoCode('cm');
-  
+
   // bool isPhoneNumber = true;
   // String get fullPhoneNumber => '+${_country.phoneCode}${_phoneController.text}';
 
   void onCountryTap() {
-    showCountryPicker(
-      
-       context,
-         onValuePicked: (country) => setState(() {
+    showCountryPicker(context,
+        onValuePicked: (country) => setState(() {
               _country = country;
-            })
-
-    );
- 
-  
-
+            }));
   }
 
   Widget get numberWidget => Column(
@@ -116,9 +111,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ],
       );
 
-
-
-
   @override
   void dispose() {
     _emailController.dispose();
@@ -129,18 +121,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void _onRegister(BuildContext context) {
     FocusScope.of(context).unfocus();
-  if (_formKey.currentState!.validate()) {
-    final user = RegisterRequest(
-      email: _emailController.text,
-      password: _passwordController.text,
-      name: _nameController.text,
-      phone:_phoneController.text,
-    );
-   
-    context.read<RegisterCubit>().register(user);
-  }
-}
+    if (_formKey.currentState!.validate()) {
+      final user = RegisterRequest(
+        email: _emailController.text,
+        password: _passwordController.text,
+        name: _nameController.text,
+        phone: _phoneController.text,
+      );
 
+      context.read<RegisterCubit>().register(user);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -151,49 +142,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
           success: (response) {
             _hideLoadingDialog(context);
             showSuccesModal(response.message);
-            if(response.data!=null){
+            if (response.data != null) {
               context.router.push(const LoginRoute());
             }
-            // 
+            //
 
-            print (response);
+            print(response);
           },
           error: (error) {
-            _hideLoadingDialog(context);
-            print("je suis error en grand");
-            print(error.error);
-            print(error);
-             showErrorModal(
-              error.toString()
-             );
+            showErrorModal(error.type == ApiErrorType.user ? error.error.response.data['message'].toString() : 'error');
             // _showErrorDialog(context, error.message!);
-             
           },
         );
       },
       child: Scaffold(
-        backgroundColor: context.colorScheme.onPrimary,
-        appBar: AppBar(toolbarHeight: 0),
-        body: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child:SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.all(Dimens.spacing),
-            children: [
-              const Gap.vertical(height: Dimens.tripleSpacing),
-              _buildHeader(context),
-              const Gap.vertical(height: Dimens.tripleSpacing),
-              _buildForm(context),
-              const Gap.vertical(height: Dimens.spacing),
-              _buildTermsCheckbox(context),
-              _buildSubmitButton(context),
-            ],
-          ),
-        ),
-        )
-      ),
+          backgroundColor: context.colorScheme.onPrimary,
+          appBar: AppBar(toolbarHeight: 0),
+          body: GestureDetector(
+            onTap: () {
+              FocusScope.of(context).unfocus();
+            },
+            child: SafeArea(
+              child: ListView(
+                padding: const EdgeInsets.all(Dimens.spacing),
+                children: [
+                  const Gap.vertical(height: Dimens.tripleSpacing),
+                  _buildHeader(context),
+                  const Gap.vertical(height: Dimens.tripleSpacing),
+                  _buildForm(context),
+                  const Gap.vertical(height: Dimens.spacing),
+                  _buildTermsCheckbox(context),
+                  _buildSubmitButton(context),
+                ],
+              ),
+            ),
+          )),
     );
   }
 
@@ -224,13 +207,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildInputField(
-              context,
-              label: I18n.of(context).nameLabel,
-              hint: I18n.of(context).namelHint,
-              controller: _nameController,
-              validator: (value)=>InputValidator.simpleValidator(context, value)
-            ),
+            _buildInputField(context,
+                label: I18n.of(context).nameLabel,
+                hint: I18n.of(context).namelHint,
+                controller: _nameController,
+                validator: (value) => InputValidator.simpleValidator(context, value)),
             const Gap.vertical(height: Dimens.spacing),
             numberWidget,
             const Gap.vertical(height: Dimens.spacing),
@@ -286,13 +267,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
           isPassword: !_isPasswordVisible,
           hintText: I18n.of(context).login_passwordHint,
           textInputAction: TextInputAction.done,
-          validator: (value)=>InputValidator.passwordValidator(context, value),
+          validator: (value) => InputValidator.passwordValidator(context, value),
           suffixIcon: IconButton(
             onPressed: () => setState(() => _isPasswordVisible = !_isPasswordVisible),
             icon: Icon(
-              _isPasswordVisible
-                  ? IconsaxPlusBroken.eye
-                  : IconsaxPlusBroken.eye_slash,
+              _isPasswordVisible ? IconsaxPlusBroken.eye : IconsaxPlusBroken.eye_slash,
               color: context.colorScheme.onSurface,
             ),
           ),

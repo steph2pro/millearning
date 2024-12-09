@@ -13,7 +13,7 @@ import 'package:millearnia/src/features/welcome/ui/welcome_screen.dart';
 part 'app_router.gr.dart'; // Assurez-vous que cela est correct
 
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')
-class AppRouter extends _$AppRouter {
+class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> routes = [
     AutoRoute(page: SplashRoute.page),

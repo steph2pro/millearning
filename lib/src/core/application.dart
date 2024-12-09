@@ -9,7 +9,7 @@ import 'package:oktoast/oktoast.dart';
 
 class Application extends StatelessWidget {
   final AppRouter _appRouter;
-  
+
   Application({
     super.key,
     AppRouter? appRouter,
@@ -37,7 +37,6 @@ class Application extends StatelessWidget {
       builder: (context, child) {
         return OKToast(child: child ?? Container());
       },
-      
     );
   }
 }

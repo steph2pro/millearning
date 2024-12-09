@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:millearnia/src/core/theme/dimens.dart';
 import 'package:millearnia/src/shared/components/gap.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
@@ -29,7 +30,7 @@ class Input extends StatelessWidget {
   final String? labelText;
   final TextCapitalization? textCapitalization;
   final bool expands;
-  final inputFormatters;
+  final List<TextInputFormatter>? inputFormatters;
   const Input({
     super.key,
     this.focusNode,
@@ -56,7 +57,8 @@ class Input extends StatelessWidget {
     this.onSubmitted,
     this.labelText,
     this.textCapitalization,
-    this.expands = false,  this.inputFormatters,
+    this.expands = false,
+    this.inputFormatters,
   });
 
   @override
@@ -89,8 +91,9 @@ class Input extends StatelessWidget {
             maxLines: isPassword ? 1 : maxLines,
             keyboardType: keyboardType,
             textInputAction: textInputAction,
+            inputFormatters: inputFormatters,
             onFieldSubmitted: onSubmitted,
-            textCapitalization: textCapitalization ?? TextCapitalization.sentences,
+            textCapitalization: textCapitalization ?? (keyboardType == TextInputType.text ? TextCapitalization.sentences : TextCapitalization.none),
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(vertical: Dimens.halfSpacing, horizontal: Dimens.spacing),
               hintText: hintText,
@@ -116,8 +119,5 @@ class Input extends StatelessWidget {
 
   InputBorder _getInputBorder({required Color color}) => isBorderless
       ? InputBorder.none
-      : OutlineInputBorder(
-          borderRadius: BorderRadius.circular(Dimens.radius),
-          borderSide: BorderSide(color: color, width: 1.5)
-        );
+      : OutlineInputBorder(borderRadius: BorderRadius.circular(Dimens.radius), borderSide: BorderSide(color: color, width: 1.5));
 }
