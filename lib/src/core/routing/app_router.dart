@@ -20,12 +20,12 @@ class AppRouter extends _$AppRouter {
     AutoRoute(page: WelcomeRoute.page),
     AutoRoute(page: OnboardingRoute.page),
     AutoRoute(page: OnboardingRoute.page),
-    AutoRoute(page: LoginRoute.page),
+    AutoRoute(page: LoginRoute.page, initial: true),
     AutoRoute(page: RegisterRoute.page),
     AutoRoute(page: CodeVerifyRoute.page),
     AutoRoute(page: NewPasswordRoute.page),
     AutoRoute(page: ProfileRoute.page),
     AutoRoute(page: HomeRoute.page),
-    AutoRoute(page: CourseDetailRoute.page, initial: true),
+    AutoRoute(page: CourseDetailRoute.page),
   ];
 }
