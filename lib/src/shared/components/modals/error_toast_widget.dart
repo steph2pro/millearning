@@ -43,18 +43,18 @@ class _ErrorToasWidgetState extends State<ErrorToasWidget> {
       borderRadius: BorderRadius.circular(15.0),
       child: Builder(builder: (context) {
         return Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: context.colorScheme.background, boxShadow: [
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: context.colorScheme.surface, boxShadow: [
             BoxShadow(
               offset: const Offset(0, 12),
               blurRadius: 30,
               spreadRadius: 2,
-              color: context.colorScheme.onBackground.withOpacity(.09),
+              color: context.colorScheme.onSurface.withOpacity(.09),
             ),
             BoxShadow(
               offset: const Offset(0, .2),
               blurRadius: 30,
               spreadRadius: .4,
-              color: context.colorScheme.background,
+              color: context.colorScheme.surface,
             )
           ]),
           padding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
@@ -72,11 +72,11 @@ class _ErrorToasWidgetState extends State<ErrorToasWidget> {
                       ),
                       child: Container(
                           padding: const EdgeInsets.all(2),
-                          decoration: BoxDecoration(shape: BoxShape.circle, color: context.colorScheme.background.withOpacity(.4)),
+                          decoration: BoxDecoration(shape: BoxShape.circle, color: context.colorScheme.surface.withOpacity(.4)),
                           child: Icon(
                             Icons.close,
                             size: 8,
-                            color: context.colorScheme.background,
+                            color: context.colorScheme.surface,
                           )),
                     )
                   : Container(
@@ -85,15 +85,15 @@ class _ErrorToasWidgetState extends State<ErrorToasWidget> {
                       padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: context.colorScheme.inverseSurface,
+                        color: context.colorScheme.primary,
                       ),
                       child: Container(
                           padding: const EdgeInsets.all(2),
-                          decoration: BoxDecoration(shape: BoxShape.circle, color: context.colorScheme.background.withOpacity(.4)),
+                          decoration: BoxDecoration(shape: BoxShape.circle, color: context.colorScheme.surface.withOpacity(.4)),
                           child: Icon(
                             Icons.check,
                             size: 8,
-                            color: context.colorScheme.background,
+                            color: context.colorScheme.surface,
                           )),
                     ),
               const SizedBox(

@@ -50,42 +50,12 @@ String isoToEmoji(String code) {
 }
 
 List<String> get _countriesList => [
-      "CM",
-      "BE",
-      "BG",
-      "CZ",
-      "DK",
-      "DE",
-      "EE",
-      "IE",
-      "GR",
-      "ES",
-      "FR",
-      "HR",
-      "IT",
-      "CY",
-      "LV",
-      "LT",
-      "LU",
-      "HU",
-      "MT",
-      "NL",
-      "AT",
-      "PL",
-      "PT",
-      "RO",
-      "SI",
-      "SK",
-      "FI",
-      "SE",
-      "IS",
-      "LI",
-      "NO",
-      "CH",
-      "GB",
-      "US",
-      "CA",
-      "JP"
+      "CM", 
+      "CF", 
+      "CG", 
+      "GA", 
+      "GQ", 
+      "TD",
     ];
 
 void showCountryPicker(BuildContext context, {bool limitedList = true, required ValueChanged<Country> onValuePicked}) {
@@ -111,7 +81,12 @@ void showCountryPicker(BuildContext context, {bool limitedList = true, required 
               backgroundColor: Theme.of(context).primaryColor,
               backgroundImage: AssetImage(CountryPickerUtils.getFlagImageAssetPath(c.isoCode), package: 'country_pickers'),
             ),
-            title: Text('+${c.phoneCode} ${c.name}'),
+            title: Text(
+              '+${c.phoneCode} ${c.name}',
+              style: TextStyle(
+                color: Theme.of(context).primaryColor
+              ),
+            ),
           ),
         );
       });

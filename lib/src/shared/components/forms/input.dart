@@ -86,7 +86,7 @@ class Input extends StatelessWidget {
             cursorColor: cursorColor,
             readOnly: readOnly,
             focusNode: focusNode,
-            style: style ?? Theme.of(context).textTheme.bodyLarge,
+            style: style ?? Theme.of(context).textTheme.bodySmall,
             minLines: isPassword ? 1 : minLines,
             maxLines: isPassword ? 1 : maxLines,
             keyboardType: keyboardType,

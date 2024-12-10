@@ -88,9 +88,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       controller: TextEditingController(),
                       readOnly: true,
                       hintText: '+${_country.phoneCode}',
-                      hintStyle: context.textTheme.bodyMedium,
+                      hintStyle: context.textTheme.bodySmall,
                       prefixIcon: Padding(
-                        padding: const EdgeInsets.only(right: 0, left: 0, top: 16, bottom: 16),
+                        padding: const EdgeInsets.only(right: 0, left: 0, top: 10, bottom: 10),
                         child: SizedBox(
                           height: 24,
                           width: 24,
@@ -111,6 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   keyboardType: TextInputType.phone,
                   hintText: 'Ex : 07 80 00 00 00',
                   inputFormatters: mobileFormatters(_phoneController.text.trim(), _country.phoneCode),
+                  // inputFormatters: mobileFormatters(_phoneController.text.trim(), _country.phoneCode),
                   textInputAction: TextInputAction.next,
                 ),
               )
@@ -155,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
               error: (error) {
                 LoadingDialog.hide(context: context);
 
-                showErrorModal(error.type == ApiErrorType.user ? error.error.response.data['message'].toString() : 'error');
+                showErrorModal(error.type == ApiErrorType.user ? error.error.response.data['message'].toString() : 'erreur de connexion');
               });
         },
         child: Scaffold(
@@ -187,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           isPhoneNumber ? numberWidget : emailWidget,
                           // const Gap.vertical(height: Dimens.spacing),
                           Align(
-                            alignment: Alignment.topRight,
+                            alignment: Alignment.center,
                             child: TextButton(
                               onPressed: () {
                                 setState(() {

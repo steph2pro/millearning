@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:millearnia/src/core/theme/app_size.dart';
 import 'package:millearnia/src/shared/components/modals/error_toast_widget.dart';
 import 'package:millearnia/src/shared/components/modals/modal.dart';
 import 'package:millearnia/src/shared/components/modals/progress/download_progress_widget.dart';
 import 'package:millearnia/src/shared/utils/download_service.dart';
 import 'package:millearnia/src/shared/utils/file_utils.dart';
 import 'package:millearnia/src/shared/utils/permition_storage.dart';
+import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 
@@ -22,10 +27,12 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
   bool _isPlaying = false;
   Duration _currentPosition = Duration.zero;
   Duration _totalDuration = Duration.zero;
-   double _progress = 0.0;
+   double _progress = 0.0; // Variable pour suivre la progression
   String? _statusMessage;
   bool _isSuccess = false;
-
+   String? _downloadedFilePath; // Chemin du fichier téléchargé
+  VideoPlayerController? _videoPlayerController; // Contrôleur pour la vidéo locale
+ bool _isFullScreen = false;
   @override
   void initState() {
     super.initState();
@@ -47,64 +54,72 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
       });
     });
   }
-   void _downloadVideo() async {
-    final permission= await requestManageStoragePermission();
-    print(permission);
+
+ 
+   Future<void> _downloadVideo() async {
+    final permission = await requestManageStoragePermission();
     if (permission) {
-    
+      const fileUrl =
+          'https://eiwdwnllcxkqgqapkbvx.supabase.co/storage/v1/object/public/video/AlanWalker_MaxAlone.zip';
+      setState(() {
+        _progress = 0.0; // Réinitialiser la progression
+      });
 
-    // DownloadProgressWidget(progress: 20);
-    // CircularProgressIndicator(value: 20);
-    const fileUrl = 'https://eiwdwnllcxkqgqapkbvx.supabase.co/storage/v1/object/public/video/AlanWalker_MaxAlone.7z';
-    final filePath = await DownloadService.downloadFile(fileUrl);
+      final filePath = await DownloadService.downloadFile(
+        fileUrl,
+        onProgress: (progress) {
+          setState(() {
+            _progress = progress; // Mettre à jour la progression
+          });
+        },
+      );
 
-    if (filePath != null) {
-      showSuccesModal('telechargement'); 
-      print("Téléchargement terminé : $filePath");
-    } else {
-      print("Échec du téléchargement.");
-    }
-    // try {
-      // final filePath = await DownloadService.downloadFile(
-      //   fileUrl: fileUrl,
-      //   minSpaceMB: 100, // Vérifiez 100 Mo d'espace libre
-      //   onProgress: (progress) {
-      //     setState(() {
-      //       _progress = progress;
-      //     });
-      //   },
-      // );
-      
-    print('chargement'); 
-       
+      if (filePath != null) {
+        setState(() {
+          _downloadedFilePath = filePath; // Stocker le chemin du fichier
+          _initializeLocalVideoPlayer(filePath); // Initialiser le lecteur local
+          print('[video player] $_downloadedFilePath');
+        });
+      } else {
+        print("Échec du téléchargement.");
+      }
     } else {
       print("Permission de stockage refusée.");
     }
-
-    //   print('download');
-    //   if (filePath != null) {
-    //     // Décompression après le téléchargement
-    //     final outputDir = await FileUtils.unzipFile(filePath);
-    //     _showToast("Fichier décompressé avec succès : $outputDir", isSuccess: true);
-    //   } else {
-    //     _showToast("Le téléchargement a échoué.", isSuccess: false);
-    //   }
-    // } catch (e) {
-    //   _showToast("Erreur : $e", isSuccess: false);
-    // }
-        
   }
-    
-  //  void _showToast(String message, {required bool isSuccess}) {
-  //   setState(() {
-  //     _statusMessage = message;
-  //     _isSuccess = isSuccess;
-  //   });
-  // }
+
+  void _initializeLocalVideoPlayer(String filePath) {
+    _videoPlayerController = VideoPlayerController.file(File(filePath))
+      ..initialize().then((_) {
+        setState(() {}); // Mise à jour de l'état après l'initialisation
+      });
+  }
+
+   void _toggleFullScreen() {
+    setState(() {
+      if (!_isFullScreen) {
+        // Passer en plein écran avec orientation paysage
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.landscapeRight,
+          DeviceOrientation.landscapeLeft,
+        ]);
+      } else {
+        // Retourner à l'orientation portrait par défaut
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown,
+        ]);
+      }
+
+      _isFullScreen = !_isFullScreen;
+    });
+  }
+ 
 
   @override
   void dispose() {
     _controller.dispose();
+    _videoPlayerController?.dispose();
     super.dispose();
   }
 
@@ -119,26 +134,62 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-          // Widget de progression
-          // if (_progress > 0.0 && _progress < 1.0)
-          //   DownloadProgressWidget(progress: _progress),
+        
 
-          // // Affichage des messages
-          // if (_statusMessage != null)
-          //   ErrorToasWidget(
-          //     title: _statusMessage!,
-          //     duration: const Duration(seconds: 5),
-          //     isSuccessCheck: _isSuccess,
-          //   ),
-
-        YoutubePlayer(
-          controller: _controller,
-          showVideoProgressIndicator: true,
-          onReady: () {
-            debugPrint('YouTube Player is ready.');
-          },
-        ),
+       
+        if (_downloadedFilePath == null) ...[
+          YoutubePlayer(
+            controller: _controller,
+            showVideoProgressIndicator: true,
+          ),
         const SizedBox(height: 10),
+        if (_progress > 0)
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (_progress < 1.0) ...[
+                  Text(
+                    "Téléchargement en cours",
+                    style: context.textTheme.bodySmall!.copyWith(
+                      fontSize: 14,
+                      color: context.colorScheme.surface,
+                    ),
+                  ),
+                  const SizedBox(height: 10), // Espacement entre le texte et la barre
+                  Stack(
+                    alignment: Alignment.center, // Place le texte au centre
+                    children: [
+                      SizedBox(
+                        width: 50, // Largeur du cercle
+                        height: 50, // Hauteur du cercle
+                        child: CircularProgressIndicator(
+                          value: _progress, // La progression (entre 0.0 et 1.0)
+                          strokeWidth: 5.0, // Épaisseur de la bordure
+                        ),
+                      ),
+                      Text(
+                        "${(_progress * 100).toStringAsFixed(0)}%", // Convertir la progression en pourcentage
+                        style: context.textTheme.bodySmall!.copyWith(
+                          fontSize: 14,
+                          color: context.colorScheme.surface,
+                        ),
+                      ),
+                    ],
+                  ),
+                ] else ...[
+                  Text(
+                    "Téléchargement terminé",
+                    style: context.textTheme.bodySmall!.copyWith(
+                      fontSize: 14,
+                      color: context.colorScheme.surface,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+
         Positioned(
           left: 10,
           right: 10,
@@ -178,6 +229,7 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
           right: 80,
           child: GestureDetector(
             onTap: _isPlaying ? _controller.pause : _controller.play,
+            onDoubleTap: _toggleFullScreen,
             child: Container(
               decoration: BoxDecoration(
                 color: context.colorScheme.tertiaryContainer,
@@ -210,18 +262,20 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
             ),
           ),
         ),
-        // Ajout du bouton pour basculer en mode plein écran
-        Positioned(
-          bottom: 50,
-          right: 10,
-          child: Icon(
-              Icons.fullscreen,
-              color: context.colorScheme.onPrimary,
-            ),
-          ),
+          Positioned(
+                    bottom: 40,
+                    right: 10,
+                    child: IconButton(
+                      icon: Icon(
+                        _isFullScreen ? Icons.fullscreen_exit : Icons.fullscreen,
+                        color: context.colorScheme.onPrimary,
+                      ),
+                      onPressed: _toggleFullScreen,
+                    ),
+                  ),
           Positioned(
           bottom: 40,
-          right: 30,
+          right: 35,
           child: IconButton(
             icon:  Icon(
               Icons.download,
@@ -231,6 +285,100 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
           ),
         ),
        
+
+
+        ] else ...[
+          // SizedBox(
+          //   width: double.infinity,
+          //   height: 200,
+          //   child: 
+            _isFullScreen
+                      ? Center(
+                          child: Container(
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                            child: AspectRatio(
+                              aspectRatio: _videoPlayerController!.value.aspectRatio,
+                              child: VideoPlayer(_videoPlayerController!),
+                            ),
+                          ),
+                        )
+                      : 
+            AspectRatio(
+              aspectRatio: _videoPlayerController!.value.aspectRatio,
+              child: VideoPlayer(_videoPlayerController!),
+              )
+           
+          // )
+         ,
+          
+          Positioned(
+          left: 10,
+          right: 10,
+          bottom: 0,
+          child:VideoProgressIndicator(_videoPlayerController!, allowScrubbing: true),
+          // Slider(
+          //   value: _videoPlayerController!.value.position.inSeconds.toDouble(),
+          //   max: _videoPlayerController!.value.duration.inSeconds.toDouble(),
+          //   onChanged: (value) {
+          //     _videoPlayerController!.seekTo(Duration(seconds: value.toInt()));
+          //   },
+          // )
+          )
+          ,
+
+           Positioned(
+          top: 95,
+          left: 80,
+          right: 80,
+          child:
+          IconButton(
+            icon: Icon(
+              _videoPlayerController!.value.isPlaying
+                  ? Icons.pause_circle_filled
+                  : Icons.play_circle_fill,
+                  size: 40,
+            ),
+            onPressed: () {
+              setState(() {
+                if (_videoPlayerController!.value.isPlaying) {
+                  _videoPlayerController!.pause();
+                } else {
+                  _videoPlayerController!.play();
+                }
+              });
+            },
+          ),
+           ),
+
+                  Positioned(
+                    bottom: 50,
+                    right: 10,
+                    child: IconButton(
+                      icon: Icon(
+                        _isFullScreen ? Icons.fullscreen_exit : Icons.fullscreen,
+                        color: Colors.transparent,
+                      ),
+                      onPressed: _toggleFullScreen,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 20,
+                    right: 20,
+                    child: IconButton(
+                      icon: Icon(
+                        _isFullScreen ? Icons.fullscreen_exit : Icons.fullscreen,
+                        color: Colors.white,
+                      ),
+                      onPressed: _toggleFullScreen,
+                    ),
+                  ),
+
+        ],
+        
+
+        // Ajout du bouton pour basculer en mode plein écran
+        
       ],
     );
   }

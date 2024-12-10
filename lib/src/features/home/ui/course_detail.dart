@@ -9,6 +9,7 @@ import 'package:millearnia/src/shared/components/courses/menu.dart';
 import 'package:millearnia/src/shared/components/courses/prise.dart';
 import 'package:millearnia/src/shared/components/courses/youtube_video_player.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
+import 'package:millearnia/src/shared/components/modals/progress/download_progress_widget.dart';
 
 @RoutePage()
 class CourseDetailScreen extends StatefulWidget {
@@ -21,7 +22,19 @@ class CourseDetailScreen extends StatefulWidget {
 class _CourseDetailScreenState extends State<CourseDetailScreen> {
   
     final TextEditingController _searshController = TextEditingController();
-    int _currentIndex = 0;
+    int _currentIndex = 0;double progress = 0.0;
+
+  // Simulation d'une progression de téléchargement
+  void startDownload() {
+    Future.delayed(Duration(milliseconds: 500), () {
+      if (progress < 1.0) {
+        setState(() {
+          progress += 0.1; // Augmente la progression
+        });
+        startDownload(); // Continue jusqu'à 100%
+      }
+    });
+  }
 
   final List<Widget> _pages = [
      AboutCourseSection(
@@ -55,6 +68,12 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    startDownload();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(
@@ -71,8 +90,10 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           children: [
             // Header Section
             CourseHeader(
-              videoUrl: 'https://www.youtube.com/watch?v=T20fz20cjYE'
-           
+              videoUrl: 'https://www.youtube.com/watch?v=T20fz20cjYE',
+              back: (){
+                context.router.popForced();
+              },
             ),
            Padding(
             padding: EdgeInsets.all(24),
@@ -97,6 +118,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
               ],
             ),
            ),
+
 
           ],
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 
 class DownloadProgressWidget extends StatelessWidget {
   final double progress;
@@ -7,8 +8,16 @@ class DownloadProgressWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: CircularProgressIndicator(value: progress),
+    return Row(
+      children: [
+        Text(progress.toString()),
+        Center(
+          child: CircularProgressIndicator(
+            value: progress,
+            color: context.colorScheme.primary
+              ),
+        )
+    ],
     );
   }
 }

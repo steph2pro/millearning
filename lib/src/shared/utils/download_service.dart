@@ -1,14 +1,31 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:millearnia/src/shared/utils/file_utils.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:millearnia/src/shared/components/modals/modal.dart';
 
 class DownloadService {
-  /// Télécharge un fichier et le déplace dans le dossier "Millearnia" à la racine du stockage principal
-  static Future<String?> downloadFile(String fileUrl) async {
+  
+
+/// Télécharge un fichier avec vérification d'espace et nom formaté
+  static Future<String?> downloadFile(
+    String fileUrl, {
+    required Function(double) onProgress,
+    int minSpaceMB = 100,
+  }) async {
     try {
-      // Obtenez le répertoire principal du stockage externe
+      // Vérifie si l'espace libre est suffisant
+      final hasSpace = await FileUtils.hasEnoughSpace(minSpaceMB: minSpaceMB);
+      print(hasSpace);
+      if (!hasSpace) {
+        showSuccesModal('Erreur : Pas assez d\'espace libre (min $minSpaceMB Mo requis)');
+        print("[DownloadService] Pas assez d'espace libre");
+        return null;
+      }
+
+      // Obtient le répertoire principal du stockage externe
       final externalStorageDir = await getExternalStorageDirectory();
       final rootPath = externalStorageDir?.parent.parent.parent.parent.path;
 
@@ -18,19 +35,20 @@ class DownloadService {
         return null;
       }
 
-      // Définissez le chemin du dossier cible
-      final folderPath = "$rootPath/Millearnia"; // Nom du dossier principal
-      final fileName = "AlanWalker_MaxAlone.7z";
+      // Définir le chemin et le nom du fichier avec un nombre aléatoire
+      final folderPath = "$rootPath/Millearnia";
+      final randomSuffix = Random().nextInt(1000000);
+      final fileName = "Millearnia_video_$randomSuffix.zip";
       final filePath = "$folderPath/$fileName";
 
-      // Créez le dossier "Millearnia" s'il n'existe pas
+      // Crée le dossier "Millearnia" s'il n'existe pas
       final folder = Directory(folderPath);
       if (!await folder.exists()) {
         await folder.create(recursive: true);
         print("[DownloadService] Dossier créé : $folderPath");
       }
 
-      // Téléchargez le fichier dans un emplacement temporaire
+      // Télécharge le fichier dans un emplacement temporaire
       final tempDir = await getTemporaryDirectory();
       final tempFilePath = "${tempDir.path}/$fileName";
 
@@ -40,23 +58,28 @@ class DownloadService {
         tempFilePath,
         onReceiveProgress: (received, total) {
           if (total != -1) {
-            print("[DownloadService] Progression : ${(received / total * 100).toStringAsFixed(0)}%");
+            double progress = received / total;
+            print("[DownloadService] Progression : ${(progress * 100).toStringAsFixed(0)}%");
+            onProgress(progress); // Signale la progression
           }
         },
       );
 
-      // Déplacez le fichier dans le dossier "Millearnia"
+      // Déplace le fichier dans le dossier "Millearnia"
       final tempFile = File(tempFilePath);
-      final targetFile = await tempFile.copy(filePath); // Utilisez `copy` au lieu de `rename` pour éviter les erreurs
+      final targetFile = await tempFile.copy(filePath);
+      print('attente de sezipage');
+// **Extraction du fichier ZIP**
+    final extractTemp = await FileUtils.extractZipToTemporaryDirectory(targetFile);
 
-      showSuccesModal('Téléchargement réussi. Fichier enregistré à : $filePath');
-      print("[DownloadService] Fichier déplacé vers : $filePath");
 
-      return targetFile.path;
-    } catch (e) {
-      showSuccesModal('Erreur de téléchargement');
-      print("[DownloadService] Erreur de téléchargement : $e");
-      return null;
+    showSuccesModal('Téléchargement et extraction réussis. Fichiers extraits à : $extractTemp');
+    return extractTemp; // Retourne le chemin des fichiers extraits
+  } catch (e) {
+    showSuccesModal('Erreur de téléchargement ou d\'extraction');
+    print("[DownloadService] Erreur de téléchargement ou d'extraction : $e");
+    return null;
     }
   }
+
 }

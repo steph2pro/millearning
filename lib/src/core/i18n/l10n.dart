@@ -320,6 +320,16 @@ class I18n {
     );
   }
 
+  /// `Already have an account??`
+  String get haveAccount {
+    return Intl.message(
+      'Already have an account??',
+      name: 'haveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Create Account`
   String get createAccount {
     return Intl.message(

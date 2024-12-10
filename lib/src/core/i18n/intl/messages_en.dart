@@ -57,6 +57,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "findingThe": MessageLookupByLibrary.simpleMessage("Finding the"),
         "forYou": MessageLookupByLibrary.simpleMessage("for You"),
         "gender": MessageLookupByLibrary.simpleMessage("Gender"),
+        "haveAccount":
+            MessageLookupByLibrary.simpleMessage("Already have an account??"),
         "hi": MessageLookupByLibrary.simpleMessage("Hi, "),
         "inputValidationCanBeEmpty": MessageLookupByLibrary.simpleMessage(
             "This field must not be empty"),

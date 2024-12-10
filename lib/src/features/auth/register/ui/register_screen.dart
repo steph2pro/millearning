@@ -6,6 +6,7 @@ import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:millearnia/src/core/i18n/l10n.dart';
+import 'package:millearnia/src/core/theme/app_size.dart';
 import 'package:millearnia/src/core/theme/dimens.dart';
 import 'package:millearnia/src/features/auth/register/model/register_request.dart';
 import 'package:millearnia/src/shared/components/dialogs/dialog_builder.dart';
@@ -61,55 +62,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             }));
   }
 
-  Widget get numberWidget => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            I18n.of(context).phone_number,
-            style: Theme.of(context).textTheme.labelMedium,
-          ),
-          const Gap.vertical(height: Dimens.halfSpacing),
-          Row(
-            children: [
-              GestureDetector(
-                onTap: onCountryTap,
-                child: SizedBox(
-                  width: 106.0,
-                  child: AbsorbPointer(
-                    child: Input(
-                      controller: TextEditingController(),
-                      readOnly: true,
-                      hintText: '+${_country.phoneCode}',
-                      hintStyle: context.textTheme.bodyMedium,
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.only(right: 0, left: 0, top: 16, bottom: 16),
-                        child: SizedBox(
-                          height: 24,
-                          width: 24,
-                          child: CircleAvatar(
-                            backgroundColor: Theme.of(context).primaryColor,
-                            backgroundImage: AssetImage(CountryPickerUtils.getFlagImageAssetPath(_country.isoCode), package: 'country_pickers'),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8.0),
-              Expanded(
-                child: Input(
-                  controller: _phoneController,
-                  keyboardType: TextInputType.phone,
-                  hintText: 'Ex : 07 80 00 00 00',
-                  inputFormatters: mobileFormatters(_phoneController.text.trim(), _country.phoneCode),
-                  textInputAction: TextInputAction.next,
-                ),
-              )
-            ],
-          ),
-        ],
-      );
+
 
   @override
   void dispose() {
@@ -140,17 +93,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
         state.whenOrNull(
           loading: () => LoadingDialog.show(context: context),
           success: (response) {
-            _hideLoadingDialog(context);
+            LoadingDialog.hide(context: context);
             showSuccesModal(response.message);
             if (response.data != null) {
-              context.router.push(const LoginRoute());
+              context.router.push(const HomeRoute());
             }
             //
 
             print(response);
           },
           error: (error) {
-            showErrorModal(error.type == ApiErrorType.user ? error.error.response.data['message'].toString() : 'error');
+                LoadingDialog.hide(context: context);
+                showErrorModal(error.type == ApiErrorType.user ? error.error.response.data['message'].toString() : 'erreur de connexion');
             // _showErrorDialog(context, error.message!);
           },
         );
@@ -173,6 +127,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const Gap.vertical(height: Dimens.spacing),
                   _buildTermsCheckbox(context),
                   _buildSubmitButton(context),
+                   gapH20,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(I18n.of(context).haveAccount,
+                          style: context.textTheme.bodySmall!.copyWith(fontSize: 15, color: context.colorScheme.onTertiaryContainer)),
+                      gapW4,
+                      InkWell(
+                        onTap: () {
+                          context.router.push(const LoginRoute());
+                        },
+                        child: Text(I18n.of(context).signIn,
+                            style: context.textTheme.bodySmall!.copyWith(fontSize: 16, color: context.colorScheme.primaryContainer)),
+                      )
+                    ],
+                  )
                 ],
               ),
             ),
@@ -318,34 +289,54 @@ class _RegisterScreenState extends State<RegisterScreen> {
       child: Text(I18n.of(context).signUp),
     );
   }
-
-  // Helper dialogs
-  void _showLoadingDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (_) => const Center(child: CircularProgressIndicator()),
-    );
-  }
-
-  void _hideLoadingDialog(BuildContext context) {
-    Navigator.of(context, rootNavigator: true).pop();
-    print('chargement');
-  }
-
-  void _showErrorDialog(BuildContext context, String message) {
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text('Erreur'),
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text('OK'),
+    Widget get numberWidget => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            I18n.of(context).phone_number,
+          style: context.textTheme.bodySmall?.copyWith(fontSize: 12),
+          ),
+          const Gap.vertical(height: Dimens.halfSpacing),
+          Row(
+            children: [
+              GestureDetector(
+                onTap: onCountryTap,
+                child: SizedBox(
+                  width: 106.0,
+                  child: AbsorbPointer(
+                    child: Input(
+                      controller: TextEditingController(),
+                      readOnly: true,
+                      hintText: '+${_country.phoneCode}',
+                      hintStyle: context.textTheme.bodySmall,
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.only(right: 0, left: 0, top: 10, bottom: 10),
+                        child: SizedBox(
+                          height: 24,
+                          width: 24,
+                          child: CircleAvatar(
+                            backgroundColor: Theme.of(context).primaryColor,
+                            backgroundImage: AssetImage(CountryPickerUtils.getFlagImageAssetPath(_country.isoCode), package: 'country_pickers'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8.0),
+              Expanded(
+                child: Input(
+                  controller: _phoneController,
+                  keyboardType: TextInputType.phone,
+                  hintText: 'Ex : 07 80 00 00 00',
+                  inputFormatters: mobileFormatters(_phoneController.text.trim(), _country.phoneCode),
+                  textInputAction: TextInputAction.next,
+                ),
+              )
+            ],
           ),
         ],
-      ),
-    );
-  }
+      );
+
 }

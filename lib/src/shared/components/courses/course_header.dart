@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:millearnia/src/core/application.dart';
+import 'package:millearnia/src/core/routing/app_router.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
 import 'package:millearnia/src/shared/components/courses/youtube_video_player.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
@@ -8,13 +10,13 @@ class CourseHeader extends StatelessWidget {
   final String videoUrl;
   // final String title;
   // final double rating;
-  // final int reviewsCount;
+  final VoidCallback? back;
 
   const CourseHeader({
     required this.videoUrl,
     // required this.title,
     // required this.rating,
-    // required this.reviewsCount,
+     this.back,
     Key? key,
   }) : super(key: key);
 
@@ -30,14 +32,15 @@ class CourseHeader extends StatelessWidget {
           child: 
           // Icon(Icons.arrow_back, color: Colors.white),
           Container(
+            width: 35,
+            height: 35,
             decoration: BoxDecoration(
               color: context.colorScheme.surface, // Fond bleu
               shape: BoxShape.circle,
              ),
             child: IconButton(
-              icon: Icon(Icons.arrow_back, color: context.colorScheme.onSurface), // Icône blanche
-              onPressed: () {
-              },
+              icon: Icon(Icons.arrow_back, color: context.colorScheme.onSurface,size: 20,), // Icône blanche
+              onPressed: back,
             ),
            ),
         ),
@@ -48,24 +51,28 @@ class CourseHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
                Container(
+            width: 35,
+            height: 35,
             decoration: BoxDecoration(
               color: context.colorScheme.surface, // Fond bleu
               shape: BoxShape.circle,
              ),
             child: IconButton(
-              icon: Icon(Icons.share, color: context.colorScheme.onSurface), // Icône blanche
+              icon: Icon(Icons.share, color: context.colorScheme.onSurface,size: 20,), // Icône blanche
               onPressed: () {
               },
             ),
            ),
            gapW10,
             Container(
+            width: 35,
+            height: 35,
             decoration: BoxDecoration(
               color: context.colorScheme.surface, // Fond bleu
               shape: BoxShape.circle,
              ),
             child: IconButton(
-              icon: Icon(Icons.more_vert, color: context.colorScheme.onSurface), // Icône blanche
+              icon: Icon(Icons.more_vert, color: context.colorScheme.onSurface,size: 20,), // Icône blanche
               onPressed: () {
               },
             ),

@@ -163,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     ),
     Padding(
-      padding: EdgeInsets.all(23),
+      padding: EdgeInsets.all(20),
       child: Column(
         children: [
            Row(
@@ -186,7 +186,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               gapH12,
-              Container(
+              
+        ],
+      ),
+    ),
+    Container(
                 width: double.infinity,
                 height: 100,
                 child:ListView.builder(
@@ -202,68 +206,75 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
               
               ),
-              gapH20,
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                  I18n.of(context).pupularCourse,
-                  style: context.textTheme.titleLarge
-                  ),
-                  gapW4,
-                  InkWell(
-                    onTap: (){
-                    }, 
-                    child: Text(
-                      I18n.of(context).seeAll,
-                      style: context.textTheme.bodySmall!.copyWith(fontSize: 14,color: context.colorScheme.surfaceTint)
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                    I18n.of(context).pupularCourse,
+                    style: context.textTheme.titleLarge
                     ),
-                  )
-                ],
-              ),
-               gapH12,
+                    gapW4,
+                    InkWell(
+                      onTap: (){
+                      }, 
+                      child: Text(
+                        I18n.of(context).seeAll,
+                        style: context.textTheme.bodySmall!.copyWith(fontSize: 14,color: context.colorScheme.surfaceTint)
+                      ),
+                    )
+                  ],
+                ),
+                ),
               Container(
                 width: double.infinity,
                 height: 300,
                 child:ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: categories.length,
-                    itemBuilder: (context, index) {
-                      final course = Courses[index];
-                      return 
-              CourseComponent(
-                title: course['title']!,
-                 star: course['star']!, 
-                 contentImage: course['img']!,
-                  name: course['name']!, 
-                  prise:course['prise']!,
-                   btnText:course['btnText']!);
+                    itemCount: Courses.length,
+                    itemBuilder: (context, i) {
+                      final course = Courses[i];
+                      return GestureDetector(
+                        onTap:() {
+                          context.router.push(CourseDetailRoute());
+                          },
+                          child:  CourseComponent(
+                            title: course['title']!,
+                            star: course['star']!, 
+                            contentImage: course['img']!,
+                              name: course['name']!, 
+                              prise:course['prise']!,
+                              btnText:course['btnText']!
+                          ),
+                      );
                     },
                   ),
               
               ),
-              // gapH10,
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                  I18n.of(context).topMentor,
-                  style: context.textTheme.titleLarge
-                  ),
-                  gapW4,
-                  InkWell(
-                    onTap: (){
-                    }, 
-                    child: Text(
-                      I18n.of(context).seeAll,
-                      style: context.textTheme.bodySmall!.copyWith(fontSize: 14,color: context.colorScheme.surfaceTint)
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+                child:Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                    I18n.of(context).topMentor,
+                    style: context.textTheme.titleLarge
                     ),
-                  )
-                ],
+                    gapW4,
+                    InkWell(
+                      onTap: (){
+                      }, 
+                      child: Text(
+                        I18n.of(context).seeAll,
+                        style: context.textTheme.bodySmall!.copyWith(fontSize: 14,color: context.colorScheme.surfaceTint)
+                      ),
+                    )
+                  ],
+                ),
               ),
-               gapH12,
               Container(
                 width: double.infinity,
                 height: 100,
@@ -280,42 +291,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
               
               ),
-               gapH12,
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                  I18n.of(context).continueLearning,
-                  style: context.textTheme.titleLarge
-                  ),
-                  gapW4,
-                  InkWell(
-                    onTap: (){
-                    }, 
-                    child: Text(
-                      I18n.of(context).seeAll,
-                      style: context.textTheme.bodySmall!.copyWith(fontSize: 14,color: context.colorScheme.surfaceTint)
+               Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+                child:Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                    I18n.of(context).continueLearning,
+                    style: context.textTheme.titleLarge
                     ),
-                  )
-                ],
+                    gapW4,
+                    InkWell(
+                      onTap: (){
+                      }, 
+                      child: Text(
+                        I18n.of(context).seeAll,
+                        style: context.textTheme.bodySmall!.copyWith(fontSize: 14,color: context.colorScheme.surfaceTint)
+                      ),
+                    )
+                  ],
+                ),
               ),
-               gapH12,
-              //  SizedBox(
-              //   width: 300,
-              //   height: 100,
-              //   child: 
-//               //  ),
-CourseContinue(
-                title: 'Introduction of Figma',
-                 contentImage: 'assets/images/courseContinue.png',
-                  name:'Jacob Jones', 
-                   btnText:'Design',
-                   progress: 20,
-                   ),
-        ],
-      ),
-    )
+            CourseContinue(
+                            title: 'Introduction of Figma',
+                            contentImage: 'assets/images/courseContinue.png',
+                              name:'Jacob Jones', 
+                              btnText:'Design',
+                              progress: 20,
+                              ),
           
           
         ],
