@@ -220,6 +220,26 @@ class I18n {
     );
   }
 
+  /// `Continue`
+  String get continu {
+    return Intl.message(
+      'Continue',
+      name: 'continu',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recover With`
+  String get recoverWith {
+    return Intl.message(
+      'Recover With',
+      name: 'recoverWith',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Finding the`
   String get findingThe {
     return Intl.message(

@@ -87,10 +87,17 @@ class LoginRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [NewPasswordScreen]
-class NewPasswordRoute extends PageRouteInfo<void> {
-  const NewPasswordRoute({List<PageRouteInfo>? children})
-      : super(
+class NewPasswordRoute extends PageRouteInfo<NewPasswordRouteArgs> {
+  NewPasswordRoute({
+    Key? key,
+    required OtpCodeResponse otpCodeResponse,
+    List<PageRouteInfo>? children,
+  }) : super(
           NewPasswordRoute.name,
+          args: NewPasswordRouteArgs(
+            key: key,
+            otpCodeResponse: otpCodeResponse,
+          ),
           initialChildren: children,
         );
 
@@ -99,9 +106,29 @@ class NewPasswordRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const NewPasswordScreen();
+      final args = data.argsAs<NewPasswordRouteArgs>();
+      return NewPasswordScreen(
+        key: args.key,
+        otpCodeResponse: args.otpCodeResponse,
+      );
     },
   );
+}
+
+class NewPasswordRouteArgs {
+  const NewPasswordRouteArgs({
+    this.key,
+    required this.otpCodeResponse,
+  });
+
+  final Key? key;
+
+  final OtpCodeResponse otpCodeResponse;
+
+  @override
+  String toString() {
+    return 'NewPasswordRouteArgs{key: $key, otpCodeResponse: $otpCodeResponse}';
+  }
 }
 
 /// generated route for
@@ -119,6 +146,44 @@ class OnboardingRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const OnboardingScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [PasswordForgetScreen]
+class PasswordForgetRoute extends PageRouteInfo<void> {
+  const PasswordForgetRoute({List<PageRouteInfo>? children})
+      : super(
+          PasswordForgetRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PasswordForgetRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PasswordForgetScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [PasswordWrapperScreen]
+class PasswordWrapperRoute extends PageRouteInfo<void> {
+  const PasswordWrapperRoute({List<PageRouteInfo>? children})
+      : super(
+          PasswordWrapperRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PasswordWrapperRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return WrappedRoute(child: const PasswordWrapperScreen());
     },
   );
 }

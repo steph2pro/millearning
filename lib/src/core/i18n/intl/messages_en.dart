@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Complete Profile"),
         "completeYouProfile":
             MessageLookupByLibrary.simpleMessage("Complete Your Profile"),
+        "continu": MessageLookupByLibrary.simpleMessage("Continue"),
         "continueLearning":
             MessageLookupByLibrary.simpleMessage("Continue Learning"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
@@ -101,6 +102,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "phone_number": MessageLookupByLibrary.simpleMessage("Phone number"),
         "pupularCourse": MessageLookupByLibrary.simpleMessage("Pupular Course"),
+        "recoverWith": MessageLookupByLibrary.simpleMessage("Recover With"),
         "resendCode": MessageLookupByLibrary.simpleMessage("Resend code"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See all"),

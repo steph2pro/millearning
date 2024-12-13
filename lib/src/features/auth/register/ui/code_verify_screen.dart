@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:millearnia/src/core/i18n/l10n.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
 import 'package:millearnia/src/core/theme/dimens.dart';
+import 'package:millearnia/src/features/auth/register/logic/password_forget_cubit.dart';
+import 'package:millearnia/src/features/auth/register/model/otp_code/otp_code_request.dart';
 import 'package:millearnia/src/shared/components/buttons/button.dart';
 import 'package:millearnia/src/shared/components/gap.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
@@ -13,34 +15,24 @@ import 'package:millearnia/src/core/routing/app_router.dart'; // Importez le fic
 
 @RoutePage()
 class CodeVerifyScreen extends StatefulWidget{
-// class CodeVerifyScreen extends StatefulWidget implements AutoRouteWrapper {
+  
   const CodeVerifyScreen({super.key});
 
   @override
   State<CodeVerifyScreen> createState() => _CodeVerifyScreenState();
 
-  // @override
-  // Widget wrappedRoute(BuildContext context) {
-  //   return BlocProvider(
-  //     create: (_) => CodeVerifyCubit(),
-  //     child: this,
-  //   );
-  // }
+
 }
 
 class _CodeVerifyScreenState extends State<CodeVerifyScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+  // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String _otpCode = "";
   
 
   @override
   Widget build(BuildContext context) {
     return 
-    //BlocListener<RegisterCubit, RegisterState>(
-    //   listener: (context, state) {
-    //     state.whenOrNull(
-    //   },
-      // child:
+    
        Scaffold(
         backgroundColor: context.colorScheme.onPrimary,
         appBar: AppBar(
@@ -72,7 +64,7 @@ class _CodeVerifyScreenState extends State<CodeVerifyScreen> {
               Text(
                 I18n.of(context).verifyCode,
                 textAlign: TextAlign.center,
-                style: context.textTheme.bodyLarge,
+                style: context.textTheme.titleLarge,
               ),
               const Gap.vertical(height: Dimens.minSpacing),
               Text(
@@ -100,7 +92,11 @@ class _CodeVerifyScreenState extends State<CodeVerifyScreen> {
                 enabledBorderColor: Colors.transparent,
                 focusedBorderColor: context.colorScheme.primary,
                 onCodeChanged: (String code) {},
-                onSubmit: (String verificationCode) {},
+                onSubmit: (String verificationCode) {
+                   setState(() {
+                  _otpCode = verificationCode; // Store the OTP code
+                });
+                },
               ),
               gapH32,
                 Text(
@@ -123,7 +119,11 @@ class _CodeVerifyScreenState extends State<CodeVerifyScreen> {
                 
                 title: I18n.of(context).verify,
                 onPressed: (){
-                  context.router.push(NewPasswordRoute());
+                  print("Entered OTP: $_otpCode");
+                  final otpCode=OtpCodeRequest(otpCode: _otpCode);
+                  if (_otpCode != '') {
+                      context.read<PasswordForgetCubit>().sendOtpCode(otpCode);
+                    }
                 },
               ),
               
@@ -135,5 +135,4 @@ class _CodeVerifyScreenState extends State<CodeVerifyScreen> {
     // );
   }
 
-  // void _onRegister() => context.read<RegisterCubit>().Register();
 }

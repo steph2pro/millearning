@@ -201,19 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
 
-                          // Text(
-                          //   I18n.of(context).login_emailLabel,
-                          //   style: context.textTheme.bodySmall?.copyWith(fontSize: 12)
-                          // ),
-                          // Input(
-                          //   autofillHints: const [AutofillHints.email],
-                          //   controller: _emailController,
-                          //   hintText: I18n.of(context).login_emailHint,
-                          //   validator: (value) => InputValidator.emailValidator(context, value),
-                          //   textInputAction: TextInputAction.next,
-                          // ),
-                          // const Gap.vertical(height: Dimens.spacing),
-
+                        
                           Text(I18n.of(context).login_passwordLabel, style: context.textTheme.bodySmall?.copyWith(fontSize: 12)),
                           Input(
                             autofillHints: const [AutofillHints.password],
@@ -239,7 +227,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   Align(
                     alignment: Alignment.topRight,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.router.push(PasswordForgetRoute());
+                      },
                       child: Text(I18n.of(context).login_forgotPasswordLabel),
                     ),
                   ),
