@@ -24,6 +24,7 @@ mixin _$PasswordForgetState {
             PasswordForgetState previousState, ApiError<dynamic> error)
         error,
     required TResult Function(IdentifyResponse response) successIdentify,
+    required TResult Function(IdentifyResponse response) successIdentifyPhone,
     required TResult Function(OtpCodeResponse response) successOtpCodeVerify,
     required TResult Function(NewPasswordResponse response) successNewPassword,
   }) =>
@@ -36,6 +37,7 @@ mixin _$PasswordForgetState {
             PasswordForgetState previousState, ApiError<dynamic> error)?
         error,
     TResult? Function(IdentifyResponse response)? successIdentify,
+    TResult? Function(IdentifyResponse response)? successIdentifyPhone,
     TResult? Function(OtpCodeResponse response)? successOtpCodeVerify,
     TResult? Function(NewPasswordResponse response)? successNewPassword,
   }) =>
@@ -48,6 +50,7 @@ mixin _$PasswordForgetState {
             PasswordForgetState previousState, ApiError<dynamic> error)?
         error,
     TResult Function(IdentifyResponse response)? successIdentify,
+    TResult Function(IdentifyResponse response)? successIdentifyPhone,
     TResult Function(OtpCodeResponse response)? successOtpCodeVerify,
     TResult Function(NewPasswordResponse response)? successNewPassword,
     required TResult orElse(),
@@ -59,6 +62,7 @@ mixin _$PasswordForgetState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_SuccessIdentify value) successIdentify,
+    required TResult Function(_SuccessIdentifyPhone value) successIdentifyPhone,
     required TResult Function(_SuccessOptCode value) successOtpCodeVerify,
     required TResult Function(_SuccessNewPassword value) successNewPassword,
   }) =>
@@ -69,6 +73,7 @@ mixin _$PasswordForgetState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_SuccessIdentify value)? successIdentify,
+    TResult? Function(_SuccessIdentifyPhone value)? successIdentifyPhone,
     TResult? Function(_SuccessOptCode value)? successOtpCodeVerify,
     TResult? Function(_SuccessNewPassword value)? successNewPassword,
   }) =>
@@ -79,6 +84,7 @@ mixin _$PasswordForgetState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_SuccessIdentify value)? successIdentify,
+    TResult Function(_SuccessIdentifyPhone value)? successIdentifyPhone,
     TResult Function(_SuccessOptCode value)? successOtpCodeVerify,
     TResult Function(_SuccessNewPassword value)? successNewPassword,
     required TResult orElse(),
@@ -154,6 +160,7 @@ class _$InitialImpl implements _Initial {
             PasswordForgetState previousState, ApiError<dynamic> error)
         error,
     required TResult Function(IdentifyResponse response) successIdentify,
+    required TResult Function(IdentifyResponse response) successIdentifyPhone,
     required TResult Function(OtpCodeResponse response) successOtpCodeVerify,
     required TResult Function(NewPasswordResponse response) successNewPassword,
   }) {
@@ -169,6 +176,7 @@ class _$InitialImpl implements _Initial {
             PasswordForgetState previousState, ApiError<dynamic> error)?
         error,
     TResult? Function(IdentifyResponse response)? successIdentify,
+    TResult? Function(IdentifyResponse response)? successIdentifyPhone,
     TResult? Function(OtpCodeResponse response)? successOtpCodeVerify,
     TResult? Function(NewPasswordResponse response)? successNewPassword,
   }) {
@@ -184,6 +192,7 @@ class _$InitialImpl implements _Initial {
             PasswordForgetState previousState, ApiError<dynamic> error)?
         error,
     TResult Function(IdentifyResponse response)? successIdentify,
+    TResult Function(IdentifyResponse response)? successIdentifyPhone,
     TResult Function(OtpCodeResponse response)? successOtpCodeVerify,
     TResult Function(NewPasswordResponse response)? successNewPassword,
     required TResult orElse(),
@@ -201,6 +210,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_SuccessIdentify value) successIdentify,
+    required TResult Function(_SuccessIdentifyPhone value) successIdentifyPhone,
     required TResult Function(_SuccessOptCode value) successOtpCodeVerify,
     required TResult Function(_SuccessNewPassword value) successNewPassword,
   }) {
@@ -214,6 +224,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_SuccessIdentify value)? successIdentify,
+    TResult? Function(_SuccessIdentifyPhone value)? successIdentifyPhone,
     TResult? Function(_SuccessOptCode value)? successOtpCodeVerify,
     TResult? Function(_SuccessNewPassword value)? successNewPassword,
   }) {
@@ -227,6 +238,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_SuccessIdentify value)? successIdentify,
+    TResult Function(_SuccessIdentifyPhone value)? successIdentifyPhone,
     TResult Function(_SuccessOptCode value)? successOtpCodeVerify,
     TResult Function(_SuccessNewPassword value)? successNewPassword,
     required TResult orElse(),
@@ -289,6 +301,7 @@ class _$LoadingImpl implements _Loading {
             PasswordForgetState previousState, ApiError<dynamic> error)
         error,
     required TResult Function(IdentifyResponse response) successIdentify,
+    required TResult Function(IdentifyResponse response) successIdentifyPhone,
     required TResult Function(OtpCodeResponse response) successOtpCodeVerify,
     required TResult Function(NewPasswordResponse response) successNewPassword,
   }) {
@@ -304,6 +317,7 @@ class _$LoadingImpl implements _Loading {
             PasswordForgetState previousState, ApiError<dynamic> error)?
         error,
     TResult? Function(IdentifyResponse response)? successIdentify,
+    TResult? Function(IdentifyResponse response)? successIdentifyPhone,
     TResult? Function(OtpCodeResponse response)? successOtpCodeVerify,
     TResult? Function(NewPasswordResponse response)? successNewPassword,
   }) {
@@ -319,6 +333,7 @@ class _$LoadingImpl implements _Loading {
             PasswordForgetState previousState, ApiError<dynamic> error)?
         error,
     TResult Function(IdentifyResponse response)? successIdentify,
+    TResult Function(IdentifyResponse response)? successIdentifyPhone,
     TResult Function(OtpCodeResponse response)? successOtpCodeVerify,
     TResult Function(NewPasswordResponse response)? successNewPassword,
     required TResult orElse(),
@@ -336,6 +351,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_SuccessIdentify value) successIdentify,
+    required TResult Function(_SuccessIdentifyPhone value) successIdentifyPhone,
     required TResult Function(_SuccessOptCode value) successOtpCodeVerify,
     required TResult Function(_SuccessNewPassword value) successNewPassword,
   }) {
@@ -349,6 +365,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_SuccessIdentify value)? successIdentify,
+    TResult? Function(_SuccessIdentifyPhone value)? successIdentifyPhone,
     TResult? Function(_SuccessOptCode value)? successOtpCodeVerify,
     TResult? Function(_SuccessNewPassword value)? successNewPassword,
   }) {
@@ -362,6 +379,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_SuccessIdentify value)? successIdentify,
+    TResult Function(_SuccessIdentifyPhone value)? successIdentifyPhone,
     TResult Function(_SuccessOptCode value)? successOtpCodeVerify,
     TResult Function(_SuccessNewPassword value)? successNewPassword,
     required TResult orElse(),
@@ -472,6 +490,7 @@ class _$ErrorImpl implements _Error {
             PasswordForgetState previousState, ApiError<dynamic> error)
         error,
     required TResult Function(IdentifyResponse response) successIdentify,
+    required TResult Function(IdentifyResponse response) successIdentifyPhone,
     required TResult Function(OtpCodeResponse response) successOtpCodeVerify,
     required TResult Function(NewPasswordResponse response) successNewPassword,
   }) {
@@ -487,6 +506,7 @@ class _$ErrorImpl implements _Error {
             PasswordForgetState previousState, ApiError<dynamic> error)?
         error,
     TResult? Function(IdentifyResponse response)? successIdentify,
+    TResult? Function(IdentifyResponse response)? successIdentifyPhone,
     TResult? Function(OtpCodeResponse response)? successOtpCodeVerify,
     TResult? Function(NewPasswordResponse response)? successNewPassword,
   }) {
@@ -502,6 +522,7 @@ class _$ErrorImpl implements _Error {
             PasswordForgetState previousState, ApiError<dynamic> error)?
         error,
     TResult Function(IdentifyResponse response)? successIdentify,
+    TResult Function(IdentifyResponse response)? successIdentifyPhone,
     TResult Function(OtpCodeResponse response)? successOtpCodeVerify,
     TResult Function(NewPasswordResponse response)? successNewPassword,
     required TResult orElse(),
@@ -519,6 +540,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_SuccessIdentify value) successIdentify,
+    required TResult Function(_SuccessIdentifyPhone value) successIdentifyPhone,
     required TResult Function(_SuccessOptCode value) successOtpCodeVerify,
     required TResult Function(_SuccessNewPassword value) successNewPassword,
   }) {
@@ -532,6 +554,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_SuccessIdentify value)? successIdentify,
+    TResult? Function(_SuccessIdentifyPhone value)? successIdentifyPhone,
     TResult? Function(_SuccessOptCode value)? successOtpCodeVerify,
     TResult? Function(_SuccessNewPassword value)? successNewPassword,
   }) {
@@ -545,6 +568,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_SuccessIdentify value)? successIdentify,
+    TResult Function(_SuccessIdentifyPhone value)? successIdentifyPhone,
     TResult Function(_SuccessOptCode value)? successOtpCodeVerify,
     TResult Function(_SuccessNewPassword value)? successNewPassword,
     required TResult orElse(),
@@ -659,6 +683,7 @@ class _$SuccessIdentifyImpl implements _SuccessIdentify {
             PasswordForgetState previousState, ApiError<dynamic> error)
         error,
     required TResult Function(IdentifyResponse response) successIdentify,
+    required TResult Function(IdentifyResponse response) successIdentifyPhone,
     required TResult Function(OtpCodeResponse response) successOtpCodeVerify,
     required TResult Function(NewPasswordResponse response) successNewPassword,
   }) {
@@ -674,6 +699,7 @@ class _$SuccessIdentifyImpl implements _SuccessIdentify {
             PasswordForgetState previousState, ApiError<dynamic> error)?
         error,
     TResult? Function(IdentifyResponse response)? successIdentify,
+    TResult? Function(IdentifyResponse response)? successIdentifyPhone,
     TResult? Function(OtpCodeResponse response)? successOtpCodeVerify,
     TResult? Function(NewPasswordResponse response)? successNewPassword,
   }) {
@@ -689,6 +715,7 @@ class _$SuccessIdentifyImpl implements _SuccessIdentify {
             PasswordForgetState previousState, ApiError<dynamic> error)?
         error,
     TResult Function(IdentifyResponse response)? successIdentify,
+    TResult Function(IdentifyResponse response)? successIdentifyPhone,
     TResult Function(OtpCodeResponse response)? successOtpCodeVerify,
     TResult Function(NewPasswordResponse response)? successNewPassword,
     required TResult orElse(),
@@ -706,6 +733,7 @@ class _$SuccessIdentifyImpl implements _SuccessIdentify {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_SuccessIdentify value) successIdentify,
+    required TResult Function(_SuccessIdentifyPhone value) successIdentifyPhone,
     required TResult Function(_SuccessOptCode value) successOtpCodeVerify,
     required TResult Function(_SuccessNewPassword value) successNewPassword,
   }) {
@@ -719,6 +747,7 @@ class _$SuccessIdentifyImpl implements _SuccessIdentify {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_SuccessIdentify value)? successIdentify,
+    TResult? Function(_SuccessIdentifyPhone value)? successIdentifyPhone,
     TResult? Function(_SuccessOptCode value)? successOtpCodeVerify,
     TResult? Function(_SuccessNewPassword value)? successNewPassword,
   }) {
@@ -732,6 +761,7 @@ class _$SuccessIdentifyImpl implements _SuccessIdentify {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_SuccessIdentify value)? successIdentify,
+    TResult Function(_SuccessIdentifyPhone value)? successIdentifyPhone,
     TResult Function(_SuccessOptCode value)? successOtpCodeVerify,
     TResult Function(_SuccessNewPassword value)? successNewPassword,
     required TResult orElse(),
@@ -754,6 +784,198 @@ abstract class _SuccessIdentify implements PasswordForgetState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessIdentifyImplCopyWith<_$SuccessIdentifyImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SuccessIdentifyPhoneImplCopyWith<$Res> {
+  factory _$$SuccessIdentifyPhoneImplCopyWith(_$SuccessIdentifyPhoneImpl value,
+          $Res Function(_$SuccessIdentifyPhoneImpl) then) =
+      __$$SuccessIdentifyPhoneImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({IdentifyResponse response});
+
+  $IdentifyResponseCopyWith<$Res> get response;
+}
+
+/// @nodoc
+class __$$SuccessIdentifyPhoneImplCopyWithImpl<$Res>
+    extends _$PasswordForgetStateCopyWithImpl<$Res, _$SuccessIdentifyPhoneImpl>
+    implements _$$SuccessIdentifyPhoneImplCopyWith<$Res> {
+  __$$SuccessIdentifyPhoneImplCopyWithImpl(_$SuccessIdentifyPhoneImpl _value,
+      $Res Function(_$SuccessIdentifyPhoneImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PasswordForgetState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? response = null,
+  }) {
+    return _then(_$SuccessIdentifyPhoneImpl(
+      response: null == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as IdentifyResponse,
+    ));
+  }
+
+  /// Create a copy of PasswordForgetState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $IdentifyResponseCopyWith<$Res> get response {
+    return $IdentifyResponseCopyWith<$Res>(_value.response, (value) {
+      return _then(_value.copyWith(response: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$SuccessIdentifyPhoneImpl implements _SuccessIdentifyPhone {
+  _$SuccessIdentifyPhoneImpl({required this.response});
+
+  @override
+  final IdentifyResponse response;
+
+  @override
+  String toString() {
+    return 'PasswordForgetState.successIdentifyPhone(response: $response)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessIdentifyPhoneImpl &&
+            (identical(other.response, response) ||
+                other.response == response));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, response);
+
+  /// Create a copy of PasswordForgetState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessIdentifyPhoneImplCopyWith<_$SuccessIdentifyPhoneImpl>
+      get copyWith =>
+          __$$SuccessIdentifyPhoneImplCopyWithImpl<_$SuccessIdentifyPhoneImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(
+            PasswordForgetState previousState, ApiError<dynamic> error)
+        error,
+    required TResult Function(IdentifyResponse response) successIdentify,
+    required TResult Function(IdentifyResponse response) successIdentifyPhone,
+    required TResult Function(OtpCodeResponse response) successOtpCodeVerify,
+    required TResult Function(NewPasswordResponse response) successNewPassword,
+  }) {
+    return successIdentifyPhone(response);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(
+            PasswordForgetState previousState, ApiError<dynamic> error)?
+        error,
+    TResult? Function(IdentifyResponse response)? successIdentify,
+    TResult? Function(IdentifyResponse response)? successIdentifyPhone,
+    TResult? Function(OtpCodeResponse response)? successOtpCodeVerify,
+    TResult? Function(NewPasswordResponse response)? successNewPassword,
+  }) {
+    return successIdentifyPhone?.call(response);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(
+            PasswordForgetState previousState, ApiError<dynamic> error)?
+        error,
+    TResult Function(IdentifyResponse response)? successIdentify,
+    TResult Function(IdentifyResponse response)? successIdentifyPhone,
+    TResult Function(OtpCodeResponse response)? successOtpCodeVerify,
+    TResult Function(NewPasswordResponse response)? successNewPassword,
+    required TResult orElse(),
+  }) {
+    if (successIdentifyPhone != null) {
+      return successIdentifyPhone(response);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Error value) error,
+    required TResult Function(_SuccessIdentify value) successIdentify,
+    required TResult Function(_SuccessIdentifyPhone value) successIdentifyPhone,
+    required TResult Function(_SuccessOptCode value) successOtpCodeVerify,
+    required TResult Function(_SuccessNewPassword value) successNewPassword,
+  }) {
+    return successIdentifyPhone(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_SuccessIdentify value)? successIdentify,
+    TResult? Function(_SuccessIdentifyPhone value)? successIdentifyPhone,
+    TResult? Function(_SuccessOptCode value)? successOtpCodeVerify,
+    TResult? Function(_SuccessNewPassword value)? successNewPassword,
+  }) {
+    return successIdentifyPhone?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Error value)? error,
+    TResult Function(_SuccessIdentify value)? successIdentify,
+    TResult Function(_SuccessIdentifyPhone value)? successIdentifyPhone,
+    TResult Function(_SuccessOptCode value)? successOtpCodeVerify,
+    TResult Function(_SuccessNewPassword value)? successNewPassword,
+    required TResult orElse(),
+  }) {
+    if (successIdentifyPhone != null) {
+      return successIdentifyPhone(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SuccessIdentifyPhone implements PasswordForgetState {
+  factory _SuccessIdentifyPhone({required final IdentifyResponse response}) =
+      _$SuccessIdentifyPhoneImpl;
+
+  IdentifyResponse get response;
+
+  /// Create a copy of PasswordForgetState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SuccessIdentifyPhoneImplCopyWith<_$SuccessIdentifyPhoneImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -844,6 +1066,7 @@ class _$SuccessOptCodeImpl implements _SuccessOptCode {
             PasswordForgetState previousState, ApiError<dynamic> error)
         error,
     required TResult Function(IdentifyResponse response) successIdentify,
+    required TResult Function(IdentifyResponse response) successIdentifyPhone,
     required TResult Function(OtpCodeResponse response) successOtpCodeVerify,
     required TResult Function(NewPasswordResponse response) successNewPassword,
   }) {
@@ -859,6 +1082,7 @@ class _$SuccessOptCodeImpl implements _SuccessOptCode {
             PasswordForgetState previousState, ApiError<dynamic> error)?
         error,
     TResult? Function(IdentifyResponse response)? successIdentify,
+    TResult? Function(IdentifyResponse response)? successIdentifyPhone,
     TResult? Function(OtpCodeResponse response)? successOtpCodeVerify,
     TResult? Function(NewPasswordResponse response)? successNewPassword,
   }) {
@@ -874,6 +1098,7 @@ class _$SuccessOptCodeImpl implements _SuccessOptCode {
             PasswordForgetState previousState, ApiError<dynamic> error)?
         error,
     TResult Function(IdentifyResponse response)? successIdentify,
+    TResult Function(IdentifyResponse response)? successIdentifyPhone,
     TResult Function(OtpCodeResponse response)? successOtpCodeVerify,
     TResult Function(NewPasswordResponse response)? successNewPassword,
     required TResult orElse(),
@@ -891,6 +1116,7 @@ class _$SuccessOptCodeImpl implements _SuccessOptCode {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_SuccessIdentify value) successIdentify,
+    required TResult Function(_SuccessIdentifyPhone value) successIdentifyPhone,
     required TResult Function(_SuccessOptCode value) successOtpCodeVerify,
     required TResult Function(_SuccessNewPassword value) successNewPassword,
   }) {
@@ -904,6 +1130,7 @@ class _$SuccessOptCodeImpl implements _SuccessOptCode {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_SuccessIdentify value)? successIdentify,
+    TResult? Function(_SuccessIdentifyPhone value)? successIdentifyPhone,
     TResult? Function(_SuccessOptCode value)? successOtpCodeVerify,
     TResult? Function(_SuccessNewPassword value)? successNewPassword,
   }) {
@@ -917,6 +1144,7 @@ class _$SuccessOptCodeImpl implements _SuccessOptCode {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_SuccessIdentify value)? successIdentify,
+    TResult Function(_SuccessIdentifyPhone value)? successIdentifyPhone,
     TResult Function(_SuccessOptCode value)? successOtpCodeVerify,
     TResult Function(_SuccessNewPassword value)? successNewPassword,
     required TResult orElse(),
@@ -1029,6 +1257,7 @@ class _$SuccessNewPasswordImpl implements _SuccessNewPassword {
             PasswordForgetState previousState, ApiError<dynamic> error)
         error,
     required TResult Function(IdentifyResponse response) successIdentify,
+    required TResult Function(IdentifyResponse response) successIdentifyPhone,
     required TResult Function(OtpCodeResponse response) successOtpCodeVerify,
     required TResult Function(NewPasswordResponse response) successNewPassword,
   }) {
@@ -1044,6 +1273,7 @@ class _$SuccessNewPasswordImpl implements _SuccessNewPassword {
             PasswordForgetState previousState, ApiError<dynamic> error)?
         error,
     TResult? Function(IdentifyResponse response)? successIdentify,
+    TResult? Function(IdentifyResponse response)? successIdentifyPhone,
     TResult? Function(OtpCodeResponse response)? successOtpCodeVerify,
     TResult? Function(NewPasswordResponse response)? successNewPassword,
   }) {
@@ -1059,6 +1289,7 @@ class _$SuccessNewPasswordImpl implements _SuccessNewPassword {
             PasswordForgetState previousState, ApiError<dynamic> error)?
         error,
     TResult Function(IdentifyResponse response)? successIdentify,
+    TResult Function(IdentifyResponse response)? successIdentifyPhone,
     TResult Function(OtpCodeResponse response)? successOtpCodeVerify,
     TResult Function(NewPasswordResponse response)? successNewPassword,
     required TResult orElse(),
@@ -1076,6 +1307,7 @@ class _$SuccessNewPasswordImpl implements _SuccessNewPassword {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_SuccessIdentify value) successIdentify,
+    required TResult Function(_SuccessIdentifyPhone value) successIdentifyPhone,
     required TResult Function(_SuccessOptCode value) successOtpCodeVerify,
     required TResult Function(_SuccessNewPassword value) successNewPassword,
   }) {
@@ -1089,6 +1321,7 @@ class _$SuccessNewPasswordImpl implements _SuccessNewPassword {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_SuccessIdentify value)? successIdentify,
+    TResult? Function(_SuccessIdentifyPhone value)? successIdentifyPhone,
     TResult? Function(_SuccessOptCode value)? successOtpCodeVerify,
     TResult? Function(_SuccessNewPassword value)? successNewPassword,
   }) {
@@ -1102,6 +1335,7 @@ class _$SuccessNewPasswordImpl implements _SuccessNewPassword {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_SuccessIdentify value)? successIdentify,
+    TResult Function(_SuccessIdentifyPhone value)? successIdentifyPhone,
     TResult Function(_SuccessOptCode value)? successOtpCodeVerify,
     TResult Function(_SuccessNewPassword value)? successNewPassword,
     required TResult orElse(),

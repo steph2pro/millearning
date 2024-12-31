@@ -2,12 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:millearnia/src/core/theme/app_size.dart';
-import 'package:millearnia/src/shared/components/modals/error_toast_widget.dart';
-import 'package:millearnia/src/shared/components/modals/modal.dart';
-import 'package:millearnia/src/shared/components/modals/progress/download_progress_widget.dart';
 import 'package:millearnia/src/shared/utils/download_service.dart';
-import 'package:millearnia/src/shared/utils/file_utils.dart';
 import 'package:millearnia/src/shared/utils/permition_storage.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';

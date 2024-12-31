@@ -10,6 +10,10 @@ class Utils {
 
   static String getFlagImageAssetPath(String isoCode) {
     return "assets/${isoCode.toLowerCase()}.png";
+  }    
+
+  String removeSpaces(String input) {
+    return input.replaceAll(' ', '');
   }
 
   

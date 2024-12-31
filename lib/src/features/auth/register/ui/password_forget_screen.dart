@@ -17,7 +17,8 @@ import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:millearnia/src/core/routing/app_router.dart';
-import 'package:millearnia/src/shared/utils/regexp_plus.dart'; // Importez le fichier principal // Import de la page cible
+import 'package:millearnia/src/shared/utils/regexp_plus.dart';
+import 'package:millearnia/src/shared/utils/utils.dart'; // Importez le fichier principal // Import de la page cible
 
 @RoutePage()
 class PasswordForgetScreen extends StatefulWidget{
@@ -44,6 +45,9 @@ class _PasswordForgetScreenState extends State<PasswordForgetScreen> {
         onValuePicked: (country) => setState(() {
               _country = country;
             }));
+  }
+   String removeSpaces(String input) {
+    return input.replaceAll(' ', '');
   }
 
   @override
@@ -134,9 +138,9 @@ class _PasswordForgetScreenState extends State<PasswordForgetScreen> {
                 onPressed: (){
                    final identifyRequest=IdentifyRequest(
                     email: _emailController.text ,
-                    phone: _phoneController.text
+                    phone: removeSpaces('+${_country.phoneCode}${_phoneController.text}'),
                    );
-                   
+                   print(identifyRequest.phone);
                   if (_formKey.currentState!.validate()) {
                       context.read<PasswordForgetCubit>().sendIdentify(identifyRequest);
                     }

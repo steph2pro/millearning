@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "960482717308",
+    "project_id": "millearnia",
+    "storage_bucket": "millearnia.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960482717308:android:b780a342f9373342c423f9",
+        "android_client_info": {
+          "package_name": "io.adaptiv.flutter_kit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmpGLlL7bw6XYWnqP4C8KkuU0xxWyvY-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

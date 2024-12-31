@@ -9,6 +9,7 @@ class IdentifyResponse with _$IdentifyResponse {
   factory IdentifyResponse({
     required String message,
      String? email,
+     String? phone,
      String? id,
 
   }) = _IdentifyResponse;

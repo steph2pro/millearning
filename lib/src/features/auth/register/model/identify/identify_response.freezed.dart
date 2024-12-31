@@ -22,6 +22,7 @@ IdentifyResponse _$IdentifyResponseFromJson(Map<String, dynamic> json) {
 mixin _$IdentifyResponse {
   String get message => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
+  String? get phone => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
 
   /// Serializes this IdentifyResponse to a JSON map.
@@ -40,7 +41,7 @@ abstract class $IdentifyResponseCopyWith<$Res> {
           IdentifyResponse value, $Res Function(IdentifyResponse) then) =
       _$IdentifyResponseCopyWithImpl<$Res, IdentifyResponse>;
   @useResult
-  $Res call({String message, String? email, String? id});
+  $Res call({String message, String? email, String? phone, String? id});
 }
 
 /// @nodoc
@@ -60,6 +61,7 @@ class _$IdentifyResponseCopyWithImpl<$Res, $Val extends IdentifyResponse>
   $Res call({
     Object? message = null,
     Object? email = freezed,
+    Object? phone = freezed,
     Object? id = freezed,
   }) {
     return _then(_value.copyWith(
@@ -70,6 +72,10 @@ class _$IdentifyResponseCopyWithImpl<$Res, $Val extends IdentifyResponse>
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
               as String?,
       id: freezed == id
           ? _value.id
@@ -87,7 +93,7 @@ abstract class _$$IdentifyResponseImplCopyWith<$Res>
       __$$IdentifyResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String message, String? email, String? id});
+  $Res call({String message, String? email, String? phone, String? id});
 }
 
 /// @nodoc
@@ -105,6 +111,7 @@ class __$$IdentifyResponseImplCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
     Object? email = freezed,
+    Object? phone = freezed,
     Object? id = freezed,
   }) {
     return _then(_$IdentifyResponseImpl(
@@ -115,6 +122,10 @@ class __$$IdentifyResponseImplCopyWithImpl<$Res>
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
               as String?,
       id: freezed == id
           ? _value.id
@@ -127,7 +138,8 @@ class __$$IdentifyResponseImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$IdentifyResponseImpl implements _IdentifyResponse {
-  _$IdentifyResponseImpl({required this.message, this.email, this.id});
+  _$IdentifyResponseImpl(
+      {required this.message, this.email, this.phone, this.id});
 
   factory _$IdentifyResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$IdentifyResponseImplFromJson(json);
@@ -137,11 +149,13 @@ class _$IdentifyResponseImpl implements _IdentifyResponse {
   @override
   final String? email;
   @override
+  final String? phone;
+  @override
   final String? id;
 
   @override
   String toString() {
-    return 'IdentifyResponse(message: $message, email: $email, id: $id)';
+    return 'IdentifyResponse(message: $message, email: $email, phone: $phone, id: $id)';
   }
 
   @override
@@ -151,12 +165,13 @@ class _$IdentifyResponseImpl implements _IdentifyResponse {
             other is _$IdentifyResponseImpl &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.email, email) || other.email == email) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, message, email, id);
+  int get hashCode => Object.hash(runtimeType, message, email, phone, id);
 
   /// Create a copy of IdentifyResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -179,6 +194,7 @@ abstract class _IdentifyResponse implements IdentifyResponse {
   factory _IdentifyResponse(
       {required final String message,
       final String? email,
+      final String? phone,
       final String? id}) = _$IdentifyResponseImpl;
 
   factory _IdentifyResponse.fromJson(Map<String, dynamic> json) =
@@ -188,6 +204,8 @@ abstract class _IdentifyResponse implements IdentifyResponse {
   String get message;
   @override
   String? get email;
+  @override
+  String? get phone;
   @override
   String? get id;
 

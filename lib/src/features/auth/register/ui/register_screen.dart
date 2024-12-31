@@ -182,7 +182,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 label: I18n.of(context).nameLabel,
                 hint: I18n.of(context).namelHint,
                 controller: _nameController,
-                validator: (value) => InputValidator.simpleValidator(context, value)),
+                validator: (value) => InputValidator.simpleValidator(context, value)
+              ),
             const Gap.vertical(height: Dimens.spacing),
             numberWidget,
             const Gap.vertical(height: Dimens.spacing),

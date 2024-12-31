@@ -16,7 +16,7 @@ const lightColorScheme = ColorScheme(
   onTertiaryContainer: Color(0xFF7B7B7B),
   error: Color(0xFFB3261E),
   onError: Color(0xFFFFFFFF),
-  errorContainer: Color(0xFFF9DEDC),
+  errorContainer: Color(0xFFF9DEDC), 
   onErrorContainer: Color(0xFF410E0B),
   outline: Color(0xFF717171),
   surface: Color(0XFFF4F4F5),
@@ -28,7 +28,7 @@ const lightColorScheme = ColorScheme(
   shadow: Color(0xFF767676),
   surfaceTint: Color(0xFFFFC75D),
   outlineVariant: Color(0xFFACACAC),
-  // scrim: Color(0xFF000000),
+  scrim: Color.fromARGB(255, 19, 6, 46),
 );
 
 const darkColorScheme = ColorScheme(

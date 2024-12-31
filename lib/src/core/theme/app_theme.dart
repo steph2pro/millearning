@@ -175,7 +175,7 @@ class AppTheme {
       labelMedium: font.copyWith(color: colors.onSurface, fontSize: 12, fontWeight: FontWeight.w500),
       labelSmall: font.copyWith(color: colors.tertiaryContainer, fontWeight: FontWeight.w400, fontSize: 10),
     );
-  }
+  } 
 
   static final ThemeData lightTheme = _buildTheme(brightness: Brightness.light);
 

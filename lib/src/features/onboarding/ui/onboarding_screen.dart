@@ -1,9 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:millearnia/src/core/i18n/l10n.dart';
 import 'package:millearnia/src/core/routing/app_router.dart';
-import 'package:millearnia/src/shared/components/atoms/dividers/labeled_divider.dart';
 import 'package:millearnia/src/shared/components/onboarding/onboarding_item.dart';
 import 'package:millearnia/src/shared/components/onboarding/page_indicators.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';

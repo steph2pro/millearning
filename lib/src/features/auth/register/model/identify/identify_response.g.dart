@@ -11,6 +11,7 @@ _$IdentifyResponseImpl _$$IdentifyResponseImplFromJson(
     _$IdentifyResponseImpl(
       message: json['message'] as String,
       email: json['email'] as String?,
+      phone: json['phone'] as String?,
       id: json['id'] as String?,
     );
 
@@ -19,5 +20,6 @@ Map<String, dynamic> _$$IdentifyResponseImplToJson(
     <String, dynamic>{
       'message': instance.message,
       'email': instance.email,
+      'phone': instance.phone,
       'id': instance.id,
     };

@@ -11,7 +11,9 @@ abstract class BaseRepository {
       return response;
     } on DioException catch (e) {
       return ApiResponse.error(createApiErrorFromDioError(e));
-    } catch (e) {
+    } catch (e, t) {
+      print(e);
+      print('$t');
       return ApiResponse.error(unknownError(e));
     }
   }

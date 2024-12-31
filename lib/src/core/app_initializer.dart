@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class AppInitializer {
   /// Initialize services, plugins, etc. before the app runs.
   Future<void> preAppRun() async {
     await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    // Initialiser firebase
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
     // Initialiser Supabase
     await Supabase.initialize(
       url: 'https://eiwdwnllcxkqgqapkbvx.supabase.co', // Remplacez par votre URL

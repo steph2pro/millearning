@@ -12,7 +12,7 @@ import 'package:millearnia/src/features/auth/login/models/login_request.dart';
 import 'package:millearnia/src/shared/components/atoms/dividers/labeled_divider.dart';
 import 'package:millearnia/src/shared/components/buttons/button.dart';
 import 'package:millearnia/src/shared/components/dialogs/dialog_builder.dart';
-import 'package:millearnia/src/shared/components/dialogs/notifyer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
 import 'package:millearnia/src/shared/components/gap.dart';
 import 'package:millearnia/src/shared/components/modals/modal.dart';
@@ -144,14 +144,22 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           state.whenOrNull(
               loading: () => LoadingDialog.show(context: context),
-              success: (response) {
+              success: (response) async{
                 LoadingDialog.hide(context: context);
                 showSuccesModal(response.message);
-                if (response.data != null) {
-                  context.router.push(HomeRoute());
-                }
-
                 print(response);
+                // if (response.data != null) {
+                  final user=response.data;
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                   await prefs.setString('name', user.name);
+                   await prefs.setString('email', user.email);
+                   await prefs.setString('phone', user.phone);
+                  
+                  // context.router.push(HomeRoute());
+                  context.router.push(CvBuilderRoute());
+
+                // }
+
               },
               error: (error) {
                 LoadingDialog.hide(context: context);

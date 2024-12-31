@@ -10,6 +10,25 @@
 part of 'app_router.dart';
 
 /// generated route for
+/// [ChoixModelScreen]
+class ChoixModelRoute extends PageRouteInfo<void> {
+  const ChoixModelRoute({List<PageRouteInfo>? children})
+      : super(
+          ChoixModelRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ChoixModelRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ChoixModelScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [CodeVerifyScreen]
 class CodeVerifyRoute extends PageRouteInfo<void> {
   const CodeVerifyRoute({List<PageRouteInfo>? children})
@@ -43,6 +62,82 @@ class CourseDetailRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const CourseDetailScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [CvBuilderScreen]
+class CvBuilderRoute extends PageRouteInfo<void> {
+  const CvBuilderRoute({List<PageRouteInfo>? children})
+      : super(
+          CvBuilderRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CvBuilderRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CvBuilderScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [CvModel2Screen]
+class CvModel2Route extends PageRouteInfo<void> {
+  const CvModel2Route({List<PageRouteInfo>? children})
+      : super(
+          CvModel2Route.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CvModel2Route';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CvModel2Screen();
+    },
+  );
+}
+
+/// generated route for
+/// [CvModel3Screen]
+class CvModel3Route extends PageRouteInfo<void> {
+  const CvModel3Route({List<PageRouteInfo>? children})
+      : super(
+          CvModel3Route.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CvModel3Route';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CvModel3Screen();
+    },
+  );
+}
+
+/// generated route for
+/// [CvModelScreen]
+class CvModelRoute extends PageRouteInfo<void> {
+  const CvModelRoute({List<PageRouteInfo>? children})
+      : super(
+          CvModelRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CvModelRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CvModelScreen();
     },
   );
 }

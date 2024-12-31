@@ -34,12 +34,12 @@ class PasswordForgetCubit extends Cubit<PasswordForgetState> {
     final response = await _userRepository.verifyUserRepo(identifier);
 
     response.whenOrNull(success: (res) {
-      if (res.email is String) {
+      if (res.email != null && res.email!.isNotEmpty ) {
         emit(PasswordForgetState.successIdentify(response: res));
       } 
-      // else {
-      //   emit(PasswordForgetState.successSetOtp(initialUserData: res));
-      // }
+      else {
+        emit(PasswordForgetState.successIdentifyPhone(response: res));
+      }
     }, error: (error) {
       emit(PasswordForgetState.error(previousState: state, error: error));
       emit( PasswordForgetState.initial());

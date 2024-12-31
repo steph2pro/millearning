@@ -14,6 +14,10 @@ class PasswordForgetState with _$PasswordForgetState {
   factory PasswordForgetState.successIdentify({
     required IdentifyResponse response,
   }) = _SuccessIdentify;
+  factory PasswordForgetState.successIdentifyPhone({
+    required IdentifyResponse response,
+  }) = _SuccessIdentifyPhone;
+
   factory PasswordForgetState.successOtpCodeVerify({
     required OtpCodeResponse response,
   }) = _SuccessOptCode;
