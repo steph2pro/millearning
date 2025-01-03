@@ -30,12 +30,17 @@ class FormationCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10), // Coins arrondis à 10
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Column(
+          Expanded(
+             child: Align(
+              alignment: Alignment.centerLeft,
+              child: Column(
             children: [
               Text(
-                title.length > 15 ? '${title.substring(0, 15)}...' : title,
+                title,
+                // .length > 15 ? '${title.substring(0, 15)}...' : title,
                 style: context.textTheme.titleMedium,
               ),
               ville != null 
@@ -50,10 +55,13 @@ class FormationCard extends StatelessWidget {
               ,
             ],
           ),
+             )
+          ),
           InkWell(
             onTap: edit,
             child: Container(
               padding: EdgeInsets.all(8),
+              margin: EdgeInsets.only(left: 10),
               decoration: BoxDecoration(
               color: context.colorScheme.onPrimary,
               border: Border.all(

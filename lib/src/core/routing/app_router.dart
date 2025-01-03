@@ -13,6 +13,7 @@ import 'package:millearnia/src/features/cv/ui/cv_model_screen.dart';
 import 'package:millearnia/src/features/cv/ui/cv_model2_screen.dart';
 import 'package:millearnia/src/features/cv/ui/cv_model3_screen.dart';
 import 'package:millearnia/src/features/home/ui/course_detail.dart';
+import 'package:millearnia/src/features/home/ui/home_page_screen.dart';
 import 'package:millearnia/src/features/home/ui/home_screen.dart';
 import 'package:millearnia/src/features/onboarding/ui/onboarding_screen.dart';
 import 'package:millearnia/src/features/splash/ui/splash_screen.dart';
@@ -30,11 +31,12 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: OnboardingRoute.page),
     AutoRoute(page: LoginRoute.page),
     AutoRoute(page: RegisterRoute.page),
+    AutoRoute(page: HomePageRoute.page,initial: true),
+    AutoRoute(page: ChoixModelRoute.page),
     AutoRoute(page: CvBuilderRoute.page),
-    AutoRoute(page: CvModelRoute.page),
+    AutoRoute(page: CvModelRoute.page ),
     AutoRoute(page: CvModel2Route.page),
     AutoRoute(page: CvModel3Route.page),
-    AutoRoute(page: ChoixModelRoute.page, initial: true),
 
     AutoRoute(page: PasswordWrapperRoute.page,children: [
       AutoRoute(page: PasswordForgetRoute.page, initial: true),

@@ -1,15 +1,25 @@
+import 'dart:convert';
 import 'dart:ffi';
+import 'dart:typed_data';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
 import 'package:millearnia/src/core/theme/dimens.dart';
+import 'package:millearnia/src/features/cv/logic/fetch_methodes.dart';
+import 'package:millearnia/src/features/cv/models/competences.dart';
+import 'package:millearnia/src/features/cv/models/experience.dart';
+import 'package:millearnia/src/features/cv/models/formation.dart';
+import 'package:millearnia/src/features/cv/models/langues.dart';
+import 'package:millearnia/src/features/cv/models/loisir.dart';
+import 'package:millearnia/src/features/cv/models/stage.dart';
 import 'package:millearnia/src/shared/components/forme/parallelograme.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
 class CvModel2Screen extends StatefulWidget {
@@ -20,7 +30,82 @@ class CvModel2Screen extends StatefulWidget {
 }
 
 class _CvModel2ScreenState extends State<CvModel2Screen> {
-  
+  String nomComplet = '';
+  String titre = '';
+  String email = '';
+  String telephone = '';
+  String address = '';
+  String ville = '';
+
+   Uint8List? _profileImageBytes;
+  String profil ='';
+   List<Formation>formations =[];
+   List<Experience>experiences =[];
+   List<Stage>stages =[];
+   List<Competences>competences =[];
+   List<Langues>langues =[];
+   List<Loisir>loisirs =[];
+
+
+  Future<void> _loadImageFromSharedPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    final imageBase64 = prefs.getString('profileImage');
+    if (imageBase64 != null) {
+      setState(() {
+        _profileImageBytes = base64Decode(imageBase64);
+      });
+    }
+  }
+  Future<void> fetchInfosPersonels() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  nomComplet = prefs.getString('Nom complet') ?? '';
+  titre = prefs.getString('titre') ?? '';
+  email = prefs.getString('email') ?? '';
+  telephone = prefs.getString('telephone') ?? '';
+  address = prefs.getString('address') ?? '';
+  ville = prefs.getString('ville') ?? '';
+}
+Future<void> fetchProfil() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  profil = prefs.getString('profileDescription') ?? '';
+}
+
+Future<void> loadFormations() async {
+  formations = await fetchFormation();
+}
+Future<void> loadExperiences() async {
+  experiences = await fetchExperience();
+}
+
+Future<void> loadStages() async {
+  stages = await fetchStage();
+}
+Future<void> loadCompetences() async {
+  competences = await fetchCompetences();
+}
+
+Future<void> loadLangues() async {
+  langues = await fetchLangues();
+}
+
+Future<void> loadLoisir() async {
+  loisirs = await fetchLoisir();
+}
+  @override
+  void initState() {
+    super.initState();
+    _loadImageFromSharedPreferences();
+    fetchInfosPersonels();
+    fetchProfil();
+    loadFormations();
+    loadExperiences();
+    loadStages();
+    loadCompetences();
+    loadLangues();
+    loadLoisir();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +140,38 @@ class _CvModel2ScreenState extends State<CvModel2Screen> {
                         children: [
                           // Photo de profil
                           Center(
-                            child: CircleAvatar(
-                              radius: 60,
-                              backgroundImage: AssetImage('assets/images/profile2.png'), // Remplacez par votre image
+                            child: Container(
+                    width: 118, 
+                    height: 118,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      // border: Border.all(
+                      //   color: context.colorScheme.onPrimary, // Couleur de la bordure
+                      //   width: 4, // Épaisseur de la bordure
+                      // ),
+                    ),
+                    child: ClipOval(
+                      child: _profileImageBytes != null
+                          ? Image.memory(
+                              _profileImageBytes!,
+                              fit: BoxFit.cover, // L'image occupe entièrement le conteneur
+                              // width: 100,
+                              // height: 100,
+                            )
+                          : Container(
+                              color: context.colorScheme.onPrimary,
+                              child: Icon(
+                                Icons.person,
+                                size: 50,
+                                color: context.colorScheme.tertiary,
+                              ),
                             ),
+                    ),
+                  ),
+                            // CircleAvatar(
+                            //   radius: 60,
+                            //   backgroundImage: AssetImage('assets/images/profile2.png'), // Remplacez par votre image
+                            // ),
                           ),
                           gapH20,
                           trait(),
@@ -73,7 +186,7 @@ class _CvModel2ScreenState extends State<CvModel2Screen> {
 
                           gapH8,
                            Text(
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris luctus lobortis diam.",
+                            profil,
                             style: context.textTheme.labelLarge?.copyWith(color: context.colorScheme.onPrimary),
                             textAlign: TextAlign.justify,
                             ),
@@ -85,9 +198,9 @@ class _CvModel2ScreenState extends State<CvModel2Screen> {
                           ),
                           trait(),
                           gapH10,
-                          contactRow(Icons.phone, "123 456 789"),
-                          contactRow(Icons.email, "email@exemple.com"),
-                          contactRow(Icons.web, "www.job.com"),
+                          contactRow(Icons.phone, telephone),
+                          contactRow(Icons.email, email),
+                          contactRow(Icons.home, "$address, $ville"),
                           gapH20,
                            trait(),
                            Text(
@@ -108,10 +221,9 @@ class _CvModel2ScreenState extends State<CvModel2Screen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               gapH20,
-                              socialLink("Facebook"),
-                              socialLink("LinkedIn"),
-                              socialLink("Twitter"),
-                              socialLink("Instagram"),
+                              ...loisirs.map((loisir){
+                                return socialLink(loisir.loisir);
+                              }).toList(),
                             ],
                           ),
 
@@ -132,12 +244,27 @@ class _CvModel2ScreenState extends State<CvModel2Screen> {
                             Row(
                             children: [ 
                               // Nom et prénom
-                             Flexible(
-                              child: Text(
-                                "ADÉLAÏDE SAINDON",
+                             Expanded(
+                    child: Column(
+                              // crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Flexible(
+                              // child:
+                               Text(
+                                nomComplet ,
                                 style: context.textTheme.titleLarge
-                              )
-                            ),
+                              ),
+                            // ),
+                              gapH6,
+                              Text(
+                                titre,
+                                textAlign: TextAlign.center,
+                                style: context.textTheme.titleMedium
+                                // ?.copyWith(color: context.colorScheme.error),
+                              ),
+                              ],
+                             ),
+                             ),
                                 gapW10,
                                  Parallelograme(
                                   width: 25,
@@ -156,22 +283,16 @@ class _CvModel2ScreenState extends State<CvModel2Screen> {
                               style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)
                             ),
                            traitNoir(),
-                           experienceItem(
-                                  "Titre de poste",
-                                  "Nom de la compagnie",
-                                  "2013",
-                                  '2015',
-                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                                ),
+                           ...experiences.map((experience){
+                            return  experienceItem(
+                                  experience.poste,
+                                  experience.employeur,
+                                  experience.dateDebut,
+                                  experience.dateFin,
+                                  experience.description
+                                );
+                           }).toList(),
 
-                           
-                            experienceItem(
-                              "Titre de poste",
-                              "Nom de la compagnie",
-                              "2015 ",
-                              '2018',
-                              "Mauris luctus lobortis diam.",
-                            ),
                             traitNoir(),  
                              Text(
                               "FORMATIONS",
@@ -179,23 +300,18 @@ class _CvModel2ScreenState extends State<CvModel2Screen> {
                             ), 
                             traitNoir(),
                             const SizedBox(height: 10),
-                            formationItem(
-                              'titre',
-                              "Université",
-                              'Douala',
-                              "2013",
-                              '2015',
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                            ),
-                            formationItem(
-                              'titre',
-                              "Université",
-                              'Douala',
-                              "2013",
-                              '2015',
-                              "Certificat de formation."
-                            ),
-                            const SizedBox(height: 20),
+                            
+                           ...formations.map((formation){
+                            return  formationItem(
+                                  formation.titre,
+                                  formation.etablissement,
+                                  formation.ville,
+                                  formation.dateDebut,
+                                  formation.dateFin,
+                                  formation.description
+                                );
+                           }).toList(),
+                           gapH18,
                            
                            traitNoir(),
                              Text(
@@ -203,14 +319,15 @@ class _CvModel2ScreenState extends State<CvModel2Screen> {
                               style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)
                             ),
                            traitNoir(),
-                           experienceItem(
-                                  "Poste",
-                                  "Emplyeur",
-                                  "2013",
-                                  '2015',
-                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                                ),
-
+                           ...stages.map((stage){
+                            return  experienceItem(
+                                  stage.poste,
+                                  stage.employeur,
+                                  stage.dateDebut,
+                                  stage.dateFin,
+                                  stage.description,
+                                );
+                           }).toList(),
                            
                           ],
                         ),
@@ -281,7 +398,7 @@ class _CvModel2ScreenState extends State<CvModel2Screen> {
                   ],
                 ),
               ),
-              gapH6,
+              gapH2,
               Text(
                 description,
                 style: context.textTheme.labelLarge,

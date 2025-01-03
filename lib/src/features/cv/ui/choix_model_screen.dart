@@ -51,10 +51,10 @@ class _ChoixModelScreenState extends State<ChoixModelScreen> {
               // Conteneur pour afficher chaque image
               Container(
                 width: double.infinity, // Occupe toute la largeur de l'écran
-                height: 400, // Hauteur fixe pour l'image
+                height: 600, // Hauteur fixe pour l'image
                 child: Image.asset(
                   images[index], // Chemin de l'image depuis le tableau
-                  // fit: BoxFit.cover, // Ajuste l'image pour couvrir tout l'espace
+                  fit: BoxFit.cover, // Ajuste l'image pour couvrir tout l'espace
                 ),
               ),
              gapH10, // Espacement entre l'image et le bouton
@@ -63,15 +63,11 @@ class _ChoixModelScreenState extends State<ChoixModelScreen> {
                 child: OutlinedButton.icon(
                   onPressed: () {
                     _saveChoiseModel(index+1);
-                    // Action du bouton
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Image ${index + 1} choisie')),
-                    );
                     context.pushRoute(CvBuilderRoute());
                   },
                   icon: Icon(Icons.check),
                   label: Text('Choisir'),
-                ),
+                ), 
               ),
               SizedBox(height: 16), // Espacement entre les éléments
             ],

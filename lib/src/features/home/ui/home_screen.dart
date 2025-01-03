@@ -12,6 +12,7 @@ import 'package:millearnia/src/shared/components/home_components/course_continue
 import 'package:millearnia/src/shared/components/onboarding/onboarding_item.dart';
 import 'package:millearnia/src/shared/components/onboarding/page_indicators.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -22,7 +23,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  
+    
+  String nom='';
+  Future<void> fetchModel() async {
+  final prefs = await SharedPreferences.getInstance();
+  nom = prefs.getString('name')!;
+
+}
     final TextEditingController _searshController = TextEditingController();
      final List<Map<String, String>> categories = [
     {'img': 'assets/images/art.png', 'title': 'Art'},
@@ -78,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${I18n.of(context).hi}Samuel',
+                '${I18n.of(context).hi} $nom',
                 style: context.textTheme.bodyLarge?.copyWith(color:context.colorScheme.onPrimary)
               ),
               Container(

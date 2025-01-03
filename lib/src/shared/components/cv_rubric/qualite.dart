@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
+import 'package:millearnia/src/features/cv/models/qualites.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,7 +13,7 @@ class Qualite extends StatefulWidget {
 }
 
 class _QualiteState extends State<Qualite> {
-  final List<Map<String, String>> _qualiteList = [];
+  final List<Qualites> _qualiteList = [];
   final TextEditingController _qualiteControllers = TextEditingController();
   int? _editingIndex;
   bool _showForm = false;
@@ -24,20 +25,21 @@ class _QualiteState extends State<Qualite> {
 
   Future<void> _loadFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    // await prefs.remove('qualiteList');
     List<String>? savedqualites = prefs.getStringList('qualiteList');
     if (savedqualites != null) {
       setState(() {
         _qualiteList.addAll(
-          savedqualites.map((e) => Map<String, String>.from(jsonDecode(e))).toList(),
+          savedqualites.map((e) => Qualites.fromJson(jsonDecode(e))).toList(),
         );
       });
     }
   }
 
   void _savequalite() {
-    final newqualite = {
-      'qualite': _qualiteControllers.text,
-    };
+    final newqualite = Qualites(
+      qualite: _qualiteControllers.text,
+    );
 
     setState(() {
       if (_editingIndex != null) {
@@ -67,7 +69,7 @@ class _QualiteState extends State<Qualite> {
   void _editqualite(int index) {
     setState(() {
       _editingIndex = index;
-      _qualiteControllers.text = _qualiteList[index]['qualite'] ?? '';
+      _qualiteControllers.text = _qualiteList[index].qualite;
       _showForm = true; // Affiche le formulaire lors de la modification
     });
   }
@@ -95,7 +97,7 @@ class _QualiteState extends State<Qualite> {
           return Card(
             margin: EdgeInsets.symmetric(vertical: 8),
             child: FormationCard(
-              title: qualite['qualite'] ?? '',
+              title: qualite.qualite,
               edit: () => _editqualite(index),
             ),
           );

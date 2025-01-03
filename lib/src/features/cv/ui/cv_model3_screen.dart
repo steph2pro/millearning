@@ -4,13 +4,24 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
 import 'package:millearnia/src/core/theme/dimens.dart';
+import 'package:millearnia/src/features/cv/logic/fetch_methodes.dart';
+import 'package:millearnia/src/features/cv/models/activite.dart';
+import 'package:millearnia/src/features/cv/models/certificat.dart';
+import 'package:millearnia/src/features/cv/models/competences.dart';
+import 'package:millearnia/src/features/cv/models/experience.dart';
+import 'package:millearnia/src/features/cv/models/formation.dart';
+import 'package:millearnia/src/features/cv/models/langues.dart';
+import 'package:millearnia/src/features/cv/models/loisir.dart';
+import 'package:millearnia/src/features/cv/models/qualites.dart';
+import 'package:millearnia/src/features/cv/models/realisations.dart';
+import 'package:millearnia/src/features/cv/models/references.dart';
+import 'package:millearnia/src/features/cv/models/stage.dart';
 import 'package:millearnia/src/shared/components/forme/niveau_indicateur.dart';
 import 'package:millearnia/src/shared/components/forme/parallelograme.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
-
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:printing/printing.dart';
+import 'dart:convert';
+import 'dart:typed_data';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
 class CvModel3Screen extends StatefulWidget {
@@ -21,13 +32,137 @@ class CvModel3Screen extends StatefulWidget {
 }
 
 class _CvModel3ScreenState extends State<CvModel3Screen> {
+  String nomComplet = '';
+  String titre = '';
+  String email = '';
+  String telephone = '';
+  String address = '';
+  String ville = '';
+  String lieuDeNaissance = '';
+  String permisDeConduire = '';
+  String sexe = '';
+  String nationalite = '';
+  String etatCivil = '';
+  String siteInternet = '';
+  String linkedin = '';
+  String champPersonnalise = '';
+
+   Uint8List? _profileImageBytes;
+  String profil ='';
+   List<Formation>formations =[];
+   List<Experience>experiences =[];
+   List<Stage>stages =[];
+   List<Activite>activites =[];
+   List<Certificats>certificats =[];
+   List<Competences>competences =[];
+   List<Langues>langues =[];
+   List<References>references =[];
+   List<Realisations>realisations =[];
+   List<Qualites>qualites =[];
+   List<Loisir>loisirs =[];
+
+
+  Future<void> _loadImageFromSharedPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    final imageBase64 = prefs.getString('profileImage');
+    if (imageBase64 != null) {
+      setState(() {
+        _profileImageBytes = base64Decode(imageBase64);
+      });
+    }
+  }
+  Future<void> fetchInfosPersonels() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  nomComplet = prefs.getString('Nom complet') ?? '';
+  titre = prefs.getString('titre') ?? '';
+  email = prefs.getString('email') ?? '';
+  telephone = prefs.getString('telephone') ?? '';
+  address = prefs.getString('address') ?? '';
+  ville = prefs.getString('ville') ?? '';
+  lieuDeNaissance = prefs.getString('Lieu de naissance') ?? '';
+  permisDeConduire = prefs.getString('Permis de conduire') ?? '';
+  sexe = prefs.getString('Sexe') ?? '';
+  nationalite = prefs.getString('nationalite') ?? '';
+  etatCivil = prefs.getString('Etat civil') ?? '';
+  siteInternet = prefs.getString('Site internet') ?? '';
+  linkedin = prefs.getString('linkedin') ?? '';
+  champPersonnalise = prefs.getString('Champ personalise') ?? '';
+}
+Future<void> fetchProfil() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  profil = prefs.getString('profileDescription') ?? '';
+}
+
+Future<void> loadFormations() async {
+  formations = await fetchFormation();
+}
+Future<void> loadExperiences() async {
+  experiences = await fetchExperience();
+}
+
+
+Future<void> loadStages() async {
+  stages = await fetchStage();
+}
+Future<void> loadActivites() async {
+  activites = await fetchActivite();
+}
+
+Future<void> loadCertificatss() async {
+  certificats = await fetchCertificats();
+}
+
+
+Future<void> loadCompetences() async {
+  competences = await fetchCompetences();
+}
+
+Future<void> loadLangues() async {
+  langues = await fetchLangues();
+}
+
+Future<void> loadReferences() async {
+  references = await fetchReferences();
+}
+
+Future<void> loadRealisations() async {
+  realisations = await fetchRealisations();
+}
+Future<void> loadQualites() async {
+  qualites = await fetchQualites();
+  print(qualites);
+}
+
+Future<void> loadLoisir() async {
+  loisirs = await fetchLoisir();
+}
+  @override
+  void initState() {
+    super.initState();
+    _loadImageFromSharedPreferences();
+    fetchInfosPersonels();
+    fetchProfil();
+    loadFormations();
+    loadExperiences();
+    loadStages();
+    loadActivites();
+    loadCertificatss();
+    loadCompetences();
+    loadLangues();
+    loadReferences();
+    loadRealisations();
+    loadQualites();
+    loadLoisir();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(                      
       appBar: AppBar(                      
         title: Text(                       
-         'model 3',
+         'CV de $nomComplet',
           style: context.textTheme.titleLarge,
         ),
         centerTitle: true,
@@ -59,27 +194,43 @@ class _CvModel3ScreenState extends State<CvModel3Screen> {
                         width: 4, // Épaisseur de la bordure
                       ),
                     ),
-                    child: CircleAvatar(
-                      radius: 50,
-                      backgroundImage: AssetImage('assets/images/profile1.png'), // Remplacez par votre image
+                    child: ClipOval(
+                      child: _profileImageBytes != null
+                          ? Image.memory(
+                              _profileImageBytes!,
+                              fit: BoxFit.cover, // L'image occupe entièrement le conteneur
+                              width: 100,
+                              height: 100,
+                            )
+                          : Container(
+                              color: context.colorScheme.onPrimary,
+                              child: Icon(
+                                Icons.person,
+                                size: 50,
+                                color: context.colorScheme.tertiary,
+                              ),
+                            ),
                     ),
                   ),
 
                     const SizedBox(width: 15),
+                    Expanded(
+                      child: 
                     // Name and Title
                     Column(
-                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children:  [
                         Text(
-                          'stephane ch kamga2', 
+                          nomComplet, 
                           style: context.textTheme.titleLarge?.copyWith(color: context.colorScheme.onPrimary)
                         ),
                         Text(
-                          'dev mobile',
+                          titre,
                            style: context.textTheme.titleMedium?.copyWith(color: context.colorScheme.onPrimary),
-                           textAlign: TextAlign.center,
+                           
                         ),
                       ],
+                    ),
                     ),
                   ],
                 ),
@@ -101,46 +252,74 @@ class _CvModel3ScreenState extends State<CvModel3Screen> {
                           // Personal Information
                           sectionTitle('INFORMATIONS PERSONNELLES'),
                           
-                          contactRow(Icons.person, "stephane ch kamga2"),
-                          contactRow(Icons.email, "email@exemple.com"),
-                          contactRow(Icons.phone, '677778893'),
-                          contactRow(Icons.home, "Douala, Bafoussam"),
-                          contactRow(Icons.date_range, "22 février 2002"),
+                          contactRow(Icons.person, nomComplet),
+                          contactRow(Icons.email, email),
+                          contactRow(Icons.phone, telephone),
+                          contactRow(Icons.home, '$ville ,$address'),
+                          if(lieuDeNaissance !='')
+                          contactRow(Icons.date_range, lieuDeNaissance),
 
                           // Skills
                           sectionTitle('COMPETENCES'),
-                          Column(
-                            children: [
-                          infoText('Développement web'),
-                          NiveauIndicateur(level: 'Débutant'),
-                          gapH6,
-                          infoText('Gestion de projet'),
-                          NiveauIndicateur(level: 'Très Bien')
-
-                            ],
-                          ),
+                          ...competences.map((competence){
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                              infoText(competence.competence),
+                              NiveauIndicateur(level: competence.niveau),
+                              gapH6,
+                                ],
+                              );
+                          }).toList(),
+                          
 
                           // Languages
                           sectionTitle('LANGUAGES'),
-                          infoText('Français'),
-                          NiveauIndicateur(level: 'Débutant'),
-                          gapH6,
-                          infoText('Anglais'),
-                          NiveauIndicateur(level: 'Très Bien'),
-                          gapH6,
+                           ...langues.map((langue){
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                              infoText(langue.langue),
+                              NiveauIndicateur(level: langue.niveau),
+                              gapH6,
+                                ],
+                              );
+                          }).toList(),
                           
 
                           // Interests
+                        if(loisirs.isNotEmpty)...[
                           sectionTitle('CENTRE D\'INTERET'),
-                          contactRow(Icons.square,"lecture"),
-                          contactRow(Icons.square,"Sport"),
+                          ...loisirs.map((loisir){
+                            return contactRow(
+                              Icons.square,
+                              loisir.loisir
+                              );
+                          }).toList(), 
+                        ],
 
-                           sectionTitle('QUALITES'),
-                          contactRow(Icons.square,"Ponctualite"),
-                          contactRow(Icons.square,"Taffeur"),
-
+                          if(qualites.isNotEmpty)...[
+                            sectionTitle('QUALITES'),
+                            ...qualites.map((qualite){
+                              return contactRow(
+                                Icons.check,
+                                qualite.qualite
+                                );
+                            }).toList(),
+                          ],
+                          if(references.isNotEmpty)...[
                            sectionTitle('REFERENCES'),
-                           ReferenceItem("Mentor", "StephCoop", "Bandjoun", "+237 671 50 62 17", "steph.contact@gmail.com"),
+                           ...references.map((reference){
+                            return ReferenceItem(
+                              reference.nom, 
+                              reference.entreprise, 
+                              reference.ville,
+                               reference.telephone, 
+                               reference.email
+                               );
+                           }).toList(), 
+                          ],
+                           
                           
                         ],
                       ),
@@ -161,35 +340,84 @@ class _CvModel3ScreenState extends State<CvModel3Screen> {
                           // Profile
                           sectionTitle('PROFIL'),
                            Text(
-                            'Fort d\'une solide compréhension technique et pratique, je m\'efforce d\'apporter une perspective unique et innovante à tout projet auquel je participe.',
+                           profil,
                             style: context.textTheme.labelLarge,
                             textAlign: TextAlign.justify
                           ),
                           // Education
                           sectionTitle('FORMATIONS'),
-                          ContentItem('Développement mobile', ' Insam', 'Bafoussam','mai 2021' ,'juil. 2022','description'),
-                          ContentItem('Développement web', 'Digital Solution', 'Bafoussam', 'juin 2019',  'juil. 2022','description'),
-                          
+                          ...formations.map((formation) {
+                            return ContentItem(
+                              formation.titre,
+                              formation.etablissement,
+                              formation.ville,
+                              formation.dateDebut,
+                              formation.dateFin,
+                              formation.description,
+                            );
+                          }).toList(),
 
                           // Professional Experience
                           sectionTitle('EXPERIENCE PROFESSIONELLES'),
-                          ContentItem('Développement web', 'Digital Solution', 'bandjoun', 'juin 2019',  'juil. 2022','description'),
-                          ContentItem('Développement web', 'Digital Solution', 'bandjoun', 'juin 2019',  'juil. 2022','description'),
-
+                          ...experiences.map((experience) {
+                            return ContentItem(
+                              experience.poste,
+                              experience.employeur,
+                              experience.ville,
+                              experience.dateDebut,
+                              experience.dateFin,
+                              experience.description,
+                            );
+                          }).toList(),
                           // Internships
                           sectionTitle('STAGES'),
-                          ContentItem('Programmation web', 'Digital Solution', 'bandjoun', 'juin 2019',  'juil. 2022','description'),
-                          ContentItem('Programmation web', 'Digital Solution', 'bandjoun', 'juin 2019',  'juil. 2022','description'),
-
+                          ...stages.map((stage) {
+                            return ContentItem(
+                              stage.poste,
+                              stage.employeur,
+                              stage.ville,
+                              stage.dateDebut,
+                              stage.dateFin,
+                              stage.description,
+                            );
+                          }).toList(),
                           // Certificates
-                          sectionTitle('CERTIFICATS'),
-                          CertifItem('certificat', 'periode', 'description'),
-                          CertifItem('certificat', 'periode', 'description'),
+                          if(certificats.isNotEmpty)...[
+                            sectionTitle('CERTIFICATS'),
+                            ...certificats.map((certificat){
+                              return CertifItem(
+                                certificat.certificat, 
+                                certificat.periode, 
+                                certificat.description
+                                );
+                            }).toList(),
+                          ],
+                          
                           // Extracurricular Activities
+                        if(activites.isNotEmpty)...[
                           sectionTitle('ACTIVITES EXTRA-SCOLAIRE'),
-                           ContentItem('Formateur web', 'StephCoop', 'bandjoun', 'juin 2019',  'juil. 2022','description'),
-                           ContentItem('Formateur web', 'StephCoop', 'bandjoun', 'juin 2019',  'juil. 2022','description'),
+                          ...activites.map((activite) {
+                            return ContentItem(
+                              activite.poste,
+                              activite.employeur,
+                              activite.ville,
+                              activite.dateDebut,
+                              activite.dateFin,
+                              activite.description,
+                            );
+                          }).toList(), 
+                        ],
 
+                          
+                          if(realisations.isNotEmpty)...[
+                            sectionTitle('REALISATIONS'),
+                            ...realisations.map((realisation){
+                              return contactRow(
+                                Icons.check,
+                                realisation.realisation
+                                );
+                            }).toList(),
+                          ],
                         ],
                       ),
                       )
@@ -317,7 +545,7 @@ class _CvModel3ScreenState extends State<CvModel3Screen> {
                     ),
                     TextSpan(
                       text: '$Numero \n $Adresse',
-                      style: context.textTheme.labelLarge?.copyWith(color:context.colorScheme.primary),
+                      style: context.textTheme.labelLarge,
                     ),
                   ],
                 ),

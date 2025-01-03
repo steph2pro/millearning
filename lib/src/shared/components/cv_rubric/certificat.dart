@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
-import 'package:millearnia/src/shared/components/validator/input_validator.dart';
+import 'package:millearnia/src/features/cv/models/certificat.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:millearnia/src/shared/components/cv_rubric/formation_card.dart';
@@ -13,7 +13,7 @@ class Certificat extends StatefulWidget {
 }
 
 class _CertificatState extends State<Certificat> {
-  final List<Map<String, String>> _certificatList = [];
+  final List<Certificats>_certificatList = [];
   final Map<String, TextEditingController> _controllers = {
     'Certificat': TextEditingController(),
     'Période': TextEditingController(),
@@ -36,18 +36,18 @@ class _CertificatState extends State<Certificat> {
     if (savedcertificats != null) {
       setState(() {
         _certificatList.addAll(
-          savedcertificats.map((e) => Map<String, String>.from(jsonDecode(e))).toList(),
+          savedcertificats.map((e) => Certificats.fromJson(jsonDecode(e))).toList()
         );
       });
     }
   }
 
   void _savecertificat() {
-    final newcertificat = {
-      'Certificat': _controllers['Certificat']!.text,
-      'Période': _controllers['Période']!.text,
-      'Description': _controllers['Description']!.text,
-    };
+    final newcertificat = Certificats(
+      certificat:_controllers['Certificat']!.text , 
+      periode:  _controllers['Période']!.text, 
+      description: _controllers['Description']!.text
+      );
 
     setState(() {
       if (_editingIndex != null) {
@@ -75,9 +75,10 @@ class _CertificatState extends State<Certificat> {
   void _editcertificat(int index) {
     setState(() {
       _editingIndex = index;
-      _certificatList[index].forEach((key, value) {
-        _controllers[key]?.text = value;
-      });
+     final certificat = _certificatList[index];
+    _controllers['Certificat']?.text = certificat.certificat;
+    _controllers['Période']?.text = certificat.periode;
+    _controllers['Description']?.text = certificat.description;
       _showForm = true; // Affiche le formulaire lors de la modification
     });
   }
@@ -119,7 +120,7 @@ Future<void> _pickDate(String fieldKey) async {
           return Card(
             margin: EdgeInsets.symmetric(vertical: 8),
             child: FormationCard(
-              title: certificat['Certificat'] ?? '',
+              title: certificat.certificat,
               edit: () => _editcertificat(index),
             ),
           );

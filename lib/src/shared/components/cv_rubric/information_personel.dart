@@ -16,23 +16,23 @@ class InformationPersonel extends StatefulWidget {
 
 class _InformationPersonelState extends State<InformationPersonel> {
   final Map<String, TextEditingController> _controllers = {
-    'Complet Name': TextEditingController(),
-    'title': TextEditingController(),
+    'Nom complet': TextEditingController(),
+    'titre': TextEditingController(),
     'email': TextEditingController(),
-    'phone': TextEditingController(),
+    'telephone': TextEditingController(),
     'address': TextEditingController(),
-    'city': TextEditingController(),
+    'ville': TextEditingController(),
   };
 
   final List<String> _optionalFields = [
-    'birthPlace',
-    'driverLicense',
-    'gender',
-    'nationality',
-    'maritalStatus',
-    'website',
+    'Lieu de naissance',
+    'Permis de conduire',
+    'Sexe',
+    'nationalite',
+    'Etat civil',
+    'Site inernet',
     'linkedin',
-    'customField',
+    'Champ personalise',
   ];
   final Map<String, bool> _optionalFieldsVisible = {};
 

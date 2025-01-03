@@ -143,6 +143,25 @@ class CvModelRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [HomePageScreen]
+class HomePageRoute extends PageRouteInfo<void> {
+  const HomePageRoute({List<PageRouteInfo>? children})
+      : super(
+          HomePageRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomePageRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const HomePageScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [HomeScreen]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
+import 'package:millearnia/src/features/cv/models/stage.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
 import 'package:millearnia/src/shared/components/validator/input_validator.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
@@ -11,9 +12,9 @@ class StageProfessionel extends StatefulWidget {
   @override
   _StageProfessionelState createState() => _StageProfessionelState();
 }
-
+ 
 class _StageProfessionelState extends State<StageProfessionel> {
-  final List<Map<String, String>> _stageList = [];
+  final List<Stage> _stageList = [];
   final Map<String, TextEditingController> _controllers = {
     'Poste': TextEditingController(),
     'Employeur': TextEditingController(),
@@ -33,25 +34,26 @@ class _StageProfessionelState extends State<StageProfessionel> {
 
   Future<void> _loadFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    // await prefs.remove('stageList');
     List<String>? savedstages = prefs.getStringList('stageList');
     if (savedstages != null) {
       setState(() {
         _stageList.addAll(
-          savedstages.map((e) => Map<String, String>.from(jsonDecode(e))).toList(),
+          savedstages.map((e) =>  Stage.fromJson(jsonDecode(e))).toList()
         );
       });
     }
   }
 
   void _savestage() {
-    final newstage = {
-      'Poste': _controllers['Poste']!.text,
-      'Employeur': _controllers['Employeur']!.text,
-      'Ville': _controllers['Ville']!.text,
-      'Date de debut': _controllers['Date de debut']!.text,
-      'Date de fin': _controllers['Date de fin']!.text,
-      'Description': _controllers['Description']!.text,
-    };
+    final newstage = Stage(
+      poste:  _controllers['Poste']!.text, 
+      employeur: _controllers['Employeur']!.text,
+       ville:_controllers['Ville']!.text, 
+       dateDebut:  _controllers['Date de debut']!.text, 
+       dateFin:  _controllers['Date de fin']!.text, 
+       description: _controllers['Description']!.text
+       );
 
     setState(() {
       if (_editingIndex != null) {
@@ -93,9 +95,13 @@ class _StageProfessionelState extends State<StageProfessionel> {
   void _editstage(int index) {
     setState(() {
       _editingIndex = index;
-      _stageList[index].forEach((key, value) {
-        _controllers[key]?.text = value;
-      });
+    final stage = _stageList[index];
+    _controllers['Poste']?.text = stage.poste;
+    _controllers['Employeur']?.text = stage.employeur;
+    _controllers['Ville']?.text = stage.ville;
+    _controllers['Date debut']?.text = stage.dateDebut;
+    _controllers['Date fin']?.text = stage.dateFin;
+    _controllers['Description']?.text = stage.description;
       _showForm = true; // Affiche le formulaire lors de la modification
     });
   }
@@ -123,9 +129,9 @@ class _StageProfessionelState extends State<StageProfessionel> {
           return Card(
             margin: EdgeInsets.symmetric(vertical: 8),
             child: FormationCard(
-              title: stage['Poste'] ?? '',
-              etablissement: stage['Employeur'] ?? '',
-              ville: stage['Ville'] ?? '',
+              title: stage.poste,
+              etablissement: stage.employeur,
+              ville: stage.ville,
               edit: () => _editstage(index),
             ),
           );

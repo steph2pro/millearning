@@ -17,6 +17,7 @@ import 'package:millearnia/src/shared/components/cv_rubric/realisation.dart';
 import 'package:millearnia/src/shared/components/cv_rubric/reference.dart';
 import 'package:millearnia/src/shared/components/cv_rubric/stage_professionel.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
 class CvBuilderScreen extends StatefulWidget {
@@ -28,7 +29,14 @@ class CvBuilderScreen extends StatefulWidget {
 
 class _CvBuilderScreenState extends State<CvBuilderScreen> {
   int currentStep = 0;
+  int model=3;
+  String nom='';
+  Future<void> fetchModel() async {
+  final prefs = await SharedPreferences.getInstance();
+  model = prefs.getInt('model')!;
+  nom = prefs.getString('name')!;
 
+}
   final List<Widget> steps = [
     InformationPersonel(),
     ProfilePage(),
@@ -94,13 +102,18 @@ class _CvBuilderScreenState extends State<CvBuilderScreen> {
       });
     }
   }
+   @override
+  void initState() {
+    super.initState();
+    fetchModel();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'cv de ...',
+          'cv de $nom',
           style: context.textTheme.titleLarge,
         ),
         centerTitle: true,
@@ -162,7 +175,15 @@ class _CvBuilderScreenState extends State<CvBuilderScreen> {
                   child:ElevatedButton.icon(
                   onPressed: () {
                     print('Création du CV terminée');
+                    if(model==1){
                     context.pushRoute(CvModelRoute());
+
+                    }else if(model==2){
+                    context.pushRoute(CvModel2Route());
+
+                    }else if(model ==3){
+                    context.pushRoute(CvModel3Route());
+                    }
                   },
                   icon: Icon(Icons.check),
                   label: Text('Terminer',style:TextStyle(fontSize:12)),

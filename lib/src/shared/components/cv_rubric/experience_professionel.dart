@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
+import 'package:millearnia/src/features/cv/models/experience.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
 import 'package:millearnia/src/shared/components/validator/input_validator.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
@@ -13,7 +14,7 @@ class ExperienceProfessionel extends StatefulWidget {
 }
 
 class _ExperienceProfessionelState extends State<ExperienceProfessionel> {
-  final List<Map<String, String>> _experienceList = [];
+  final List<Experience> _experienceList = [];
   final Map<String, TextEditingController> _controllers = {
     'Poste': TextEditingController(),
     'Employeur': TextEditingController(),
@@ -33,25 +34,26 @@ class _ExperienceProfessionelState extends State<ExperienceProfessionel> {
 
   Future<void> _loadFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    // await prefs.remove('experienceList');
     List<String>? savedExperiences = prefs.getStringList('experienceList');
     if (savedExperiences != null) {
       setState(() {
         _experienceList.addAll(
-          savedExperiences.map((e) => Map<String, String>.from(jsonDecode(e))).toList(),
+          savedExperiences.map((e) => Experience.fromJson(jsonDecode(e))).toList(),
         );
       });
     }
   }
 
   void _saveexperience() {
-    final newexperience = {
-      'Poste': _controllers['Poste']!.text,
-      'Employeur': _controllers['Employeur']!.text,
-      'Ville': _controllers['Ville']!.text,
-      'Date de debut': _controllers['Date de debut']!.text,
-      'Date de fin': _controllers['Date de fin']!.text,
-      'Description': _controllers['Description']!.text,
-    };
+    final newexperience = Experience(
+      poste:  _controllers['Poste']!.text, 
+      employeur: _controllers['Employeur']!.text,
+       ville:_controllers['Ville']!.text, 
+       dateDebut:  _controllers['Date de debut']!.text, 
+       dateFin:  _controllers['Date de fin']!.text, 
+       description: _controllers['Description']!.text
+       );
 
     setState(() {
       if (_editingIndex != null) {
@@ -71,7 +73,7 @@ class _ExperienceProfessionelState extends State<ExperienceProfessionel> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setStringList(
       'experienceList',
-      _experienceList.map((e) => jsonEncode(e)).toList(),
+      _experienceList.map((e) => jsonEncode(e.toJson())).toList(),
     );
   }
 
@@ -93,9 +95,13 @@ class _ExperienceProfessionelState extends State<ExperienceProfessionel> {
   void _editexperience(int index) {
     setState(() {
       _editingIndex = index;
-      _experienceList[index].forEach((key, value) {
-        _controllers[key]?.text = value;
-      });
+    final experience = _experienceList[index];
+    _controllers['Poste']?.text = experience.poste;
+    _controllers['Employeur']?.text = experience.employeur;
+    _controllers['Ville']?.text = experience.ville;
+    _controllers['Date debut']?.text = experience.dateDebut;
+    _controllers['Date fin']?.text = experience.dateFin;
+    _controllers['Description']?.text = experience.description;
       _showForm = true; // Affiche le formulaire lors de la modification
     });
   }
@@ -123,9 +129,9 @@ class _ExperienceProfessionelState extends State<ExperienceProfessionel> {
           return Card(
             margin: EdgeInsets.symmetric(vertical: 8),
             child: FormationCard(
-              title: experience['Poste'] ?? '',
-              etablissement: experience['Employeur'] ?? '',
-              ville: experience['Ville'] ?? '',
+              title: experience.poste,
+              etablissement: experience.employeur,
+              ville: experience.ville,
               edit: () => _editexperience(index),
             ),
           );

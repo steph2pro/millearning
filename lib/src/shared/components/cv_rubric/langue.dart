@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
+import 'package:millearnia/src/features/cv/models/langues.dart';
 import 'package:millearnia/src/shared/components/cv_rubric/niveau_indicateur.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
 import 'package:millearnia/src/shared/components/validator/input_validator.dart';
@@ -14,7 +15,7 @@ class Langue extends StatefulWidget {
 }
 
 class _LangueState extends State<Langue> {
-  final List<Map<String, String>> _langueList = [];
+  final List<Langues> _langueList = [];
   final TextEditingController _langueControllers = TextEditingController();
   int? _editingIndex;
   bool _showForm = false;
@@ -27,21 +28,22 @@ class _LangueState extends State<Langue> {
 
   Future<void> _loadFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    // await prefs.remove('langueList');
     List<String>? savedlangues = prefs.getStringList('langueList');
     if (savedlangues != null) {
       setState(() {
         _langueList.addAll(
-          savedlangues.map((e) => Map<String, String>.from(jsonDecode(e))).toList(),
+          savedlangues.map((e) => Langues.fromJson(jsonDecode(e))).toList(),
         );
       });
     }
   }
 
   void _savelangue() {
-    final newlangue = {
-      'langue': _langueControllers.text,
-      'niveau': _selectedNiveau,
-    };
+    final newlangue = Langues(
+      langue: _langueControllers.text,
+      niveau: _selectedNiveau);
+    
 
     setState(() {
       if (_editingIndex != null) {
@@ -71,8 +73,9 @@ class _LangueState extends State<Langue> {
   void _editlangue(int index) {
     setState(() {
       _editingIndex = index;
-      _langueControllers.text = _langueList[index]['langue'] ?? '';
-      _selectedNiveau = _langueList[index]['niveau'] ?? "Intermédiaire";
+      final langue  = _langueList[index];
+      _langueControllers.text =langue.langue;
+      _selectedNiveau = langue.niveau;
       _showForm = true; // Affiche le formulaire lors de la modification
     });
   }
@@ -100,8 +103,8 @@ class _LangueState extends State<Langue> {
           return Card(
             margin: EdgeInsets.symmetric(vertical: 8),
             child: FormationCard(
-              title: langue['langue'] ?? '',
-              etablissement:  langue['niveau'] ?? '',
+              title: langue.langue,
+              etablissement:  langue.niveau,
               edit: () => _editlangue(index),
             ),
           );

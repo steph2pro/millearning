@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
+import 'package:millearnia/src/features/cv/models/competences.dart';
 import 'package:millearnia/src/shared/components/cv_rubric/niveau_indicateur.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
 import 'package:millearnia/src/shared/components/validator/input_validator.dart';
@@ -14,7 +15,7 @@ class Competence extends StatefulWidget {
 }
 
 class _CompetenceState extends State<Competence> {
-  final List<Map<String, String>> _competenceList = [];
+  final List<Competences> _competenceList = [];
   final TextEditingController _competenceControllers = TextEditingController();
   int? _editingIndex;
   bool _showForm = false;
@@ -27,21 +28,23 @@ class _CompetenceState extends State<Competence> {
 
   Future<void> _loadFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    // await prefs.remove('competenceList');
+
     List<String>? savedcompetences = prefs.getStringList('competenceList');
     if (savedcompetences != null) {
       setState(() {
         _competenceList.addAll(
-          savedcompetences.map((e) => Map<String, String>.from(jsonDecode(e))).toList(),
+          savedcompetences.map((e) => Competences.fromJson(jsonDecode(e))).toList(),
         );
       });
     }
   }
 
   void _savecompetence() {
-    final newcompetence = {
-      'competence': _competenceControllers.text,
-      'niveau': _selectedNiveau,
-    };
+    final newcompetence = Competences(
+      competence: _competenceControllers.text, 
+      niveau: _selectedNiveau);
+    
 
     setState(() {
       if (_editingIndex != null) {
@@ -71,8 +74,9 @@ class _CompetenceState extends State<Competence> {
   void _editcompetence(int index) {
     setState(() {
       _editingIndex = index;
-      _competenceControllers.text = _competenceList[index]['competence'] ?? '';
-      _selectedNiveau = _competenceList[index]['niveau'] ?? "Intermédiaire";
+    final competence = _competenceList[index];
+      _competenceControllers.text = competence.competence;
+      _selectedNiveau = competence.niveau;
       _showForm = true; // Affiche le formulaire lors de la modification
     });
   }
@@ -100,8 +104,8 @@ class _CompetenceState extends State<Competence> {
           return Card(
             margin: EdgeInsets.symmetric(vertical: 8),
             child: FormationCard(
-              title: competence['competence'] ?? '',
-              etablissement:  competence['niveau'] ?? '',
+              title: competence.competence,
+              etablissement:  competence.niveau,
               edit: () => _editcompetence(index),
             ),
           );

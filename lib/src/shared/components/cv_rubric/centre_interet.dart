@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
+import 'package:millearnia/src/features/cv/models/loisir.dart';
 import 'package:millearnia/src/shared/components/cv_rubric/niveau_indicateur.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
 import 'package:millearnia/src/shared/components/validator/input_validator.dart';
@@ -14,7 +15,7 @@ class CentreInteret extends StatefulWidget {
 }
 
 class _CentreInteretState extends State<CentreInteret> {
-  final List<Map<String, String>> _centreInteretList = [];
+  final List<Loisir> _centreInteretList = [];
   final TextEditingController _centreInteretControllers = TextEditingController();
   int? _editingIndex;
   bool _showForm = false;
@@ -26,20 +27,21 @@ class _CentreInteretState extends State<CentreInteret> {
 
   Future<void> _loadFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    // await prefs.remove('centreInteretList');
     List<String>? savedcentreInterets = prefs.getStringList('centreInteretList');
     if (savedcentreInterets != null) {
       setState(() {
         _centreInteretList.addAll(
-          savedcentreInterets.map((e) => Map<String, String>.from(jsonDecode(e))).toList(),
+          savedcentreInterets.map((e) => Loisir.fromJson(jsonDecode(e))).toList(),
         );
       });
     }
   }
 
   void _savecentreInteret() {
-    final newcentreInteret = {
-      'centreInteret': _centreInteretControllers.text,
-    };
+    final newcentreInteret = Loisir(
+      loisir: _centreInteretControllers.text,
+    );
 
     setState(() {
       if (_editingIndex != null) {
@@ -69,7 +71,7 @@ class _CentreInteretState extends State<CentreInteret> {
   void _editcentreInteret(int index) {
     setState(() {
       _editingIndex = index;
-      _centreInteretControllers.text = _centreInteretList[index]['centreInteret'] ?? '';
+      _centreInteretControllers.text = _centreInteretList[index].loisir;
       _showForm = true; // Affiche le formulaire lors de la modification
     });
   }
@@ -97,7 +99,7 @@ class _CentreInteretState extends State<CentreInteret> {
           return Card(
             margin: EdgeInsets.symmetric(vertical: 8),
             child: FormationCard(
-              title: centreInteret['centreInteret'] ?? '',
+              title: centreInteret.loisir,
               edit: () => _editcentreInteret(index),
             ),
           );

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
+import 'package:millearnia/src/features/cv/models/activite.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
 import 'package:millearnia/src/shared/components/validator/input_validator.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
@@ -13,7 +14,7 @@ class ActiviteExtraScolaire extends StatefulWidget {
 }
 
 class _ActiviteExtraScolaireState extends State<ActiviteExtraScolaire> {
-  final List<Map<String, String>> _activiteList = [];
+  final List<Activite> _activiteList = [];
   final Map<String, TextEditingController> _controllers = {
     'Poste': TextEditingController(),
     'Employeur': TextEditingController(),
@@ -33,25 +34,26 @@ class _ActiviteExtraScolaireState extends State<ActiviteExtraScolaire> {
 
   Future<void> _loadFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    // await prefs.remove('activiteList');
     List<String>? savedactivites = prefs.getStringList('activiteList');
     if (savedactivites != null) {
       setState(() {
-        _activiteList.addAll(
-          savedactivites.map((e) => Map<String, String>.from(jsonDecode(e))).toList(),
+        _activiteList.addAll( 
+          savedactivites.map((e) => Activite.fromJson(jsonDecode(e))).toList(),
         );
       });
     }
   }
 
   void _saveactivite() {
-    final newactivite = {
-      'Poste': _controllers['Poste']!.text,
-      'Employeur': _controllers['Employeur']!.text,
-      'Ville': _controllers['Ville']!.text,
-      'Date de debut': _controllers['Date de debut']!.text,
-      'Date de fin': _controllers['Date de fin']!.text,
-      'Description': _controllers['Description']!.text,
-    };
+    final newactivite =  Activite(
+      poste:  _controllers['Poste']!.text, 
+      employeur: _controllers['Employeur']!.text,
+       ville:_controllers['Ville']!.text, 
+       dateDebut:  _controllers['Date de debut']!.text, 
+       dateFin:  _controllers['Date de fin']!.text, 
+       description: _controllers['Description']!.text
+       );
 
     setState(() {
       if (_editingIndex != null) {
@@ -93,9 +95,13 @@ class _ActiviteExtraScolaireState extends State<ActiviteExtraScolaire> {
   void _editactivite(int index) {
     setState(() {
       _editingIndex = index;
-      _activiteList[index].forEach((key, value) {
-        _controllers[key]?.text = value;
-      });
+     final activite = _activiteList[index];
+    _controllers['Poste']?.text = activite.poste;
+    _controllers['Employeur']?.text = activite.employeur;
+    _controllers['Ville']?.text = activite.ville;
+    _controllers['Date debut']?.text = activite.dateDebut;
+    _controllers['Date fin']?.text = activite.dateFin;
+    _controllers['Description']?.text = activite.description;
       _showForm = true; // Affiche le formulaire lors de la modification
     });
   }
@@ -123,9 +129,9 @@ class _ActiviteExtraScolaireState extends State<ActiviteExtraScolaire> {
           return Card(
             margin: EdgeInsets.symmetric(vertical: 8),
             child: FormationCard(
-              title: activite['Poste'] ?? '',
-              etablissement: activite['Employeur'] ?? '',
-              ville: activite['Ville'] ?? '',
+              title: activite.poste,
+              etablissement: activite.employeur,
+              ville: activite.ville,
               edit: () => _editactivite(index),
             ),
           );

@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
+import 'package:millearnia/src/features/cv/models/realisations.dart';
+import 'package:millearnia/src/features/cv/models/references.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,7 +14,7 @@ class Realisation extends StatefulWidget {
 }
 
 class _RealisationState extends State<Realisation> {
-  final List<Map<String, String>> _realisationList = [];
+  final List<Realisations> _realisationList = [];
   final TextEditingController _realisationControllers = TextEditingController();
   int? _editingIndex;
   bool _showForm = false;
@@ -24,20 +26,21 @@ class _RealisationState extends State<Realisation> {
 
   Future<void> _loadFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    // await prefs.remove('realisationList');
     List<String>? savedrealisations = prefs.getStringList('realisationList');
     if (savedrealisations != null) {
       setState(() {
         _realisationList.addAll(
-          savedrealisations.map((e) => Map<String, String>.from(jsonDecode(e))).toList(),
+          savedrealisations.map((e) => Realisations.fromJson(jsonDecode(e))).toList(),
         );
       });
     }
   }
 
   void _saverealisation() {
-    final newrealisation = {
-      'realisation': _realisationControllers.text,
-    };
+    final newrealisation = Realisations(
+      realisation: _realisationControllers.text,
+    );
 
     setState(() {
       if (_editingIndex != null) {
@@ -67,7 +70,7 @@ class _RealisationState extends State<Realisation> {
   void _editrealisation(int index) {
     setState(() {
       _editingIndex = index;
-      _realisationControllers.text = _realisationList[index]['realisation'] ?? '';
+      _realisationControllers.text = _realisationList[index].realisation;
       _showForm = true; // Affiche le formulaire lors de la modification
     });
   }
@@ -95,7 +98,7 @@ class _RealisationState extends State<Realisation> {
           return Card(
             margin: EdgeInsets.symmetric(vertical: 8),
             child: FormationCard(
-              title: realisation['realisation'] ?? '',
+              title: realisation.realisation,
               edit: () => _editrealisation(index),
             ),
           );

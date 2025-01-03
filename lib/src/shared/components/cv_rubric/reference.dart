@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
+import 'package:millearnia/src/features/cv/models/references.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
 import 'package:millearnia/src/shared/components/validator/input_validator.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
@@ -13,12 +14,12 @@ class Reference extends StatefulWidget {
 }
 
 class _ReferenceState extends State<Reference> {
-  final List<Map<String, String>> _referenceList = [];
+  final List<References> _referenceList = [];
   final Map<String, TextEditingController> _controllers = {
     'Nom': TextEditingController(),
     'Entreprise': TextEditingController(),
     'Ville': TextEditingController(),
-    'Numéro de téléphonet': TextEditingController(),
+    'Numéro de téléphone': TextEditingController(),
     'Adresse e-mail': TextEditingController(),
   };
   int? _editingIndex;
@@ -33,24 +34,25 @@ class _ReferenceState extends State<Reference> {
 
   Future<void> _loadFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    // await prefs.remove('referenceList');
     List<String>? savedreferences = prefs.getStringList('referenceList');
     if (savedreferences != null) {
       setState(() {
         _referenceList.addAll(
-          savedreferences.map((e) => Map<String, String>.from(jsonDecode(e))).toList(),
+          savedreferences.map((e) => References.fromJson(jsonDecode(e))).toList(),
         );
       });
     }
   }
 
   void _savereference() {
-    final newreference = {
-      'Nom': _controllers['Nom']!.text,
-      'Entreprise': _controllers['Entreprise']!.text,
-      'Ville': _controllers['Ville']!.text,
-      'Numéro de téléphonet': _controllers['Numero de téléphonet']!.text,
-      'Adresse e-mail': _controllers['Adresse e-mail']!.text,
-    };
+    final newreference = References(
+      nom: _controllers['Nom']!.text,
+      entreprise: _controllers['Entreprise']!.text,
+      ville: _controllers['Ville']!.text,
+      telephone: _controllers['Numéro de téléphone']!.text,
+      email: _controllers['Adresse e-mail']!.text,
+    );
 
     setState(() {
       if (_editingIndex != null) {
@@ -78,9 +80,12 @@ class _ReferenceState extends State<Reference> {
   void _editreference(int index) {
     setState(() {
       _editingIndex = index;
-      _referenceList[index].forEach((key, value) {
-        _controllers[key]?.text = value;
-      });
+     final reference = _referenceList[index];
+    _controllers['Nom']?.text = reference.nom;
+    _controllers['Entreprise']?.text = reference.entreprise;
+    _controllers['Ville']?.text = reference.ville;
+    _controllers['Numero de téléphone']?.text = reference.telephone;
+    _controllers['Adresse e-mail']?.text = reference.email;
       _showForm = true; // Affiche le formulaire lors de la modification
     });
   }
@@ -108,9 +113,9 @@ class _ReferenceState extends State<Reference> {
           return Card(
             margin: EdgeInsets.symmetric(vertical: 8),
             child: FormationCard(
-              title: reference['Nom'] ?? '',
-              etablissement: reference['Entreprise'] ?? '',
-              ville: reference['Ville'] ?? '',
+              title: reference.nom,
+              etablissement: reference.entreprise,
+              ville: reference.ville,
               edit: () => _editreference(index),
             ),
           );
