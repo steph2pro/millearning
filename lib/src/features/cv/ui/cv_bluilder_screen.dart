@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:millearnia/src/core/routing/app_router.dart';
@@ -19,6 +21,11 @@ import 'package:millearnia/src/shared/components/cv_rubric/stage_professionel.da
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
+import 'package:path_provider/path_provider.dart';
+
 @RoutePage()
 class CvBuilderScreen extends StatefulWidget {
   const CvBuilderScreen({super.key});
@@ -28,13 +35,37 @@ class CvBuilderScreen extends StatefulWidget {
 }
 
 class _CvBuilderScreenState extends State<CvBuilderScreen> {
+  
+  //gestion de pdf
+  Future<File> generatePdf() async {
+  final pdf = pw.Document();
+
+  pdf.addPage(
+    pw.Page(
+      build: (pw.Context context) => pw.Center(
+        child: pw.Text(
+          "Ceci est un exemple de page Flutter convertie en PDF.",
+          style: pw.TextStyle(fontSize: 18),
+        ),
+      ),
+    ),
+  );
+
+  // Enregistrer le PDF dans un fichier temporaire
+  final directory = await getTemporaryDirectory();
+  final file = File('${directory.path}/example.pdf');
+  await file.writeAsBytes(await pdf.save());
+  return file;
+}
+
   int currentStep = 0;
   int model=3;
   String nom='';
   Future<void> fetchModel() async {
   final prefs = await SharedPreferences.getInstance();
   model = prefs.getInt('model')!;
-  nom = prefs.getString('name')!;
+
+  nom = prefs.getString('name')?? '';
 
 }
   final List<Widget> steps = [

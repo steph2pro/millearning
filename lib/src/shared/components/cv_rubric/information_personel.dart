@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
 import 'package:millearnia/src/shared/components/cv_rubric/profil.dart';
+import 'package:millearnia/src/shared/components/dialogs/dialog_builder.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
+import 'package:millearnia/src/shared/components/modals/modal.dart';
 import 'package:millearnia/src/shared/components/validator/input_validator.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
+import 'package:millearnia/src/shared/utils/regexp_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class InformationPersonel extends StatefulWidget {
@@ -25,14 +28,13 @@ class _InformationPersonelState extends State<InformationPersonel> {
   };
 
   final List<String> _optionalFields = [
-    'Lieu de naissance',
+    'date de naissance',
     'Permis de conduire',
     'Sexe',
     'nationalite',
     'Etat civil',
     'Site inernet',
     'linkedin',
-    'Champ personalise',
   ];
   final Map<String, bool> _optionalFieldsVisible = {};
 
@@ -57,33 +59,80 @@ class _InformationPersonelState extends State<InformationPersonel> {
     }
   }
 
-  Future<void> _saveInfo() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    // Save text fields
-    _controllers.forEach((key, controller) {
-      prefs.setString(key, controller.text);
-    });
-    print('[Info Perso] :enregistrement des champ');
-
-    // Save optional fields
-    for (var field in _optionalFields) {
-      prefs.setString(field, _optionalFieldsVisible[field] == true
-          ? _controllers[field]?.text ?? ''
-          : '');
+Future<void> _saveInfo() async {
+  // Vérifier les champs obligatoires
+  for (var key in _controllers.keys) {
+    if (_controllers[key]!.text.trim().isEmpty) {
+      LoadingDialog.hide(context: context);
+      showErrorModal('Le champ $key ne peut pas être vide.');
+      return; 
     }
-    print('[Info Perso] :enregistrement des champ optionel');
+  }
 
+  SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    // Save profile image as base64
+  try {
+    // Sauvegarder les champs obligatoires
+    _controllers.forEach((key, controller) {
+      prefs.setString(key, controller.text.trim());
+    });
+    print('[Info Perso] : enregistrement des champs obligatoires');
+
+    // Sauvegarder les champs optionnels
+    for (var field in _optionalFields) {
+      prefs.setString(
+        field,
+        _optionalFieldsVisible[field] == true
+            ? _controllers[field]?.text.trim() ?? ''
+            : '',
+      );
+    }
+    print('[Info Perso] : enregistrement des champs optionnels');
+
+    // Sauvegarder l'image de profil en base64
     if (_profileImage != null) {
       final imageBytes = await _profileImage!.readAsBytes();
       final imageBase64 = base64Encode(imageBytes);
       prefs.setString('profileImage', imageBase64);
+    }else{
+      
+      LoadingDialog.hide(context: context);
+      showErrorModal('vous n\'avez pas choisis une photo de profil.');
+      return; 
     }
-     final img= await prefs.getString('profileImage');
-    print('[Info Perso] :enregistrement de l\'image : $img');
 
+    // Afficher un message de confirmation
+    LoadingDialog.hide(context: context);
+    showSuccesModal('Informations enregistrées avec succès !');
+
+    print('[Info Perso] : enregistrement terminé');
+  } catch (e) {
+    print("Erreur lors de l'enregistrement : $e");
+    // Afficher un message d'erreur
+      LoadingDialog.hide(context: context);
+      showErrorModal('Erreur lors de l\'enregistrement ');
+    
+  }
+}
+
+  Future<void> _pickDate(String fieldKey) async {
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+    );
+
+    if (pickedDate != null) {
+      if (_controllers[fieldKey] != null) {
+      setState(() {
+        _controllers[fieldKey]!.text = pickedDate.toLocal().toString().split(' ')[0];
+      });
+    } else {
+      print('Erreur : Le contrôleur pour la clé $fieldKey est nul.');
+    }
+  }
   }
 
   @override
@@ -164,10 +213,33 @@ class _InformationPersonelState extends State<InformationPersonel> {
             validator: (value) => key != 'email'
                 ? InputValidator.simpleValidator(context, value)
                 : InputValidator.emailValidator(context, value),
+            isPhoneNumber: key == 'telephone'? true :false
           );
         }),
         ..._optionalFields.map((field) {
           if (_optionalFieldsVisible[field]!) {
+             if (field == 'date de naissance') {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    field,
+                    style: context.textTheme.bodySmall?.copyWith(fontSize: 12),
+                  ),
+                  gapH6,
+                  TextField(
+                    controller: _controllers[field] = TextEditingController(),
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      labelText: field,
+                      suffixIcon: Icon(Icons.calendar_today),
+                    ),
+                    onTap: () => _pickDate(field),
+                  ),
+                  gapH20,
+                ],
+              );
+            }
             return _buildInputField(
             context,
             label: field,
@@ -230,6 +302,7 @@ class _InformationPersonelState extends State<InformationPersonel> {
     required String hint,
     required TextEditingController controller,
     required String? Function(String?) validator,
+    bool? isPhoneNumber
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -244,6 +317,8 @@ class _InformationPersonelState extends State<InformationPersonel> {
           hintText: hint,
           textInputAction: TextInputAction.next,
           validator: validator,
+          keyboardType: isPhoneNumber==true ? TextInputType.phone : TextInputType.text,
+         inputFormatters: isPhoneNumber==true ? mobileFormatters(controller.text.trim(),'+237') : [] ,
         ),
         gapH20,
       ],

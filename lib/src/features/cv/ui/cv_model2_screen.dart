@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:ffi';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
 import 'package:millearnia/src/core/theme/dimens.dart';
 import 'package:millearnia/src/features/cv/logic/fetch_methodes.dart';
@@ -19,6 +21,7 @@ import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
@@ -30,6 +33,33 @@ class CvModel2Screen extends StatefulWidget {
 }
 
 class _CvModel2ScreenState extends State<CvModel2Screen> {
+  String? pdfPath;
+
+ 
+  //  Future<void> _createPdf() async {
+  //   final pdf = pw.Document();
+
+  //   // Ajout d'une page au PDF
+  //   pdf.addPage(
+  //     pw.Page(
+  //       build: (pw.Context context) => pw.Center(
+  //         child: pw.Text(
+  //           "Ceci est une prévisualisation d'une page Flutter en PDF.",
+  //           style: pw.TextStyle(fontSize: 20),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+
+  //   // Sauvegarde dans un fichier temporaire
+  //   final directory = await getTemporaryDirectory();
+  //   final file = File('${directory.path}/preview.pdf');
+  //   await file.writeAsBytes(await pdf.save());
+
+  //   setState(() {
+  //     pdfPath = file.path;
+  //   });
+  // }
   String nomComplet = '';
   String titre = '';
   String email = '';
@@ -105,8 +135,648 @@ Future<void> loadLoisir() async {
     loadCompetences();
     loadLangues();
     loadLoisir();
+    
+    _createPdf();
   }
+  
+   Future<void> _createPdf() async {
+    final pdf = pw.Document();
 
+    // Ajout d'une page au PDF
+    pdf.addPage(
+      pw.Page(
+        
+        build: (pw.Context context) {
+          return pw.ListView(
+            children: [
+             pw.Container(
+              color: PdfColor.fromInt(0xFF000000),
+              child:  pw.Column(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                // Colonne principale avec deux sections : Gauche et Droite
+                pw.Row(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  children: [
+                    // Section gauche (Profil et Contact)
+                   pw.Expanded(
+                    flex: 1,
+                    child:  pw.Container(
+                     
+                      // color: PdfColor.fromInt(0xFF000000),
+                      // padding:  pw.EdgeInsets.all(10.0),
+                      child: pw.Column(
+                        crossAxisAlignment: pw.CrossAxisAlignment.center,
+                        children: [
+                          // Photo de profil
+                          pw.Center(
+                            child: pw.Container(
+                      width: 118, 
+                      height: 118,
+                      decoration: pw.BoxDecoration(
+                      shape: pw.BoxShape.circle,
+                    ),
+                    child: pw.ClipOval(
+                      child: _profileImageBytes != null
+                          ? pw.Image(
+                              pw.MemoryImage(
+                              _profileImageBytes!,
+                            ),
+                              fit: pw.BoxFit.cover, 
+                            )
+                          : pw.Container(
+                              color: PdfColor.fromInt(0xFFFFFFFF),
+                              child: pw.Center(
+                                child: pw.Text(
+                                  '👤', 
+                                  style: pw.TextStyle(
+                                    fontSize: 50,
+                                    color: PdfColor.fromInt(0xFF3C3C3C),
+                                  ),
+                              ),
+                              )
+                            ),
+                    ),
+                  ),
+                  ),
+                  pw.SizedBox(height: 20),
+                  pw.Container(
+                    height: 1,
+                    width: double.infinity, 
+                    margin: pw.EdgeInsets.symmetric(vertical: 5), 
+                    decoration: pw.BoxDecoration(
+                      color:  PdfColor.fromInt(0xFFFFFFFF), 
+                      borderRadius: pw.BorderRadius.circular(4),
+                    ),
+                  ),
+                  // Profil
+                           pw.Text(
+                            "PROFIL",
+                            textAlign: pw.TextAlign.center,
+                          style: pw.TextStyle(
+                            fontWeight: pw.FontWeight.bold, fontSize: 20,
+                            color:PdfColor.fromInt(0xFFFFFFFF), 
+                          )
+                          ),
+                  pw.Container(
+                    height: 1,
+                    width: double.infinity, 
+                    margin: pw.EdgeInsets.symmetric(vertical: 5), 
+                    decoration: pw.BoxDecoration(
+                      color:  PdfColor.fromInt(0xFFFFFFFF), 
+                      borderRadius: pw.BorderRadius.circular(4),
+                    ),
+                  ),
+                  pw.SizedBox(height: 8),
+
+                           pw.Text(
+                            profil,
+                            style:  pw.TextStyle(
+                              color: PdfColor.fromInt(0xFFFFFFFF), fontWeight: pw.FontWeight.bold, fontSize: 14
+                            ),
+                            textAlign: pw.TextAlign.justify,
+                            ),
+                  pw.SizedBox(height: 18),
+                          pw.Container(
+                    height: 1,
+                    width: double.infinity, 
+                    margin: pw.EdgeInsets.symmetric(vertical: 5), 
+                    decoration: pw.BoxDecoration(
+                      color:  PdfColor.fromInt(0xFFFFFFFF), 
+                      borderRadius: pw.BorderRadius.circular(4),
+                    ),
+                  ),
+                           pw.Text(
+                            "CONTACT",
+                          style: pw.TextStyle(
+                              color: PdfColor.fromInt(0xFFFFFFFF), fontWeight: pw.FontWeight.bold, fontSize: 14
+                            ),
+                          ),
+                          pw.Container(
+                    height: 1,
+                    width: double.infinity, 
+                    margin: pw.EdgeInsets.symmetric(vertical: 5), 
+                    decoration: pw.BoxDecoration(
+                      color:  PdfColor.fromInt(0xFFFFFFFF), 
+                      borderRadius: pw.BorderRadius.circular(4),
+                    ),
+                  ),
+                          pw.SizedBox(height: 10),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(bottom: 6),
+                            child: pw.Row(
+                              children: [
+                                // pw.Icon(icon, color:context.colorScheme.onPrimary,size: 20,),
+                                // pw.gapW10,
+                                pw.Flexible(
+                                  child: pw.Text(telephone, 
+                                    style: pw.TextStyle(
+                                      color: PdfColor.fromInt(0xFFFFFFFF), fontSize: 14,fontWeight: pw.FontWeight.normal
+                                    ),
+                                    ),
+                                )
+                              ],
+                            ),
+                          ),
+                          pw.SizedBox(height: 10),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(bottom: 6),
+                            child: pw.Row(
+                              children: [
+                                // pw.Icon(icon, color:context.colorScheme.onPrimary,size: 20,),
+                                // pw.gapW10,
+                                pw.Flexible(
+                                  child: pw.Text(email, 
+                                    style: pw.TextStyle(
+                                      color: PdfColor.fromInt(0xFFFFFFFF), fontSize: 14,fontWeight: pw.FontWeight.normal
+                                    ),
+                                    ),
+                                )
+                              ],
+                            ),
+                          ),
+                          pw.SizedBox(height: 10),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(bottom: 6),
+                            child: pw.Row(
+                              children: [
+                                // pw.Icon(icon, color:context.colorScheme.onPrimary,size: 20,),
+                                // pw.gapW10,
+                                pw.Flexible(
+                                  child: pw.Text( '$address, $ville', 
+                                    style: pw.TextStyle(
+                                      color: PdfColor.fromInt(0xFFFFFFFF), fontSize: 14,fontWeight: pw.FontWeight.normal
+                                    ),
+                                    ),
+                                )
+                              ],
+                            ),
+                          ),
+                          
+                          pw.SizedBox(height: 10),
+                           pw.Container(
+                    height: 1,
+                    width: double.infinity, 
+                    margin: pw.EdgeInsets.symmetric(vertical: 5), 
+                    decoration: pw.BoxDecoration(
+                      color:  PdfColor.fromInt(0xFFFFFFFF), 
+                      borderRadius: pw.BorderRadius.circular(4),
+                    ),
+                  ),
+                           pw.Text(
+                            "Loisirs",
+                          style: pw.TextStyle(
+                            fontWeight: pw.FontWeight.bold, fontSize: 20,
+                            color:PdfColor.fromInt(0xFFFFFFFF), 
+                          )
+                          ),
+                          pw.Container(
+                    height: 1,
+                    width: double.infinity, 
+                    margin: pw.EdgeInsets.symmetric(vertical: 5), 
+                    decoration: pw.BoxDecoration(
+                      color:  PdfColor.fromInt(0xFFFFFFFF), 
+                      borderRadius: pw.BorderRadius.circular(4),
+                    ),
+                  ),
+                          pw.Row(
+                            children: [
+                                //  Parallelograme(
+                                //   width: 25,
+                                //   height: 100,
+                                //   startColor: Colors.yellow.shade700,
+                                //   endColor: Colors.yellow,
+                                // ),
+                          pw.SizedBox(height: 10),
+
+                          pw.Column(
+                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                            children: [
+                              pw.SizedBox(height: 10),
+                              ...loisirs.map((loisir){
+
+                                return pw.Padding(
+                                  padding: const pw.EdgeInsets.symmetric(vertical: 5),
+                                  child: pw.Text(
+                                    '- ${loisir.loisir}',
+                                    style: const pw.TextStyle(color: PdfColor.fromInt(0xFFFFFFFF)),
+                                  ),
+                                );
+
+                              }).toList(),
+
+
+                        ])
+                            ])
+                        ])
+                    ),
+                    ),
+                     // Section droite (Expérience, Éducation et Intérêts)
+                    pw.Expanded(
+                      flex: 2,
+                      child: pw.Container(
+                        color:PdfColor.fromInt(0xFFFFFFFF),
+                        padding:  pw.EdgeInsets.symmetric(horizontal: 10),
+                        child: pw.Column(
+                          crossAxisAlignment: pw.CrossAxisAlignment.center,
+                          children: [
+                            pw.Row(
+                            children: [ 
+                              // Nom et prénom
+                             pw.Expanded(
+                             child: pw.Column(
+                              // crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Flexible(
+                              // child:
+                               pw.Text(
+                                nomComplet ,
+                                style: pw.TextStyle(
+                                  color: PdfColor.fromInt(0xFF5C5C5C), 
+                                  fontWeight: pw.FontWeight.bold,
+                                  fontSize: 24
+                                )
+   
+                              ),
+                            // ),
+                              
+              pw.SizedBox(height: 6),
+                              pw.Text(
+                                titre,
+                                textAlign: pw.TextAlign.center,
+                                style: pw.TextStyle(
+                                  color: PdfColor.fromInt(0XFF09090B), 
+                                  fontWeight: pw.FontWeight.bold, 
+                                  fontSize: 18
+                                )
+                              ),
+                              ] ),
+                             ),
+                          ]),
+                          pw.Container(
+                            height: 1,
+                            width: double.infinity, 
+                            margin: pw.EdgeInsets.symmetric(vertical: 10,horizontal: 25), 
+                            decoration: pw.BoxDecoration(
+                              color: PdfColor.fromInt(0xFF000000), 
+                              borderRadius: pw.BorderRadius.circular(4),
+                            ),
+                          ),
+                             pw.Text(
+                              "EXPÉRIENCE",
+                              style: pw.TextStyle(
+                                  color: PdfColor.fromInt(0XFF09090B), 
+                                  fontWeight: pw.FontWeight.bold, 
+                                  fontSize: 18
+                                )
+                            ),
+                          pw.Container(
+                            height: 1,
+                            width: double.infinity, 
+                            margin: pw.EdgeInsets.symmetric(vertical: 10,horizontal: 25), 
+                            decoration: pw.BoxDecoration(
+                              color: PdfColor.fromInt(0xFF000000), 
+                              borderRadius: pw.BorderRadius.circular(4),
+                            ),
+                          ),
+                           ...experiences.map((experience){
+                            return  pw.Padding(
+    padding: const pw.EdgeInsets.only(bottom: 10),
+    child: pw.Row(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+       pw.Container(
+        width: 10, 
+        height: 10, 
+        decoration: pw.BoxDecoration(
+          color: PdfColor.fromInt(0xFF000000), // Couleur du point
+          shape: pw.BoxShape.circle, // Forme circulaire
+        ),
+      ),
+        pw.SizedBox(width: 10), // gapW10 peut être remplacé par SizedBox si c'est juste un espace
+        pw.Expanded(
+          child: pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.RichText(
+                text: pw.TextSpan(
+                  children: [
+                    pw.TextSpan(
+                      text: "${experience.poste.toUpperCase()}  ",
+                      style: pw.TextStyle(
+                        color: PdfColor.fromInt(0xFF3C3C3C), fontSize: 14
+                      ),
+                    ),
+                    pw.TextSpan(
+                      text: "${experience.employeur} ",
+                      style: pw.TextStyle(
+                        color: PdfColor.fromInt(0xFF3C3C3C), fontWeight: pw.FontWeight.bold, fontSize: 14
+                      ),
+                    ),
+                    pw.TextSpan(
+                      text: '${experience.dateDebut} - ${experience.dateFin}',
+                      style:pw.TextStyle(
+                        color: PdfColor.fromInt(0xFF3C3C3C), fontSize: 14
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              pw.SizedBox(height: 2),
+              pw.Text(
+                experience.description,
+                style: pw.TextStyle(
+                        color: PdfColor.fromInt(0xFF3C3C3C), fontSize: 14
+                      ),
+                textAlign: pw.TextAlign.justify,
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+                           }).toList(),
+                           pw.Container(
+                            height: 1,
+                            width: double.infinity, 
+                            margin: pw.EdgeInsets.symmetric(vertical: 10,horizontal: 25), 
+                            decoration: pw.BoxDecoration(
+                              color: PdfColor.fromInt(0xFF000000), 
+                              borderRadius: pw.BorderRadius.circular(4),
+                            ),
+                          ),
+                             pw.Text(
+                              "FORMATIONS",
+                              style: pw.TextStyle(
+                                  color: PdfColor.fromInt(0XFF09090B), 
+                                  fontWeight: pw.FontWeight.bold, 
+                                  fontSize: 18
+                                )
+                            ), 
+                           pw.Container(
+                            height: 1,
+                            width: double.infinity, 
+                            margin: pw.EdgeInsets.symmetric(vertical: 10,horizontal: 25), 
+                            decoration: pw.BoxDecoration(
+                              color: PdfColor.fromInt(0xFF000000), 
+                              borderRadius: pw.BorderRadius.circular(4),
+                            ),
+                          ),
+                          pw.SizedBox(height: 10),
+                            
+                           ...formations.map((formation){
+                            return  pw.Padding(
+      padding:  pw.EdgeInsets.only(bottom: 10),
+      child: pw.Row(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [     
+       pw.Container(
+        width: 10, 
+        height: 10, 
+        decoration: pw.BoxDecoration(
+          color: PdfColor.fromInt(0xFF000000), // Couleur du point
+          shape: pw.BoxShape.circle, // Forme circulaire
+        ),
+      ),
+        pw.SizedBox(width: 10), 
+              pw.Container(
+                width: 90,
+                child:  pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.Row(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Flexible(
+                    child: pw.Text(
+                    formation.etablissement,
+                      style:pw.TextStyle(
+                        color: PdfColor.fromInt(0xFF3C3C3C), fontSize: 14,fontWeight: pw.FontWeight.bold
+                      ),
+                  ) 
+                  ), 
+
+                ],
+              ),
+            pw.Text(
+               '${formation.dateDebut }- ${formation.dateFin}',
+                style: pw.TextStyle(
+                        color: PdfColor.fromInt(0xFF3C3C3C), fontSize: 14,fontWeight: pw.FontWeight.normal
+                      ),
+            ),   
+            pw.Text(
+               formation.ville,
+                style: pw.TextStyle(
+                        color: PdfColor.fromInt(0xFF3C3C3C), fontSize: 14,fontWeight: pw.FontWeight.normal
+                      ),
+            ) , 
+            ],
+          ),
+              ),
+         
+          pw.SizedBox(width: 4), 
+          pw.Expanded(
+            child: 
+          pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              
+            pw.Text(
+               formation.titre.toUpperCase(),
+                style:pw.TextStyle(
+                        color: PdfColor.fromInt(0xFF3C3C3C), fontSize: 14
+                      ),
+            ) ,
+            pw.Container(
+              width:110,
+              child: pw.Text(
+               formation.description,
+                style: pw.TextStyle(
+                        color: PdfColor.fromInt(0xFF3C3C3C), fontSize: 14,fontWeight: pw.FontWeight.bold
+                      ),
+                textAlign: pw.TextAlign.justify,
+            )   ,
+            )
+            ],
+          ),
+          
+          )
+        ],
+      ),
+    );
+                           }).toList(),
+
+                          pw.SizedBox(height: 18),
+
+                           pw.Container(
+                            height: 1,
+                            width: double.infinity, 
+                            margin: pw.EdgeInsets.symmetric(vertical: 10,horizontal: 25), 
+                            decoration: pw.BoxDecoration(
+                              color: PdfColor.fromInt(0xFF000000), 
+                              borderRadius: pw.BorderRadius.circular(4),
+                            ),
+                          ),
+                            pw.Text(
+                              "STAGE",
+                              style: pw.TextStyle(
+                                  color: PdfColor.fromInt(0XFF09090B), 
+                                  fontWeight: pw.FontWeight.bold, 
+                                  fontSize: 18
+                                )
+                            ),
+                          pw.Container(
+                            height: 1,
+                            width: double.infinity, 
+                            margin: pw.EdgeInsets.symmetric(vertical: 10,horizontal: 25), 
+                            decoration: pw.BoxDecoration(
+                              color: PdfColor.fromInt(0xFF000000), 
+                              borderRadius: pw.BorderRadius.circular(4),
+                            ),
+                          ),
+                           ...stages.map((experience){
+                            return  pw.Padding(
+    padding: const pw.EdgeInsets.only(bottom: 10),
+    child: pw.Row(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+       pw.Container(
+        width: 10, 
+        height: 10, 
+        decoration: pw.BoxDecoration(
+          color: PdfColor.fromInt(0xFF000000), // Couleur du point
+          shape: pw.BoxShape.circle, // Forme circulaire
+        ),
+      ),
+        pw.SizedBox(width: 10), // gapW10 peut être remplacé par SizedBox si c'est juste un espace
+        pw.Expanded(
+          child: pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.RichText(
+                text: pw.TextSpan(
+                  children: [
+                    pw.TextSpan(
+                      text: "${experience.poste.toUpperCase()}  ",
+                      style: pw.TextStyle(
+                        color: PdfColor.fromInt(0xFF3C3C3C), fontSize: 14
+                      ),
+                    ),
+                    pw.TextSpan(
+                      text: "${experience.employeur} ",
+                      style: pw.TextStyle(
+                        color: PdfColor.fromInt(0xFF3C3C3C), fontWeight: pw.FontWeight.bold, fontSize: 14
+                      ),
+                    ),
+                    pw.TextSpan(
+                      text: '${experience.dateDebut} - ${experience.dateFin}',
+                      style:pw.TextStyle(
+                        color: PdfColor.fromInt(0xFF3C3C3C), fontSize: 14
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              pw.SizedBox(height: 2),
+              pw.Text(
+                experience.description,
+                style: pw.TextStyle(
+                        color: PdfColor.fromInt(0xFF3C3C3C), fontSize: 14
+                      ),
+                textAlign: pw.TextAlign.justify,
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+                           }).toList(),
+                           pw.Container(
+                            height: 1,
+                            width: double.infinity, 
+                            margin: pw.EdgeInsets.symmetric(vertical: 10,horizontal: 25), 
+                            decoration: pw.BoxDecoration(
+                              color: PdfColor.fromInt(0xFF000000), 
+                              borderRadius: pw.BorderRadius.circular(4),
+                            ),
+                          ),
+                           
+
+
+                     ])
+                      )
+                      )
+
+                  ])
+            ])
+   
+             )
+              
+            ],
+          );
+        }
+      ),
+    );
+
+    // Sauvegarde dans un fichier temporaire
+    final directory = await getTemporaryDirectory();
+    final file = File('${directory.path}/preview.pdf');
+    await file.writeAsBytes(await pdf.save());
+
+    setState(() {
+      pdfPath = file.path;
+    });
+    //printing 
+    if(pdfPath!=''){
+    await Printing.layoutPdf(
+      onLayout: (PdfPageFormat format) async => pdf.save(),
+    );  
+    }
+  }
+  Future<void> _downloadPdf() async {
+  try {
+    // Obtenir le répertoire des documents
+    final directory = await getApplicationDocumentsDirectory();
+
+    // Chemin complet du dossier Millearnia/cv
+    final String folderPath = "${directory.path}/Millearnia/cv";
+
+    // Créer le dossier Millearnia/cv si ce n'est pas déjà fait
+    final folder = Directory(folderPath);
+    if (!await folder.exists()) {
+      await folder.create(recursive: true);
+    }
+    
+
+    // Définir le chemin complet du fichier
+    final String fileName = "cv_$nomComplet.pdf";
+    final String newFilePath = "$folderPath/$fileName";
+
+    // Copier le fichier PDF existant vers le nouvel emplacement
+    final File pdfFile = File(pdfPath ?? '');
+    final File newFile = await pdfFile.copy(newFilePath);
+
+    print("Fichier téléchargé dans : $newFilePath");
+
+    // Afficher un message de confirmation
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Fichier téléchargé dans : $newFilePath"),
+      ),
+    );
+  } catch (e) {
+    print("Erreur lors du téléchargement : $e");
+
+    // Afficher un message d'erreur
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Erreur lors du téléchargement : $e"),
+      ),
+    );
+  }
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,9 +789,25 @@ Future<void> loadLoisir() async {
         backgroundColor: context.colorScheme.onPrimary,
       ),
       
-        backgroundColor: context.colorScheme.scrim,
-      body: 
-      ListView(
+        // backgroundColor: context.colorScheme.scrim,
+      body:  
+      // CvModel2()
+      pdfPath == null
+          ? Center(child: CircularProgressIndicator())
+          : PDFView(
+              filePath: pdfPath,
+              enableSwipe: true,
+              swipeHorizontal: false,
+            ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _createPdf, // Appeler la méthode de téléchargement
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: Icon(Icons.download),
+      ),
+    );
+  }
+ Widget CvModel2(){
+  return ListView(
         // padding: EdgeInsets.all(Dimens.spacing),
         children:[
          Column(
@@ -339,10 +1025,8 @@ Future<void> loadLoisir() async {
             ),
             //      Container()
           ],
-        ),
-    );
-  }
-
+        );
+ }
   Widget contactRow(IconData icon, String text) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),

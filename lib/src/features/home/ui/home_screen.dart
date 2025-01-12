@@ -25,11 +25,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
     
   String nom='';
-  Future<void> fetchModel() async {
+  Future<void> fetchInfosUser() async {
   final prefs = await SharedPreferences.getInstance();
-  nom = prefs.getString('name')!;
-
+  nom = prefs.getString('name')?? '';
+  print(nom);
 }
+
     final TextEditingController _searshController = TextEditingController();
      final List<Map<String, String>> categories = [
     {'img': 'assets/images/art.png', 'title': 'Art'},
@@ -53,7 +54,11 @@ class _HomeScreenState extends State<HomeScreen> {
     _searshController.dispose();
     super.dispose();
   }
+  @override
+  void initState(){
 
+    fetchInfosUser();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${I18n.of(context).hi} $nom',
+                '${I18n.of(context).hi} ${nom}',
                 style: context.textTheme.bodyLarge?.copyWith(color:context.colorScheme.onPrimary)
               ),
               Container(

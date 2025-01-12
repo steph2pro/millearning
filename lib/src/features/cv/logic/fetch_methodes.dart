@@ -1,5 +1,11 @@
 import 'dart:convert';
-import 'dart:typed_data';
+import 'dart:io';
+import 'package:millearnia/src/core/routing/app_router.dart';
+import 'package:millearnia/src/features/cv/ui/cv_model3_screen.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
+import 'package:path_provider/path_provider.dart';
 
 
 import 'package:millearnia/src/features/cv/models/activite.dart';
@@ -133,3 +139,22 @@ Future<List<Qualites>> fetchQualites() async {
   }
   return [];
 }
+
+// //gestion de pdf
+//   Future<File> generatePdf() async {
+//   final pdf = pw.Document();
+
+//   pdf.addPage(
+//     pw.Page(
+//       build: (pw.Context context) {
+//         return CvModel3Screen();
+//       }
+//     ),
+//   );
+
+//   // Enregistrer le PDF dans un fichier temporaire
+//   final directory = await getTemporaryDirectory();
+//   final file = File('${directory.path}/example.pdf');
+//   await file.writeAsBytes(await pdf.save());
+//   return file;
+// }

@@ -150,12 +150,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 print(response);
                 // if (response.data != null) {
                   final user=response.data;
+                  print(user);
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                    await prefs.setString('name', user.name);
                    await prefs.setString('email', user.email);
                    await prefs.setString('phone', user.phone);
                   
-                  context.router.push(HomeRoute());
+                  context.router.push(HomePageRoute());
                   // context.router.push(CvBuilderRoute());
 
                 // }
