@@ -7,13 +7,13 @@ import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 
 // Course Header Widget
 class CourseHeader extends StatelessWidget {
-  final String videoUrl;
+  final String videoId;
   // final String title;
   // final double rating;
   final VoidCallback? back;
 
   const CourseHeader({
-    required this.videoUrl,
+    required this.videoId,
     // required this.title,
     // required this.rating,
      this.back,
@@ -25,7 +25,7 @@ class CourseHeader extends StatelessWidget {
     return Stack(
       children: [
         // Image.asset(videoUrl, width: double.infinity, height: 300, fit: BoxFit.cover),
-        YoutubeVideoPlayer(videoUrl: videoUrl),
+        YoutubeVideoPlayer(videoId: videoId),
         Positioned(
           top: 20,
           left: 16,

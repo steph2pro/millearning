@@ -48,3 +48,4 @@ app.*.map.json
 .vscode/
 
 .fvmrc
+lib\src\features\home\logic\key.dart

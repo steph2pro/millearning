@@ -26,7 +26,7 @@ import '../../../../datasource/models/api_response/api_response.dart';
 class RegisterScreen extends StatefulWidget implements AutoRouteWrapper {
   const RegisterScreen({super.key});
 
-  @override
+  @override 
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
       create: (_) => RegisterCubit(),

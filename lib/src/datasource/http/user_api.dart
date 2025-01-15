@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:millearnia/src/datasource/models/user_model.dart';
 import 'package:millearnia/src/features/auth/login/models/login_request.dart';
 import 'package:millearnia/src/features/auth/register/model/identify/identify_request.dart';
 import 'package:millearnia/src/features/auth/register/model/new_password/new_password_request.dart';

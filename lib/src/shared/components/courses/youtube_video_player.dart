@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:millearnia/src/features/home/logic/youtube_service.dart';
 import 'package:millearnia/src/shared/utils/download_service.dart';
 import 'package:millearnia/src/shared/utils/permition_storage.dart';
 import 'package:video_player/video_player.dart';
@@ -9,9 +10,9 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 
 class YoutubeVideoPlayer extends StatefulWidget {
-  final String videoUrl;
+  final String videoId;
 
-  const YoutubeVideoPlayer({Key? key, required this.videoUrl}) : super(key: key);
+  const YoutubeVideoPlayer({Key? key, required this.videoId}) : super(key: key);
 
   @override
   _YoutubeVideoPlayerState createState() => _YoutubeVideoPlayerState();
@@ -19,6 +20,9 @@ class YoutubeVideoPlayer extends StatefulWidget {
 
 class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
   late YoutubePlayerController _controller;
+   Map<String, dynamic>? videoDetails;
+  bool isLoading = true;
+
   bool _isPlaying = false;
   Duration _currentPosition = Duration.zero;
   Duration _totalDuration = Duration.zero;
@@ -28,18 +32,35 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
    String? _downloadedFilePath; // Chemin du fichier téléchargé
   VideoPlayerController? _videoPlayerController; // Contrôleur pour la vidéo locale
  bool _isFullScreen = false;
+
+ 
   @override
   void initState() {
     super.initState();
+//*initialisation du controlleur */
 
     _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl) ?? "",
+      initialVideoId: widget.videoId,
       flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
         hideControls: true,
       ),
     );
+    _fetchVideoDetails();
+    
+  }
+  
+Future<void> _fetchVideoDetails() async {
+    final service = YouTubeService();
+    final details = await service.fetchVideoDetails(widget.videoId);
+    if (details != null) {
+      setState(() {
+        videoDetails = details;
+        isLoading = false;
+      });
+    }
+
 
     _controller.addListener(() {
       setState(() {

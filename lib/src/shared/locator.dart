@@ -1,9 +1,11 @@
 import 'package:millearnia/src/core/routing/app_router.dart';
+import 'package:millearnia/src/datasource/http/cv_api.dart';
 import 'package:millearnia/src/datasource/http/user_api.dart';
 import 'package:millearnia/src/datasource/http/dio_config.dart';
 import 'package:millearnia/src/datasource/http/example_api.dart';
 import 'package:millearnia/src/datasource/http/random_user_api.dart';
 import 'package:millearnia/src/datasource/models/user_model.dart';
+import 'package:millearnia/src/datasource/repositories/cv_repository.dart';
 import 'package:millearnia/src/datasource/repositories/example_repository.dart';
 import 'package:millearnia/src/datasource/repositories/user_repository.dart';
 import 'package:get_it/get_it.dart';
@@ -32,7 +34,7 @@ final GetIt locator = GetIt.instance
     return RandomUserApi(dio: locator<DioConfig>().dio);
   })
   ..registerLazySingleton(() {
-    print('Registering RandomUserApi');
+    print('Registering UserApi');
     return UserApi(dio: locator<DioConfig>().dio);
   })
   ..registerLazySingleton(() {
@@ -42,5 +44,13 @@ final GetIt locator = GetIt.instance
   ..registerLazySingleton(() {
     print('Registering SupabaseClient');
     return Supabase.instance.client;
+  })
+  ..registerLazySingleton(() {
+    print('Registering CvApi');
+    return CvApi(dio: locator<DioConfig>().dio);
+  })
+  ..registerLazySingleton(() {
+    print('Registering CvRepository');
+    return CvRepository(cvApi: locator<CvApi>());
   })
   ;

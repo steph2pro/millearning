@@ -360,6 +360,25 @@ class SplashRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [VideoPlayerScreen]
+class VideoPlayerRoute extends PageRouteInfo<void> {
+  const VideoPlayerRoute({List<PageRouteInfo>? children})
+      : super(
+          VideoPlayerRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'VideoPlayerRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const VideoPlayerScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [WelcomeScreen]
 class WelcomeRoute extends PageRouteInfo<void> {
   const WelcomeRoute({List<PageRouteInfo>? children})

@@ -90,7 +90,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           children: [
             // Header Section
             CourseHeader(
-              videoUrl: 'https://www.youtube.com/watch?v=T20fz20cjYE',
+              videoId: 'T20fz20cjYE',
               back: (){
                 context.router.popForced();
               },
