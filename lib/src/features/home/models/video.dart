@@ -1,21 +1,24 @@
-class Video {
-  final String id;
-  final String title;
-  final String thumbnaiUrl;
-  final String channelTitle;
-  Video({
-    required this.id,
-    required this.title,
-    required this.thumbnaiUrl,
-    required this.channelTitle,
-  });
-  factory Video.fromMap(Map<String, dynamic> map){
-    return Video(
-      id:map['ressource']['videoId'],
-      title: map['title'], 
-      thumbnaiUrl: map['thumbnails']['high']['url'],
-       channelTitle: map['channelTitle'],
-       );
-  }
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:millearnia/src/features/home/models/comment.dart';
+import 'package:millearnia/src/features/home/models/comment_converter.dart';
+import 'package:millearnia/src/features/home/models/profession.dart';
 
+part 'video.freezed.dart';
+part 'video.g.dart';
+
+@freezed
+class Video with _$Video {
+  const factory Video({
+    required int id,
+    required int professionId,
+    required String title,
+    required String youtubeId,
+    required String thumbnail,
+    // required Comment comments,
+    // @CommentListConverter() List<Comment>? comments,
+    required List<Profession> professions,
+  }) = _Video;
+
+  factory Video.fromJson(Map<String, dynamic> json) =>
+      _$VideoFromJson(json);
 }

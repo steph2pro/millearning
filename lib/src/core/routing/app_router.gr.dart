@@ -67,6 +67,25 @@ class CourseDetailRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [CourseScreen]
+class CourseRoute extends PageRouteInfo<void> {
+  const CourseRoute({List<PageRouteInfo>? children})
+      : super(
+          CourseRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CourseRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CourseScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [CvBuilderScreen]
 class CvBuilderRoute extends PageRouteInfo<void> {
   const CvBuilderRoute({List<PageRouteInfo>? children})
@@ -298,6 +317,25 @@ class PasswordWrapperRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return WrappedRoute(child: const PasswordWrapperScreen());
+    },
+  );
+}
+
+/// generated route for
+/// [ProfessionsScreen]
+class ProfessionsRoute extends PageRouteInfo<void> {
+  const ProfessionsRoute({List<PageRouteInfo>? children})
+      : super(
+          ProfessionsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfessionsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ProfessionsScreen();
     },
   );
 }

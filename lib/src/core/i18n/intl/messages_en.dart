@@ -101,7 +101,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Perfect Online Course"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "phone_number": MessageLookupByLibrary.simpleMessage("Phone number"),
-        "pupularCourse": MessageLookupByLibrary.simpleMessage("Pupular Course"),
+        "pupularCourse":
+            MessageLookupByLibrary.simpleMessage("Pupular Profession"),
         "recoverWith": MessageLookupByLibrary.simpleMessage("Recover With"),
         "resendCode": MessageLookupByLibrary.simpleMessage("Resend code"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),

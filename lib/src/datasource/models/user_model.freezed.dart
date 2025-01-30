@@ -24,7 +24,10 @@ mixin _$UserModel {
   String get email => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  String? get profil => throw _privateConstructorUsedError;
   String? get accessToken => throw _privateConstructorUsedError;
+  String get role => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
 
   /// Serializes this UserModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,7 +49,10 @@ abstract class $UserModelCopyWith<$Res> {
       String email,
       String phone,
       String password,
-      String? accessToken});
+      String? profil,
+      String? accessToken,
+      String role,
+      String status});
 }
 
 /// @nodoc
@@ -68,7 +74,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? email = null,
     Object? phone = null,
     Object? password = null,
+    Object? profil = freezed,
     Object? accessToken = freezed,
+    Object? role = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -87,10 +96,22 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      profil: freezed == profil
+          ? _value.profil
+          : profil // ignore: cast_nullable_to_non_nullable
+              as String?,
       accessToken: freezed == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
               as String?,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -108,7 +129,10 @@ abstract class _$$UserModelImplCopyWith<$Res>
       String email,
       String phone,
       String password,
-      String? accessToken});
+      String? profil,
+      String? accessToken,
+      String role,
+      String status});
 }
 
 /// @nodoc
@@ -128,7 +152,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? email = null,
     Object? phone = null,
     Object? password = null,
+    Object? profil = freezed,
     Object? accessToken = freezed,
+    Object? role = null,
+    Object? status = null,
   }) {
     return _then(_$UserModelImpl(
       name: null == name
@@ -147,10 +174,22 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      profil: freezed == profil
+          ? _value.profil
+          : profil // ignore: cast_nullable_to_non_nullable
+              as String?,
       accessToken: freezed == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
               as String?,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -163,7 +202,10 @@ class _$UserModelImpl implements _UserModel {
       required this.email,
       required this.phone,
       required this.password,
-      this.accessToken});
+      this.profil,
+      this.accessToken,
+      required this.role,
+      required this.status});
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserModelImplFromJson(json);
@@ -177,11 +219,17 @@ class _$UserModelImpl implements _UserModel {
   @override
   final String password;
   @override
+  final String? profil;
+  @override
   final String? accessToken;
+  @override
+  final String role;
+  @override
+  final String status;
 
   @override
   String toString() {
-    return 'UserModel(name: $name, email: $email, phone: $phone, password: $password, accessToken: $accessToken)';
+    return 'UserModel(name: $name, email: $email, phone: $phone, password: $password, profil: $profil, accessToken: $accessToken, role: $role, status: $status)';
   }
 
   @override
@@ -194,14 +242,17 @@ class _$UserModelImpl implements _UserModel {
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.password, password) ||
                 other.password == password) &&
+            (identical(other.profil, profil) || other.profil == profil) &&
             (identical(other.accessToken, accessToken) ||
-                other.accessToken == accessToken));
+                other.accessToken == accessToken) &&
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, email, phone, password, accessToken);
+  int get hashCode => Object.hash(runtimeType, name, email, phone, password,
+      profil, accessToken, role, status);
 
   /// Create a copy of UserModel
   /// with the given fields replaced by the non-null parameter values.
@@ -225,7 +276,10 @@ abstract class _UserModel implements UserModel {
       required final String email,
       required final String phone,
       required final String password,
-      final String? accessToken}) = _$UserModelImpl;
+      final String? profil,
+      final String? accessToken,
+      required final String role,
+      required final String status}) = _$UserModelImpl;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$UserModelImpl.fromJson;
@@ -239,7 +293,13 @@ abstract class _UserModel implements UserModel {
   @override
   String get password;
   @override
+  String? get profil;
+  @override
   String? get accessToken;
+  @override
+  String get role;
+  @override
+  String get status;
 
   /// Create a copy of UserModel
   /// with the given fields replaced by the non-null parameter values.

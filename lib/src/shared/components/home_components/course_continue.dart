@@ -39,11 +39,12 @@ class CourseContinue extends StatelessWidget {
       ),
     ),
       padding: EdgeInsets.symmetric(horizontal: 12,vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 12,vertical: 8),
       child: Row(
         children: [
            ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
+              child: Image.network(
                 contentImage,
                 fit: BoxFit.cover,
                 width: 108,

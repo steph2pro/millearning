@@ -590,10 +590,10 @@ class I18n {
     );
   }
 
-  /// `Pupular Course`
+  /// `Pupular Profession`
   String get pupularCourse {
     return Intl.message(
-      'Pupular Course',
+      'Pupular Profession',
       name: 'pupularCourse',
       desc: '',
       args: [],

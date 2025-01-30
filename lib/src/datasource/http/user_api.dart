@@ -85,6 +85,16 @@ Future<Map<String, dynamic>> loginUser(LoginRequest user) async {
     );
     return response.data;
   }
+  Future<Map<String, dynamic>> getMentors() async {
+   
+      final response = await dio.get(
+        '/user-getMentors',
+      );
+
+        return response.data;
+      
+    
+  }
 
 
 }

@@ -3,6 +3,6 @@ class Environment {
 
   static const String baseUrl = String.fromEnvironment(
     'base_url',
-    defaultValue: 'http://192.168.99.100:3333/api',
+    defaultValue: 'http://192.168.1.199:3333/api',
   );
 }

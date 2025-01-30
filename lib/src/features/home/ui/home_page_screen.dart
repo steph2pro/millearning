@@ -4,6 +4,8 @@ import 'package:millearnia/src/core/i18n/l10n.dart';
 import 'package:millearnia/src/features/cv/ui/choix_model_screen.dart';
 import 'package:millearnia/src/features/home/ui/course_detail.dart';
 import 'package:millearnia/src/features/home/ui/home_screen.dart';
+import 'package:millearnia/src/features/professions/ui/professions_screen.dart';
+import 'package:millearnia/src/features/course/ui/course_screen.dart';
 
 @RoutePage()
 class HomePageScreen extends StatefulWidget {
@@ -22,8 +24,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: [
-        const CourseDetailScreen(),
         const HomeScreen(),
+        const CourseScreen(),
+        const ProfessionsScreen(),
         const ChoixModelScreen(),
       ].elementAt(currentIndex),
       bottomNavigationBar: BottomNavigationBar(
@@ -36,12 +39,16 @@ class _HomePageScreenState extends State<HomePageScreen> {
         },
         items:  [
           BottomNavigationBarItem(
+            icon: const Icon(Icons.home),
+            label: 'Acceuil'
+          ),
+          BottomNavigationBarItem(
             icon: const Icon(Icons.book),
             label: 'Cours'
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.home),
-            label: 'Acceil'
+            icon: const Icon(Icons.bookmark),
+            label: 'Profession'
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.description),

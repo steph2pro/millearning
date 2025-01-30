@@ -13,6 +13,7 @@ import 'package:millearnia/src/features/auth/register/model/otp_code/otp_code_re
 import 'package:millearnia/src/features/auth/register/model/otp_code/otp_code_response.dart';
 import 'package:millearnia/src/features/auth/register/model/register_request.dart';
 import 'package:millearnia/src/features/auth/register/model/register_response.dart';
+import 'package:millearnia/src/features/home/models/user_response.dart';
 import 'package:millearnia/src/shared/locator.dart';
 import '../models/user_model.dart';
 
@@ -77,6 +78,17 @@ class UserRepository extends BaseRepository {
           final response = await userApi.newpassword(newpassword);
           
           return ApiResponse.success(NewPasswordResponse.fromJson(response));
+      },
+    );
+  }
+  Future<ApiResponse<UserResponse, ApiError>> getAllMentor() async {
+    return runApiCall(
+      call: () async {
+          // Appel à l'API via l'instance de userApi
+          final response = await userApi.getMentors();
+          // Retourner une réponse réussie
+          return ApiResponse.success(UserResponse.fromJson(response));
+       
       },
     );
   }

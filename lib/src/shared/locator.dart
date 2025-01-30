@@ -1,12 +1,16 @@
 import 'package:millearnia/src/core/routing/app_router.dart';
+import 'package:millearnia/src/datasource/http/Course_api.dart';
 import 'package:millearnia/src/datasource/http/cv_api.dart';
+import 'package:millearnia/src/datasource/http/profession_api.dart';
 import 'package:millearnia/src/datasource/http/user_api.dart';
 import 'package:millearnia/src/datasource/http/dio_config.dart';
 import 'package:millearnia/src/datasource/http/example_api.dart';
 import 'package:millearnia/src/datasource/http/random_user_api.dart';
 import 'package:millearnia/src/datasource/models/user_model.dart';
+import 'package:millearnia/src/datasource/repositories/course_repository.dart';
 import 'package:millearnia/src/datasource/repositories/cv_repository.dart';
 import 'package:millearnia/src/datasource/repositories/example_repository.dart';
+import 'package:millearnia/src/datasource/repositories/profession_repository.dart';
 import 'package:millearnia/src/datasource/repositories/user_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:millearnia/src/features/auth/register/logic/register_cubit.dart';
@@ -52,5 +56,21 @@ final GetIt locator = GetIt.instance
   ..registerLazySingleton(() {
     print('Registering CvRepository');
     return CvRepository(cvApi: locator<CvApi>());
+  })
+  ..registerLazySingleton(() {
+    print('Registering ProfessionApi');
+    return ProfessionApi(dio: locator<DioConfig>().dio);
+  })
+  ..registerLazySingleton(() {
+    print('Registering ProfessionRepository');
+    return ProfessionRepository(professionApi: locator<ProfessionApi>());
+  })
+  ..registerLazySingleton(() {
+    print('Registering CourseApi');
+    return CourseApi(dio: locator<DioConfig>().dio);
+  })
+  ..registerLazySingleton(() {
+    print('Registering CourseRepository');
+    return CourseRepository(courseApi: locator<CourseApi>());
   })
   ;

@@ -142,7 +142,7 @@ uploadPlaylistId: 'uploadPlaylistId');
         children: [
           Image(
             width: 150,
-            image: NetworkImage(video.thumbnaiUrl)
+            image: NetworkImage(video.thumbnail)
             ),
             SizedBox(width: 10,),
             Expanded(

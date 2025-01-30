@@ -32,7 +32,7 @@ class Categorie extends StatelessWidget {
             child: contentImage != null
                 ? CircleAvatar(
                     backgroundColor: Theme.of(context).colorScheme.onInverseSurface,
-                    backgroundImage: AssetImage(contentImage!),
+                    backgroundImage: NetworkImage(contentImage!),
                   )
                 : (icon != null
                     ? CircleAvatar(

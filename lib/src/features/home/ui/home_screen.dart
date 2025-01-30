@@ -1,16 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:millearnia/src/core/i18n/l10n.dart';
 import 'package:millearnia/src/core/routing/app_router.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
-import 'package:millearnia/src/shared/components/atoms/dividers/labeled_divider.dart';
+import 'package:millearnia/src/features/home/ui/categories.dart';
+import 'package:millearnia/src/features/home/ui/mentors.dart';
+import 'package:millearnia/src/features/home/ui/profession.dart';
+import 'package:millearnia/src/features/home/ui/courses.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
-import 'package:millearnia/src/shared/components/home_components/categorie.dart';
-import 'package:millearnia/src/shared/components/home_components/course_component.dart';
-import 'package:millearnia/src/shared/components/home_components/course_continue.dart';
-import 'package:millearnia/src/shared/components/onboarding/onboarding_item.dart';
-import 'package:millearnia/src/shared/components/onboarding/page_indicators.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,12 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
     final TextEditingController _searshController = TextEditingController();
-     final List<Map<String, String>> categories = [
-    {'img': 'assets/images/art.png', 'title': 'Art'},
-    {'img': 'assets/images/coding.png', 'title': 'Coding'},
-    {'img': 'assets/images/marketing.png', 'title': 'Marketing'},
-    {'img': 'assets/images/business.png', 'title': 'Business'},
-  ];
+   
+  
    final List<Map<String, String>> Courses = [
     {'img': 'assets/images/course1.png', 'title': 'Design Thinking Fundamental','star':' 4.8','name':'Robert Green','prise':'180.00','btnText':'Best seller'},
     {'img': 'assets/images/course1.png', 'title': 'Design Thinking Fundamental','star':' 4.8','name':'Robert Green','prise':'180.00','btnText':'Best seller'},
@@ -202,22 +195,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     ),
-    Container(
-                width: double.infinity,
-                height: 100,
-                child:ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: categories.length,
-                    itemBuilder: (context, index) {
-                      final category = categories[index];
-                      return Categorie(
-                        title: category['title']!,
-                        contentImage: category['img'],
-                      );
-                    },
-                  ),
-              
-              ),
+     // Ajout du widget Categories ici
+    Categories(),
+    
+          //profession
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
                 child: Row(
@@ -240,32 +221,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 ),
-              Container(
-                width: double.infinity,
-                height: 300,
-                child:ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: Courses.length,
-                    itemBuilder: (context, i) {
-                      final course = Courses[i];
-                      return GestureDetector(
-                        onTap:() {
-                          context.router.push(CourseDetailRoute());
-                          },
-                          child:  CourseComponent(
-                            title: course['title']!,
-                            star: course['star']!, 
-                            contentImage: course['img']!,
-                              name: course['name']!, 
-                              prise:course['prise']!,
-                              btnText:course['btnText']!
-                          ),
-                      );
-                    },
-                  ),
-              
-              ),
-              Padding(
+                Professions(),
+             
+           Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
                 child:Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -287,22 +245,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              Container(
-                width: double.infinity,
-                height: 100,
-                child:ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: categories.length,
-                    itemBuilder: (context, index) {
-                      final profile = profiles[index];
-                      return Categorie(
-                        title: profile['title']!,
-                        contentImage: profile['img'],
-                      );
-                    },
-                  ),
-              
-              ),
+             Mentors(),
+
                Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
                 child:Row(
@@ -325,13 +269,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-            CourseContinue(
-                            title: 'Introduction of Figma',
-                            contentImage: 'assets/images/courseContinue.png',
-                              name:'Jacob Jones', 
-                              btnText:'Design',
-                              progress: 20,
-                              ),
+              Expanded(child:  CourseList(),)
+            // CourseContinue(
+            //                 title: 'Introduction of Figma',
+            //                 contentImage: 'assets/images/courseContinue.png',
+            //                   name:'Jacob Jones', 
+            //                   btnText:'Design',
+            //                   progress: 20,
+            //                   ),
+
           
           
         ],

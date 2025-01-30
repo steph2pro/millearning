@@ -37,7 +37,7 @@ class CourseComponent extends StatelessWidget {
             children: [
                  ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
+              child: Image.network(
                 contentImage,
                 fit: BoxFit.cover,
                 width: 213,
@@ -87,7 +87,7 @@ class CourseComponent extends StatelessWidget {
                     child: IconButton(
                       icon: Icon(
                         size: 24,
-                        Icons.sync,
+                        Icons.bookmark,
                         color: context.colorScheme.primary,
                       ),
                       onPressed: () {},
