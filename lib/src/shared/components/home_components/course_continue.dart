@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
+import 'package:millearnia/src/shared/components/string_extionsions.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 
 class CourseContinue extends StatelessWidget {
@@ -77,7 +78,7 @@ class CourseContinue extends StatelessWidget {
              ),
             gapH8,
               Text(
-                title,
+                title.capitalize().truncateWithEllipsis(30),
                 style: context.textTheme.bodySmall!.copyWith(
                   fontSize: 14,
                   color: context.colorScheme.outline,
@@ -89,7 +90,7 @@ class CourseContinue extends StatelessWidget {
               children: [
                 profilImage != null
                   ? CircleAvatar(
-                      radius: 10,
+                      radius: 18,
                       backgroundColor: Theme.of(context).colorScheme.surface,
                       backgroundImage: AssetImage(profilImage!),
                     )
@@ -105,7 +106,7 @@ class CourseContinue extends StatelessWidget {
                       ,
                       gapW6,
                 Text(
-              name,
+              name.capitalize().truncateWithEllipsis(15),
               style: context.textTheme.bodySmall!.copyWith(
                 fontSize: 12,
                 color: context.colorScheme.outlineVariant,

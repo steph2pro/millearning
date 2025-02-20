@@ -23,11 +23,11 @@ mixin _$Profession {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   int get userId => throw _privateConstructorUsedError;
-  String get thumbnail =>
-      throw _privateConstructorUsedError; // required List<String> tabs,
+  String get thumbnail => throw _privateConstructorUsedError;
   int get categoryId =>
       throw _privateConstructorUsedError; // required Category category,
   UserModel get user => throw _privateConstructorUsedError;
+  List<Video> get videos => throw _privateConstructorUsedError;
 
   /// Serializes this Profession to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -51,7 +51,8 @@ abstract class $ProfessionCopyWith<$Res> {
       int userId,
       String thumbnail,
       int categoryId,
-      UserModel user});
+      UserModel user,
+      List<Video> videos});
 
   $UserModelCopyWith<$Res> get user;
 }
@@ -77,6 +78,7 @@ class _$ProfessionCopyWithImpl<$Res, $Val extends Profession>
     Object? thumbnail = null,
     Object? categoryId = null,
     Object? user = null,
+    Object? videos = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -103,6 +105,10 @@ class _$ProfessionCopyWithImpl<$Res, $Val extends Profession>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel,
+      videos: null == videos
+          ? _value.videos
+          : videos // ignore: cast_nullable_to_non_nullable
+              as List<Video>,
     ) as $Val);
   }
 
@@ -131,7 +137,8 @@ abstract class _$$ProfessionImplCopyWith<$Res>
       int userId,
       String thumbnail,
       int categoryId,
-      UserModel user});
+      UserModel user,
+      List<Video> videos});
 
   @override
   $UserModelCopyWith<$Res> get user;
@@ -156,6 +163,7 @@ class __$$ProfessionImplCopyWithImpl<$Res>
     Object? thumbnail = null,
     Object? categoryId = null,
     Object? user = null,
+    Object? videos = null,
   }) {
     return _then(_$ProfessionImpl(
       id: null == id
@@ -182,6 +190,10 @@ class __$$ProfessionImplCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel,
+      videos: null == videos
+          ? _value._videos
+          : videos // ignore: cast_nullable_to_non_nullable
+              as List<Video>,
     ));
   }
 }
@@ -195,7 +207,9 @@ class _$ProfessionImpl implements _Profession {
       required this.userId,
       required this.thumbnail,
       required this.categoryId,
-      required this.user});
+      required this.user,
+      required final List<Video> videos})
+      : _videos = videos;
 
   factory _$ProfessionImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProfessionImplFromJson(json);
@@ -208,16 +222,22 @@ class _$ProfessionImpl implements _Profession {
   final int userId;
   @override
   final String thumbnail;
-// required List<String> tabs,
   @override
   final int categoryId;
 // required Category category,
   @override
   final UserModel user;
+  final List<Video> _videos;
+  @override
+  List<Video> get videos {
+    if (_videos is EqualUnmodifiableListView) return _videos;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_videos);
+  }
 
   @override
   String toString() {
-    return 'Profession(id: $id, name: $name, userId: $userId, thumbnail: $thumbnail, categoryId: $categoryId, user: $user)';
+    return 'Profession(id: $id, name: $name, userId: $userId, thumbnail: $thumbnail, categoryId: $categoryId, user: $user, videos: $videos)';
   }
 
   @override
@@ -232,13 +252,14 @@ class _$ProfessionImpl implements _Profession {
                 other.thumbnail == thumbnail) &&
             (identical(other.categoryId, categoryId) ||
                 other.categoryId == categoryId) &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.user, user) || other.user == user) &&
+            const DeepCollectionEquality().equals(other._videos, _videos));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, userId, thumbnail, categoryId, user);
+  int get hashCode => Object.hash(runtimeType, id, name, userId, thumbnail,
+      categoryId, user, const DeepCollectionEquality().hash(_videos));
 
   /// Create a copy of Profession
   /// with the given fields replaced by the non-null parameter values.
@@ -263,7 +284,8 @@ abstract class _Profession implements Profession {
       required final int userId,
       required final String thumbnail,
       required final int categoryId,
-      required final UserModel user}) = _$ProfessionImpl;
+      required final UserModel user,
+      required final List<Video> videos}) = _$ProfessionImpl;
 
   factory _Profession.fromJson(Map<String, dynamic> json) =
       _$ProfessionImpl.fromJson;
@@ -275,11 +297,13 @@ abstract class _Profession implements Profession {
   @override
   int get userId;
   @override
-  String get thumbnail; // required List<String> tabs,
+  String get thumbnail;
   @override
   int get categoryId; // required Category category,
   @override
   UserModel get user;
+  @override
+  List<Video> get videos;
 
   /// Create a copy of Profession
   /// with the given fields replaced by the non-null parameter values.

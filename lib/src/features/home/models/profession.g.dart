@@ -14,6 +14,9 @@ _$ProfessionImpl _$$ProfessionImplFromJson(Map<String, dynamic> json) =>
       thumbnail: json['thumbnail'] as String,
       categoryId: (json['categoryId'] as num).toInt(),
       user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
+      videos: (json['videos'] as List<dynamic>)
+          .map((e) => Video.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$ProfessionImplToJson(_$ProfessionImpl instance) =>
@@ -24,4 +27,5 @@ Map<String, dynamic> _$$ProfessionImplToJson(_$ProfessionImpl instance) =>
       'thumbnail': instance.thumbnail,
       'categoryId': instance.categoryId,
       'user': instance.user.toJson(),
+      'videos': instance.videos.map((e) => e.toJson()).toList(),
     };

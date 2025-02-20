@@ -4,9 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:millearnia/src/core/i18n/l10n.dart';
 import 'package:millearnia/src/core/routing/app_router.dart';
 import 'package:millearnia/src/core/theme/app_theme.dart';
+import 'package:millearnia/src/features/centre_interet/logic/interet_cubit.dart';
+import 'package:millearnia/src/features/centre_interet/logic/user_interest_cubit.dart';
+import 'package:millearnia/src/features/course/logic/course_userInterest_cubit.dart';
+import 'package:millearnia/src/features/course/logic/userCourse_cubit.dart';
+import 'package:millearnia/src/features/course/logic/userCourse_enroll_cubit.dart';
 import 'package:millearnia/src/features/home/logic/category_cubit.dart';
 import 'package:millearnia/src/features/home/logic/profession_cubit.dart';
 import 'package:millearnia/src/features/home/logic/course_cubit.dart';
+import 'package:millearnia/src/features/professions/logic/profession_userInterest_cubit.dart';
 import 'package:millearnia/src/shared/locator.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:oktoast/oktoast.dart';
@@ -23,7 +29,13 @@ class Application extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => ProfessionCubit()), 
+        BlocProvider(create: (context) => ProfessionUserInterestCubit()),
         BlocProvider(create: (context) => CourseCubit()), 
+        BlocProvider(create: (context) => CourseUserInterestCubit()), 
+        BlocProvider(create: (context) => UserCourseEnrollCubit()), 
+        BlocProvider(create: (context) => UserCourseCubit()),
+        BlocProvider(create: (context) => InteretCubit()),
+        BlocProvider(create: (context) => UserInteretCubit()),
         BlocProvider(create: (context) => CategoryCubit()..getCategories()), 
       ],
       child: MaterialApp.router(

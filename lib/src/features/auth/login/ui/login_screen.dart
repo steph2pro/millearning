@@ -155,8 +155,10 @@ class _LoginScreenState extends State<LoginScreen> {
                    await prefs.setString('name', user.name);
                    await prefs.setString('email', user.email);
                    await prefs.setString('phone', user.phone);
+                   await prefs.setInt('id', user.id);
+                  print('*********** ${user.id}');
                   
-                  context.router.push(HomePageRoute());
+                  context.router.push(CentreInteretRoute());
                   // context.router.push(CvBuilderRoute());
 
                 // }

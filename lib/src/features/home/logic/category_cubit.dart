@@ -2,8 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:millearnia/src/datasource/models/api_response/api_response.dart';
 import 'package:millearnia/src/datasource/repositories/profession_repository.dart';
 import 'package:millearnia/src/features/home/models/category_response.dart';
-import 'package:millearnia/src/features/home/models/profession_response.dart';
-import 'package:millearnia/src/features/home/models/video_response.dart';
 import 'package:millearnia/src/shared/locator.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

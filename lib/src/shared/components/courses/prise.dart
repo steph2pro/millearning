@@ -34,7 +34,7 @@ class PriceAndEnrollButton extends StatelessWidget {
         height: 50,
         child:   ElevatedButton(
           onPressed: onPressed,
-          child: Text('Enroll Now'),
+          child: Text('start Now'),
           
           style: ElevatedButton.styleFrom(
             backgroundColor: context.colorScheme.primary,

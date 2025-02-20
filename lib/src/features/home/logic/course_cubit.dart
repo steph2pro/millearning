@@ -17,9 +17,6 @@ class CourseCubit extends Cubit<CourseState> {
     CourseRepository? courseRepository,
   })  : _courseRepository = courseRepository ?? locator<CourseRepository>(),
         super(CourseState.initial());
-
-  
-
   // recuperer les Course 
   Future<void> getCourses() async {
     if(state.whenOrNull(loading: ()=>true) == true) return;

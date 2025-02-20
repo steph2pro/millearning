@@ -4,6 +4,7 @@ import 'package:millearnia/src/features/auth/register/model/identify/identify_re
 import 'package:millearnia/src/features/auth/register/model/new_password/new_password_request.dart';
 import 'package:millearnia/src/features/auth/register/model/otp_code/otp_code_request.dart';
 import 'package:millearnia/src/features/auth/register/model/register_request.dart';
+import 'package:millearnia/src/features/centre_interet/models/interet_request.dart';
 
 class UserApi {
   final Dio dio;
@@ -94,6 +95,27 @@ Future<Map<String, dynamic>> loginUser(LoginRequest user) async {
         return response.data;
       
     
+  }
+
+ Future<Map<String, dynamic>> saveInteret(InteretRequest interet) async {
+      final interests= interet.interests;
+      print("******* interet à envoyer : $interests et interet request: $interet");
+      final response = await dio.put(
+        '/interest-addInterestsToUser/${interet.id}',
+       data: {
+          "interestIds": interet.interests, // Assurez-vous que c'est une liste non vide
+        }
+      );
+
+        return response.data;
+  }
+  
+ Future<Map<String, dynamic>> getInterests(int id) async {
+      final response = await dio.get(
+        '/user-getInterests/$id',
+      );
+
+        return response.data;
   }
 
 

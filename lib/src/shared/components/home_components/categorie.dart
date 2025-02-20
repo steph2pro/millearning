@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
+import 'package:millearnia/src/shared/components/string_extionsions.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 
 class Categorie extends StatelessWidget {
@@ -47,11 +48,13 @@ class Categorie extends StatelessWidget {
           ),
           gapH8,
           Text(
-            title,
+            title.capitalize().truncateWithEllipsis(15),
             style: context.textTheme.bodySmall!.copyWith(
               fontSize: 12,
               color: context.colorScheme.tertiary,
+              
             ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),

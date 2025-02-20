@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
+import 'package:millearnia/src/shared/components/home_components/course_continue.dart';
+import 'package:millearnia/src/shared/components/string_extionsions.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 
 // Course Header Widget
@@ -64,7 +66,7 @@ class CourseTitle extends StatelessWidget {
         ),
         gapH12,
         Text(
-                 title,
+                 title.capitalize(),
                 style: context.textTheme.titleSmall,
               )
         ,
@@ -77,12 +79,11 @@ class CourseTitle extends StatelessWidget {
               children: [
                 imageProfil != null
                   ? CircleAvatar(
-                      radius: 10,
+                      radius: 18,
                       backgroundColor: Theme.of(context).colorScheme.surface,
                       backgroundImage: AssetImage(imageProfil!),
                     )
                   :  CircleAvatar(
-                         radius: 10,
                           backgroundColor: Theme.of(context).colorScheme.surface,
                           child: Icon(
                             Icons.person,
@@ -107,7 +108,7 @@ class CourseTitle extends StatelessWidget {
                 Icon(Icons.play_circle,size: 15,color: Theme.of(context).colorScheme.tertiary,),
                 gapW6,
                 Text(
-                '${lessons.toString()} lessons',
+                '${lessons.toString()} hours',
                 style: context.textTheme.bodySmall!.copyWith(
                   fontSize: 10,
                   color: context.colorScheme.outlineVariant,

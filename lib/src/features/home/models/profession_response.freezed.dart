@@ -20,6 +20,7 @@ ProfessionResponse _$ProfessionResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProfessionResponse {
+// String? message,
   List<Profession> get professions => throw _privateConstructorUsedError;
 
   /// Serializes this ProfessionResponse to a JSON map.
@@ -111,7 +112,9 @@ class _$ProfessionResponseImpl implements _ProfessionResponse {
   factory _$ProfessionResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProfessionResponseImplFromJson(json);
 
+// String? message,
   final List<Profession> _professions;
+// String? message,
   @override
   List<Profession> get professions {
     if (_professions is EqualUnmodifiableListView) return _professions;
@@ -162,6 +165,7 @@ abstract class _ProfessionResponse implements ProfessionResponse {
   factory _ProfessionResponse.fromJson(Map<String, dynamic> json) =
       _$ProfessionResponseImpl.fromJson;
 
+// String? message,
   @override
   List<Profession> get professions;
 

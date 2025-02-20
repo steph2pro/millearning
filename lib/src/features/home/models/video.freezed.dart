@@ -24,10 +24,7 @@ mixin _$Video {
   int get professionId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get youtubeId => throw _privateConstructorUsedError;
-  String get thumbnail =>
-      throw _privateConstructorUsedError; // required Comment comments,
-// @CommentListConverter() List<Comment>? comments,
-  List<Profession> get professions => throw _privateConstructorUsedError;
+  String get thumbnail => throw _privateConstructorUsedError;
 
   /// Serializes this Video to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,8 +45,7 @@ abstract class $VideoCopyWith<$Res> {
       int professionId,
       String title,
       String youtubeId,
-      String thumbnail,
-      List<Profession> professions});
+      String thumbnail});
 }
 
 /// @nodoc
@@ -72,7 +68,6 @@ class _$VideoCopyWithImpl<$Res, $Val extends Video>
     Object? title = null,
     Object? youtubeId = null,
     Object? thumbnail = null,
-    Object? professions = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -95,10 +90,6 @@ class _$VideoCopyWithImpl<$Res, $Val extends Video>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String,
-      professions: null == professions
-          ? _value.professions
-          : professions // ignore: cast_nullable_to_non_nullable
-              as List<Profession>,
     ) as $Val);
   }
 }
@@ -115,8 +106,7 @@ abstract class _$$VideoImplCopyWith<$Res> implements $VideoCopyWith<$Res> {
       int professionId,
       String title,
       String youtubeId,
-      String thumbnail,
-      List<Profession> professions});
+      String thumbnail});
 }
 
 /// @nodoc
@@ -137,7 +127,6 @@ class __$$VideoImplCopyWithImpl<$Res>
     Object? title = null,
     Object? youtubeId = null,
     Object? thumbnail = null,
-    Object? professions = null,
   }) {
     return _then(_$VideoImpl(
       id: null == id
@@ -160,10 +149,6 @@ class __$$VideoImplCopyWithImpl<$Res>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String,
-      professions: null == professions
-          ? _value._professions
-          : professions // ignore: cast_nullable_to_non_nullable
-              as List<Profession>,
     ));
   }
 }
@@ -176,9 +161,7 @@ class _$VideoImpl implements _Video {
       required this.professionId,
       required this.title,
       required this.youtubeId,
-      required this.thumbnail,
-      required final List<Profession> professions})
-      : _professions = professions;
+      required this.thumbnail});
 
   factory _$VideoImpl.fromJson(Map<String, dynamic> json) =>
       _$$VideoImplFromJson(json);
@@ -193,21 +176,10 @@ class _$VideoImpl implements _Video {
   final String youtubeId;
   @override
   final String thumbnail;
-// required Comment comments,
-// @CommentListConverter() List<Comment>? comments,
-  final List<Profession> _professions;
-// required Comment comments,
-// @CommentListConverter() List<Comment>? comments,
-  @override
-  List<Profession> get professions {
-    if (_professions is EqualUnmodifiableListView) return _professions;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_professions);
-  }
 
   @override
   String toString() {
-    return 'Video(id: $id, professionId: $professionId, title: $title, youtubeId: $youtubeId, thumbnail: $thumbnail, professions: $professions)';
+    return 'Video(id: $id, professionId: $professionId, title: $title, youtubeId: $youtubeId, thumbnail: $thumbnail)';
   }
 
   @override
@@ -222,15 +194,13 @@ class _$VideoImpl implements _Video {
             (identical(other.youtubeId, youtubeId) ||
                 other.youtubeId == youtubeId) &&
             (identical(other.thumbnail, thumbnail) ||
-                other.thumbnail == thumbnail) &&
-            const DeepCollectionEquality()
-                .equals(other._professions, _professions));
+                other.thumbnail == thumbnail));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, professionId, title,
-      youtubeId, thumbnail, const DeepCollectionEquality().hash(_professions));
+  int get hashCode =>
+      Object.hash(runtimeType, id, professionId, title, youtubeId, thumbnail);
 
   /// Create a copy of Video
   /// with the given fields replaced by the non-null parameter values.
@@ -254,8 +224,7 @@ abstract class _Video implements Video {
       required final int professionId,
       required final String title,
       required final String youtubeId,
-      required final String thumbnail,
-      required final List<Profession> professions}) = _$VideoImpl;
+      required final String thumbnail}) = _$VideoImpl;
 
   factory _Video.fromJson(Map<String, dynamic> json) = _$VideoImpl.fromJson;
 
@@ -268,10 +237,7 @@ abstract class _Video implements Video {
   @override
   String get youtubeId;
   @override
-  String get thumbnail; // required Comment comments,
-// @CommentListConverter() List<Comment>? comments,
-  @override
-  List<Profession> get professions;
+  String get thumbnail;
 
   /// Create a copy of Video
   /// with the given fields replaced by the non-null parameter values.

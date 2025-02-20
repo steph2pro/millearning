@@ -39,6 +39,19 @@ class ProfessionRepository extends BaseRepository {
       },
     );
   }
+  Future<ApiResponse<ProfessionResponse, ApiError>> getProfessionsByUserInterests(int userId) async {
+    return runApiCall(
+      call: () async {
+        
+          final response = await professionApi.getProfessionsByUserInterests(userId);
+        
+          print("response Repository ****************** ${response} ");
+          return ApiResponse.success(ProfessionResponse.fromJson(response));
+       
+      },
+    );
+  }
+  
    Future<ApiResponse<ProfessionResponse, ApiError>> getAllProfessionCategory(int categoryId) async {
     return runApiCall(
       call: () async {

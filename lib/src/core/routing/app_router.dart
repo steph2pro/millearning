@@ -13,15 +13,19 @@ import 'package:millearnia/src/features/cv/ui/cv_bluilder_screen.dart';
 import 'package:millearnia/src/features/cv/ui/cv_model_screen.dart';
 import 'package:millearnia/src/features/cv/ui/cv_model2_screen.dart';
 import 'package:millearnia/src/features/cv/ui/cv_model3_screen.dart';
-import 'package:millearnia/src/features/home/ui/course_detail.dart';
+import 'package:millearnia/src/features/centre_interet/ui/centre_interet_screen.dart';
+import 'package:millearnia/src/features/course/ui/course_detail_screen.dart';
 import 'package:millearnia/src/features/home/ui/home_page_screen.dart';
 import 'package:millearnia/src/features/home/ui/home_screen.dart';
 import 'package:millearnia/src/features/home/ui/video_player_screen.dart';
 import 'package:millearnia/src/features/onboarding/ui/onboarding_screen.dart';
+import 'package:millearnia/src/features/professions/ui/professions_detail.dart';
 import 'package:millearnia/src/features/professions/ui/professions_screen.dart';
 import 'package:millearnia/src/features/splash/ui/splash_screen.dart';
 import 'package:millearnia/src/features/welcome/ui/welcome_screen.dart';
 import 'package:millearnia/src/features/auth/register/model/otp_code/otp_code_response.dart';
+import 'package:millearnia/src/features/home/models/profession.dart';
+import 'package:millearnia/src/datasource/models/course.dart';
 
 part 'app_router.gr.dart'; 
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')
@@ -34,6 +38,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: OnboardingRoute.page),
     AutoRoute(page: LoginRoute.page),
     AutoRoute(page: RegisterRoute.page),
+    AutoRoute(page: CentreInteretRoute.page),
     AutoRoute(page: HomePageRoute.page,initial: true),
     AutoRoute(page: ChoixModelRoute.page),
     AutoRoute(page: CvBuilderRoute.page),
@@ -43,6 +48,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: VideoPlayerRoute.page),
     AutoRoute(page: ProfessionsRoute.page),
     AutoRoute(page: CourseRoute.page),
+    AutoRoute(page: ProfessionsDetailRoute.page),
 
     AutoRoute(page: PasswordWrapperRoute.page,children: [
       AutoRoute(page: PasswordForgetRoute.page, initial: true),

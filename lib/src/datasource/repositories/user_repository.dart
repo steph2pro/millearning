@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+
 import 'package:millearnia/src/datasource/http/dio_config.dart';
 import 'package:millearnia/src/datasource/http/user_api.dart';
 import 'package:millearnia/src/datasource/models/api_response/api_response.dart';
@@ -13,9 +13,11 @@ import 'package:millearnia/src/features/auth/register/model/otp_code/otp_code_re
 import 'package:millearnia/src/features/auth/register/model/otp_code/otp_code_response.dart';
 import 'package:millearnia/src/features/auth/register/model/register_request.dart';
 import 'package:millearnia/src/features/auth/register/model/register_response.dart';
+import 'package:millearnia/src/features/centre_interet/models/interet_request.dart';
+import 'package:millearnia/src/features/centre_interet/models/interet_response.dart';
+import 'package:millearnia/src/features/centre_interet/models/user_interest_response.dart';
 import 'package:millearnia/src/features/home/models/user_response.dart';
 import 'package:millearnia/src/shared/locator.dart';
-import '../models/user_model.dart';
 
 class UserRepository extends BaseRepository {
   final UserApi userApi;
@@ -90,6 +92,27 @@ class UserRepository extends BaseRepository {
           return ApiResponse.success(UserResponse.fromJson(response));
        
       },
+    );
+  }
+  Future<ApiResponse<InteretResponse, ApiError>> saveInteret(InteretRequest interet) async {
+    return runApiCall(
+      call: () async {
+        
+          final response = await userApi.saveInteret(interet);
+
+          return ApiResponse.success(InteretResponse.fromJson(response));
+      }
+    );
+  }
+
+  Future<ApiResponse<UserInterestResponse, ApiError>> getUserInterest(int id) async {
+    return runApiCall(
+      call: () async {
+        
+          final response = await userApi.getInterests(id);
+
+          return ApiResponse.success(UserInterestResponse.fromJson(response));
+      }
     );
   }
 

@@ -12,9 +12,6 @@ _$VideoImpl _$$VideoImplFromJson(Map<String, dynamic> json) => _$VideoImpl(
       title: json['title'] as String,
       youtubeId: json['youtubeId'] as String,
       thumbnail: json['thumbnail'] as String,
-      professions: (json['professions'] as List<dynamic>)
-          .map((e) => Profession.fromJson(e as Map<String, dynamic>))
-          .toList(),
     );
 
 Map<String, dynamic> _$$VideoImplToJson(_$VideoImpl instance) =>
@@ -24,5 +21,4 @@ Map<String, dynamic> _$$VideoImplToJson(_$VideoImpl instance) =>
       'title': instance.title,
       'youtubeId': instance.youtubeId,
       'thumbnail': instance.thumbnail,
-      'professions': instance.professions.map((e) => e.toJson()).toList(),
     };

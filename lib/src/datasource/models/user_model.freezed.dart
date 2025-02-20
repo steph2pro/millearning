@@ -20,6 +20,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserModel {
+  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
@@ -27,7 +28,13 @@ mixin _$UserModel {
   String? get profil => throw _privateConstructorUsedError;
   String? get accessToken => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
+  String get status =>
+      throw _privateConstructorUsedError; // required DateTime createdAt,
+// required DateTime updatedAt,
+// List<Profession>? professions,
+// List<Comment>? comments,
+  List<String> get interests => throw _privateConstructorUsedError;
+  List<UserCourse> get courses => throw _privateConstructorUsedError;
 
   /// Serializes this UserModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,14 +52,17 @@ abstract class $UserModelCopyWith<$Res> {
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
   $Res call(
-      {String name,
+      {int id,
+      String name,
       String email,
       String phone,
       String password,
       String? profil,
       String? accessToken,
       String role,
-      String status});
+      String status,
+      List<String> interests,
+      List<UserCourse> courses});
 }
 
 /// @nodoc
@@ -70,6 +80,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? email = null,
     Object? phone = null,
@@ -78,8 +89,14 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? accessToken = freezed,
     Object? role = null,
     Object? status = null,
+    Object? interests = null,
+    Object? courses = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -112,6 +129,14 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
+      interests: null == interests
+          ? _value.interests
+          : interests // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      courses: null == courses
+          ? _value.courses
+          : courses // ignore: cast_nullable_to_non_nullable
+              as List<UserCourse>,
     ) as $Val);
   }
 }
@@ -125,14 +150,17 @@ abstract class _$$UserModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name,
+      {int id,
+      String name,
       String email,
       String phone,
       String password,
       String? profil,
       String? accessToken,
       String role,
-      String status});
+      String status,
+      List<String> interests,
+      List<UserCourse> courses});
 }
 
 /// @nodoc
@@ -148,6 +176,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? email = null,
     Object? phone = null,
@@ -156,8 +185,14 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? accessToken = freezed,
     Object? role = null,
     Object? status = null,
+    Object? interests = null,
+    Object? courses = null,
   }) {
     return _then(_$UserModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -190,6 +225,14 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
+      interests: null == interests
+          ? _value._interests
+          : interests // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      courses: null == courses
+          ? _value._courses
+          : courses // ignore: cast_nullable_to_non_nullable
+              as List<UserCourse>,
     ));
   }
 }
@@ -198,18 +241,25 @@ class __$$UserModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserModelImpl implements _UserModel {
   const _$UserModelImpl(
-      {required this.name,
+      {required this.id,
+      required this.name,
       required this.email,
       required this.phone,
       required this.password,
       this.profil,
       this.accessToken,
       required this.role,
-      required this.status});
+      required this.status,
+      final List<String> interests = const [],
+      final List<UserCourse> courses = const []})
+      : _interests = interests,
+        _courses = courses;
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserModelImplFromJson(json);
 
+  @override
+  final int id;
   @override
   final String name;
   @override
@@ -226,10 +276,35 @@ class _$UserModelImpl implements _UserModel {
   final String role;
   @override
   final String status;
+// required DateTime createdAt,
+// required DateTime updatedAt,
+// List<Profession>? professions,
+// List<Comment>? comments,
+  final List<String> _interests;
+// required DateTime createdAt,
+// required DateTime updatedAt,
+// List<Profession>? professions,
+// List<Comment>? comments,
+  @override
+  @JsonKey()
+  List<String> get interests {
+    if (_interests is EqualUnmodifiableListView) return _interests;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_interests);
+  }
+
+  final List<UserCourse> _courses;
+  @override
+  @JsonKey()
+  List<UserCourse> get courses {
+    if (_courses is EqualUnmodifiableListView) return _courses;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_courses);
+  }
 
   @override
   String toString() {
-    return 'UserModel(name: $name, email: $email, phone: $phone, password: $password, profil: $profil, accessToken: $accessToken, role: $role, status: $status)';
+    return 'UserModel(id: $id, name: $name, email: $email, phone: $phone, password: $password, profil: $profil, accessToken: $accessToken, role: $role, status: $status, interests: $interests, courses: $courses)';
   }
 
   @override
@@ -237,6 +312,7 @@ class _$UserModelImpl implements _UserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phone, phone) || other.phone == phone) &&
@@ -246,13 +322,27 @@ class _$UserModelImpl implements _UserModel {
             (identical(other.accessToken, accessToken) ||
                 other.accessToken == accessToken) &&
             (identical(other.role, role) || other.role == role) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            const DeepCollectionEquality()
+                .equals(other._interests, _interests) &&
+            const DeepCollectionEquality().equals(other._courses, _courses));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, email, phone, password,
-      profil, accessToken, role, status);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      email,
+      phone,
+      password,
+      profil,
+      accessToken,
+      role,
+      status,
+      const DeepCollectionEquality().hash(_interests),
+      const DeepCollectionEquality().hash(_courses));
 
   /// Create a copy of UserModel
   /// with the given fields replaced by the non-null parameter values.
@@ -272,18 +362,23 @@ class _$UserModelImpl implements _UserModel {
 
 abstract class _UserModel implements UserModel {
   const factory _UserModel(
-      {required final String name,
+      {required final int id,
+      required final String name,
       required final String email,
       required final String phone,
       required final String password,
       final String? profil,
       final String? accessToken,
       required final String role,
-      required final String status}) = _$UserModelImpl;
+      required final String status,
+      final List<String> interests,
+      final List<UserCourse> courses}) = _$UserModelImpl;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$UserModelImpl.fromJson;
 
+  @override
+  int get id;
   @override
   String get name;
   @override
@@ -299,7 +394,14 @@ abstract class _UserModel implements UserModel {
   @override
   String get role;
   @override
-  String get status;
+  String get status; // required DateTime createdAt,
+// required DateTime updatedAt,
+// List<Profession>? professions,
+// List<Comment>? comments,
+  @override
+  List<String> get interests;
+  @override
+  List<UserCourse> get courses;
 
   /// Create a copy of UserModel
   /// with the given fields replaced by the non-null parameter values.

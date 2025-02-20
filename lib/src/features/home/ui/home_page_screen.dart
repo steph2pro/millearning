@@ -26,7 +26,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
       body: [
         const HomeScreen(),
         const CourseScreen(),
-        const ProfessionsScreen(),
+        // const ProfessionsScreen(),
         const ChoixModelScreen(),
       ].elementAt(currentIndex),
       bottomNavigationBar: BottomNavigationBar(
@@ -46,10 +46,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
             icon: const Icon(Icons.book),
             label: 'Cours'
           ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.bookmark),
-            label: 'Profession'
-          ),
+          // BottomNavigationBarItem(
+          //   icon: const Icon(Icons.bookmark),
+          //   label: 'Profession'
+          // ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.description),
             label:'CV'

@@ -7,6 +7,7 @@ part 'profession_response.g.dart';
 @freezed
 class ProfessionResponse with _$ProfessionResponse {
   const factory ProfessionResponse({
+    // String? message, 
     required List<Profession> professions,
   }) = _ProfessionResponse;
 

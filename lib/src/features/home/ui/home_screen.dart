@@ -7,9 +7,11 @@ import 'package:millearnia/src/features/home/ui/categories.dart';
 import 'package:millearnia/src/features/home/ui/mentors.dart';
 import 'package:millearnia/src/features/home/ui/profession.dart';
 import 'package:millearnia/src/features/home/ui/courses.dart';
+import 'package:millearnia/src/shared/components/courses/course_title.dart';
 import 'package:millearnia/src/shared/components/forms/input.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:millearnia/src/shared/components/string_extionsions.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -21,37 +23,37 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
     
-  String nom='';
-  Future<void> fetchInfosUser() async {
-  final prefs = await SharedPreferences.getInstance();
-  nom = prefs.getString('name')?? '';
-  print(nom);
-}
+  
 
     final TextEditingController _searshController = TextEditingController();
    
   
-   final List<Map<String, String>> Courses = [
-    {'img': 'assets/images/course1.png', 'title': 'Design Thinking Fundamental','star':' 4.8','name':'Robert Green','prise':'180.00','btnText':'Best seller'},
-    {'img': 'assets/images/course1.png', 'title': 'Design Thinking Fundamental','star':' 4.8','name':'Robert Green','prise':'180.00','btnText':'Best seller'},
-    {'img': 'assets/images/course2.png', 'title': '3D Illustration Des','star':'4.9','name':'John Doe','prise':'250.00','btnText':'Recommer'},
-  ];
-   final List<Map<String, String>> profiles = [
-    {'img': 'assets/images/profile1.png', 'title': 'Esther T.'},
-    {'img': 'assets/images/profile2.png', 'title': 'Jenny M.'},
-    {'img': 'assets/images/profile3.png', 'title': 'Jacob U.'},
-    {'img': 'assets/images/profile4.png', 'title': 'Bessi K.'},
-  ];
+
   @override
   void dispose() {
     _searshController.dispose();
     super.dispose();
   }
-  @override
-  void initState(){
-
-    fetchInfosUser();
+  String? name; // Déclarer une variable pour stocker l'ID de l'utilisateur
+int? userId;
+  // Récupérer l'ID et les autres informations de l'utilisateur
+  Future<void> getUserData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+     userId = prefs.getInt('id');
+     name = prefs.getString('name');
+    // String? email = prefs.getString('email');
+    // String? phone = prefs.getString('phone');
+    print('********* $name ************');
+    setState(() {}); // Rafraîchir l'interface pour que le nom soit disponible
   }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData(); // Appeler la méthode pour récupérer les données dès que l'écran est construit
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${I18n.of(context).hi} ${nom}',
+            '${I18n.of(context).hi} ${name?.capitalize().truncateWithEllipsis(20)}',
                 style: context.textTheme.bodyLarge?.copyWith(color:context.colorScheme.onPrimary)
               ),
               Container(
@@ -221,6 +223,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 ),
+              //  Expanded(
+              //    child: 
+              //   FutureBuilder(
+              //   future: getUserData(),
+              //   builder: (context, snapshot) {
+              //     if (userId == null) {
+              //       return const Center(child: CircularProgressIndicator());
+              //     }
+              //     return  Professions(userId: userId!,);
+              //   },
+              // ),
+              // ),
                 Professions(),
              
            Padding(
@@ -269,7 +283,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              Expanded(child:  CourseList(),)
+              CourseList()
+              // Expanded(child:  ,)
             // CourseContinue(
             //                 title: 'Introduction of Figma',
             //                 contentImage: 'assets/images/courseContinue.png',

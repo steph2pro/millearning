@@ -10,6 +10,25 @@
 part of 'app_router.dart';
 
 /// generated route for
+/// [CentreInteretScreen]
+class CentreInteretRoute extends PageRouteInfo<void> {
+  const CentreInteretRoute({List<PageRouteInfo>? children})
+      : super(
+          CentreInteretRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CentreInteretRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CentreInteretScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [ChoixModelScreen]
 class ChoixModelRoute extends PageRouteInfo<void> {
   const ChoixModelRoute({List<PageRouteInfo>? children})
@@ -49,10 +68,17 @@ class CodeVerifyRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [CourseDetailScreen]
-class CourseDetailRoute extends PageRouteInfo<void> {
-  const CourseDetailRoute({List<PageRouteInfo>? children})
-      : super(
+class CourseDetailRoute extends PageRouteInfo<CourseDetailRouteArgs> {
+  CourseDetailRoute({
+    Key? key,
+    required Course course,
+    List<PageRouteInfo>? children,
+  }) : super(
           CourseDetailRoute.name,
+          args: CourseDetailRouteArgs(
+            key: key,
+            course: course,
+          ),
           initialChildren: children,
         );
 
@@ -61,9 +87,29 @@ class CourseDetailRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const CourseDetailScreen();
+      final args = data.argsAs<CourseDetailRouteArgs>();
+      return CourseDetailScreen(
+        key: args.key,
+        course: args.course,
+      );
     },
   );
+}
+
+class CourseDetailRouteArgs {
+  const CourseDetailRouteArgs({
+    this.key,
+    required this.course,
+  });
+
+  final Key? key;
+
+  final Course course;
+
+  @override
+  String toString() {
+    return 'CourseDetailRouteArgs{key: $key, course: $course}';
+  }
 }
 
 /// generated route for
@@ -322,11 +368,64 @@ class PasswordWrapperRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ProfessionsDetailScreen]
+class ProfessionsDetailRoute extends PageRouteInfo<ProfessionsDetailRouteArgs> {
+  ProfessionsDetailRoute({
+    Key? key,
+    required Profession profession,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ProfessionsDetailRoute.name,
+          args: ProfessionsDetailRouteArgs(
+            key: key,
+            profession: profession,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfessionsDetailRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ProfessionsDetailRouteArgs>();
+      return ProfessionsDetailScreen(
+        key: args.key,
+        profession: args.profession,
+      );
+    },
+  );
+}
+
+class ProfessionsDetailRouteArgs {
+  const ProfessionsDetailRouteArgs({
+    this.key,
+    required this.profession,
+  });
+
+  final Key? key;
+
+  final Profession profession;
+
+  @override
+  String toString() {
+    return 'ProfessionsDetailRouteArgs{key: $key, profession: $profession}';
+  }
+}
+
+/// generated route for
 /// [ProfessionsScreen]
-class ProfessionsRoute extends PageRouteInfo<void> {
-  const ProfessionsRoute({List<PageRouteInfo>? children})
-      : super(
+class ProfessionsRoute extends PageRouteInfo<ProfessionsRouteArgs> {
+  ProfessionsRoute({
+    Key? key,
+    required int categoryId,
+    List<PageRouteInfo>? children,
+  }) : super(
           ProfessionsRoute.name,
+          args: ProfessionsRouteArgs(
+            key: key,
+            categoryId: categoryId,
+          ),
           initialChildren: children,
         );
 
@@ -335,9 +434,29 @@ class ProfessionsRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ProfessionsScreen();
+      final args = data.argsAs<ProfessionsRouteArgs>();
+      return ProfessionsScreen(
+        key: args.key,
+        categoryId: args.categoryId,
+      );
     },
   );
+}
+
+class ProfessionsRouteArgs {
+  const ProfessionsRouteArgs({
+    this.key,
+    required this.categoryId,
+  });
+
+  final Key? key;
+
+  final int categoryId;
+
+  @override
+  String toString() {
+    return 'ProfessionsRouteArgs{key: $key, categoryId: $categoryId}';
+  }
 }
 
 /// generated route for

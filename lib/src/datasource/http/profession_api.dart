@@ -12,7 +12,18 @@ class ProfessionApi {
       final response = await dio.get(
         '/orientation-getAllPof',
       );
+        return response.data;
+        // return {
+        //   "professions": response.data
+        // };      
+  }
+  Future<Map<String, dynamic>> getProfessionsByUserInterests(int userId) async {
 
+      final response = await dio.get(
+        '/orientation-getProfByUserInterests/$userId',
+      );
+        
+        print("response API ****************** ${response.data} et $userId ");
         return response.data;
         // return {
         //   "professions": response.data
@@ -39,7 +50,7 @@ class ProfessionApi {
   Future<Map<String, dynamic>> getCategories() async {
    
       final response = await dio.get(
-        '/orientation-getAllCat',
+        '/orientation-getAllCategory',
       );
 
         return response.data;

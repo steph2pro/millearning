@@ -14,11 +14,11 @@ class Profession with _$Profession {
     required String name,
     required int userId,
     required String thumbnail,
-    // required List<String> tabs,
     required int categoryId,
     // required Category category,
     required UserModel user,
-    // required List<Video> videos,
+    required List<Video> videos,
+    //  @Default([]) List<Interest> interests,
     // required List<Comment> comments,
   }) = _Profession;
 

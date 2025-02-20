@@ -6,14 +6,14 @@ class AboutCourseSection extends StatelessWidget {
   final String description;
   final String tutorName;
   final String tutorRole;
-  final String tutorImageUrl;
+  final String? tutorImageUrl;
   final Map<String, String> info;
 
   const AboutCourseSection({
     required this.description,
     required this.tutorName,
     required this.tutorRole,
-    required this.tutorImageUrl,
+     this.tutorImageUrl,
     required this.info,
     Key? key,
   }) : super(key: key);
@@ -39,7 +39,21 @@ class AboutCourseSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
            Row(
-            children: [ CircleAvatar(backgroundImage: AssetImage(tutorImageUrl), radius: 25),
+            children: [ 
+              tutorImageUrl != null
+                  ? CircleAvatar(
+                      radius: 25,
+                      backgroundColor: Theme.of(context).colorScheme.surface,
+                      backgroundImage: AssetImage(tutorImageUrl!),
+                    )
+                  :  CircleAvatar(
+                          backgroundColor: Theme.of(context).colorScheme.surface,
+                          child: Icon(
+                            Icons.person,
+                            size: 25,
+                            color: Theme.of(context).colorScheme.tertiary,
+                          ),
+                    ),
             gapW12,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

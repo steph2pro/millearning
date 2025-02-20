@@ -16,7 +16,7 @@ class Video with _$Video {
     required String thumbnail,
     // required Comment comments,
     // @CommentListConverter() List<Comment>? comments,
-    required List<Profession> professions,
+    // required List<Profession> professions,
   }) = _Video;
 
   factory Video.fromJson(Map<String, dynamic> json) =>
