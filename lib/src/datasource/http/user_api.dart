@@ -15,7 +15,12 @@ class UserApi {
    
       final response = await dio.post(
         '/auth/register',
-        data: user.toJson(),
+        data: {
+          "name": user.name,
+          "email":user.email ,
+          "phone": user.phone,
+          "password":user.password
+        },
       );
 
         return response.data;

@@ -96,7 +96,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             LoadingDialog.hide(context: context);
             showSuccesModal(response.message);
             if (response.data != null) {
-              context.router.push(const HomeRoute());
+              context.router.push(const LoginRoute());
             }
             //
 

@@ -128,7 +128,7 @@ class CourseComponent extends StatelessWidget {
                     ,
                     gapW6,
               Text(
-            name.capitalize().truncateWithEllipsis(15),
+            name.capitalize().truncateWithEllipsis(5),
             style: context.textTheme.bodySmall!.copyWith(
               fontSize: 12,
               color: context.colorScheme.outlineVariant,

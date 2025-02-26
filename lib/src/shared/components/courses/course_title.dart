@@ -94,7 +94,7 @@ class CourseTitle extends StatelessWidget {
                       ,
                       gapW6,
                 Text(
-              name,
+              name.capitalize().truncateWithEllipsis(10),
               style: context.textTheme.bodySmall!.copyWith(
                 fontSize: 10,
                 color: context.colorScheme.outlineVariant,

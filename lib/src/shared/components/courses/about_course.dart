@@ -1,6 +1,7 @@
 // About Course Section
 import 'package:flutter/material.dart';
 import 'package:millearnia/src/core/theme/app_size.dart';
+import 'package:millearnia/src/shared/components/string_extionsions.dart';
 import 'package:millearnia/src/shared/extensions/context_extensions.dart';
 class AboutCourseSection extends StatelessWidget {
   final String description;
@@ -58,8 +59,10 @@ class AboutCourseSection extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(tutorName, style: TextStyle(fontWeight: FontWeight.bold)),
-                Text(tutorRole),
+                Text(tutorName.capitalize().truncateWithEllipsis(10), style: TextStyle(fontWeight: FontWeight.bold)),
+                Text(
+                  tutorRole,
+                  textAlign: TextAlign.justify,),
               ],
             )
             ],

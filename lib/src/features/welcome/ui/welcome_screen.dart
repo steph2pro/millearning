@@ -96,25 +96,41 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
              ),
              gapH20,
+              // Row(
+              //   crossAxisAlignment: CrossAxisAlignment.center,
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Text(
+              //     I18n.of(context).alreadyHave,
+              //     style: context.textTheme.bodySmall!.copyWith(fontSize: 15,color: context.colorScheme.onTertiaryContainer)
+              //     ),
+              //     TextButton(
+              //       onPressed: (){
+              //         context.router.push(const LoginRoute());
+              //       }, 
+              //       child: Text(
+              //         I18n.of(context).signIn,
+              //         style: context.textTheme.bodySmall!.copyWith(fontSize: 16,color: context.colorScheme.primaryContainer)
+              //       ),
+              //     )
+              //   ],
+              // )
               Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                  I18n.of(context).alreadyHave,
-                  style: context.textTheme.bodySmall!.copyWith(fontSize: 15,color: context.colorScheme.onTertiaryContainer)
-                  ),
-                  TextButton(
-                    onPressed: (){
-                      context.router.push(const LoginRoute());
-                    }, 
-                    child: Text(
-                      I18n.of(context).signIn,
-                      style: context.textTheme.bodySmall!.copyWith(fontSize: 16,color: context.colorScheme.primaryContainer)
-                    ),
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(I18n.of(context).alreadyHave,
+                          style: context.textTheme.bodySmall!.copyWith(fontSize: 15, color: context.colorScheme.onTertiaryContainer)),
+                      gapW4,
+                      InkWell(
+                        onTap: () {
+                          context.router.push(const LoginRoute());
+                        },
+                        child: Text(I18n.of(context).signIn,
+                            style: context.textTheme.bodySmall!.copyWith(fontSize: 16, color: context.colorScheme.primaryContainer)),
+                      )
+                    ],
                   )
-                ],
-              )
 
               ],
             ),
